@@ -718,7 +718,7 @@ h1, h2, h3, h4, h5, p {
       background-color: #1F567A; }
   .sidebar .nav-label {
     font-size: 14px;
-    font-weight: 100;
+    font-weight: 400;
     margin-left: 10px; }
 
 .mini-navbar .sidebar {
@@ -802,7 +802,7 @@ h1, h2, h3, h4, h5, p {
   margin: 10px; }
 
 table.tasks tr td {
-  font-weight: 200; }
+  font-weight: 350; }
 
 .mail-options a {
   font-size: 20px;

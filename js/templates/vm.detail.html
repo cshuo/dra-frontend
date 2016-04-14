@@ -1,6 +1,6 @@
 <div class="animated fadeInRight">
 	<div id="backTask">
-		<a id="backUrl" href="/app/vm">
+		<a id="backUrl" ui-sref="navbar.vm">
 			<i class="glyphicon glyphicon-arrow-left" style="margin-right:5px; font-size: 14px!important;"></i>
 			<span>Instances</span>
 		</a>
@@ -35,12 +35,12 @@
 					<dd>{{data.cpu}}</dd>
 				</li>
 				<li>
-					<span>Memory(mb)</span>
-					<dd>{{data.ram}}</dd>
+					<span>Memory</span>
+					<dd>{{data.ram}}MB</dd>
 				</li>
                 <li>
-                    <span>Disk(gb)</span>
-                    <dd>{{data.disk}}</dd>
+                    <span>Disk</span>
+                    <dd>{{data.disk}}GB</dd>
                 </li>
 				<li>
 					<span>Options</span>

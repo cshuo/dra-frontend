@@ -4,7 +4,11 @@ var detail_url = "http://114.212.189.132:9000/api/vm/";
 
 var detail = angular.module('sher.detail',['ngMaterial', 'ngMessages', 'material.svgAssetsCache', 'chart.js', 'ui.router']);
 
-detail.controller("detailCtrl", ['$scope', '$http', '$stateParams', 'VMs',
+detail.controller("detailCtrl", [
+    '$scope',
+    '$http',
+    '$stateParams',
+    'VMs',
 	function($scope, $http, $stateParams, VMs){
         $http({
             method: 'GET',
@@ -16,16 +20,10 @@ detail.controller("detailCtrl", ['$scope', '$http', '$stateParams', 'VMs',
             }
         }).then(function success(response) {
             $scope.data= response.data;
-            console.log(response.data);
         }, function error(response) {
         //    error
         });
 
-        /*
-		$http.get('http://114.212.189.132/data/ID.json').success(function(data) {
-			$scope.data = data.result;
-		});
-		*/
 	}
 ]);
 

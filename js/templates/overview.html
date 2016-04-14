@@ -27,22 +27,22 @@
 				<table class="table table-striped">
 					<thead>
 					<tr>
-						<th>ID</th>
 						<th>Name</th>
-						<th>Image</th>
-						<th>Slave</th>
-						<th>Cpus</th>
+                        <th>IP</th>
+						<th>CPU</th>
 						<th>Memory</th>
+						<th>Disk</th>
+                        <th>Created</th>
 					</tr>
 					</thead>
 					<tbody>
-					<tr class="read" ng-repeat="task in data" ng-click="rowClick(task.id)">
-						<td>{{task.id}}</td>
-						<td class="mail-subject">{{task.name}}</td>
-						<td>{{task.docker_image}}</td>
-						<td>{{task.slave_hostname}}</td>
-						<td>{{task.cpus}}</td>
-						<td>{{task.mem}} MiB</td>
+					<tr class="read" ng-repeat="vm in vms" ng-click="rowClick(vm.id)">
+						<td class="mail-subject">{{vm.name}}</td>
+						<td>{{vm.ip}}</td>
+						<td>{{flavors[vm.flavor].cpu}}</td>
+                        <td>{{flavors[vm.flavor].ram}}MB</td>
+                        <td>{{flavors[vm.flavor].disk}}GB</td>
+                        <td class="mail-date">{{vm.created}}</td>
 					</tr>
 					</tbody>
 				</table>

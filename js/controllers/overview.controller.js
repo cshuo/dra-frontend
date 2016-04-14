@@ -1,43 +1,62 @@
 'use strict';
 
-var overview = angular.module("sher.overview", ["chart.js"]);
+var flavor_url = "http://114.212.189.132:9000/api/flavors";
+var overview = angular.module("sher.overview", ['ngResource', 'ui.bootstrap', 'chart.js']);
 
-overview.controller("tableCtrl", function ($scope) {
-  $scope.data = [{
-		"id": 1,
-		"name": "task1",
-		"docker_image": "1",
-		"slave_hostname": "1",
-		"cpus": 1,
-		"mem": 1
-	},{
-		"id": 2,
-		"name": "task2",
-		"docker_image": "2",
-		"slave_hostname": "2",
-		"cpus": 2,
-		"mem": 2
-	},{
-		"id": 3,
-		"name": "task3",
-		"docker_image": "3",
-		"slave_hostname": "3",
-		"cpus": 3,
-		"mem": 3
-	}]
-});
+overview.controller("tableCtrl", [
+    '$scope',
+    '$http',
+    '$state',
+    '$stateParams',
+    'VmOverview',
+    function ($scope, $http, $state, $stateParams, VmOverview) {
+        $scope.query = $stateParams.query || "all";
+        $scope.filter = $scope.query;
+
+        $http({
+            method: 'GET',
+            url: flavor_url,
+            params: {
+                'tenant': 'admin',
+                'username': 'admin',
+                'password': 'cshuo'
+            }
+        }).then(function success(response) {
+            $scope.flavors = response.data;
+        }, function error(response) {
+            //    error
+        });
+
+        var reload = function (query){
+            VmOverview.refresh().$promise.then(function(response) {
+                //TODO 错误处理
+                $scope.vms = VmOverview.getTasks(query)
+            });
+        }
+
+        $scope.rowClick = function(vmID){
+            $state.go('navbar.detail',{vmID: vmID});
+        };
+
+
+        reload($scope.query);
+        setInterval(function(){
+            reload($scope.query);
+        }, 10000)
+    }
+]);
 
 overview.controller("pcpuCtrl", function ($scope) {
-  $scope.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
-  $scope.data = [300, 100, 100];
+    $scope.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
+    $scope.data = [300, 100, 100];
 });
 
 overview.controller("pmemCtrl", function ($scope) {
-  $scope.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
-  $scope.data = [200, 500, 100];
+    $scope.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
+    $scope.data = [200, 500, 100];
 });
 
 overview.controller("pnetCtrl", function ($scope) {
-  $scope.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
-  $scope.data = [300, 500, 400];
+    $scope.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
+    $scope.data = [300, 500, 400];
 });

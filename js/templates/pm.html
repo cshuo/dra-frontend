@@ -9,9 +9,6 @@
                 </div>
                 <div class="ibox-content mailbox-main">
                     <div class="clearfix table-tools">
-						<span class="pull-left">
-							<button id="task-btn"class="btn btn-block btn-primary compose-mail" ng-click="openTaskModal()">Create VM</button>
-						</span>
                         <div class="pull-right" id="input-btn">
                             <form ng-submit="search()" class="mail-search">
                                 <div class="input-group">
@@ -62,8 +59,8 @@
                             <tr class="read" ng-repeat="pm in pms" ng-click="rowClick(pm.id)">
                                 <td>{{pm.id}}</td>
                                 <td>{{pm.hypervisor_hostname}}</td>
-                                <td class=""><span class="label label-{{pm.label_class}}">{{pm.state}}</span></td>
-                                <td class=""><span class="label label-{{pm.label_class}}">{{pm.status}}</span></td>
+                                <td class=""><span class="label label-{{pm.label_class}}">{{pm.state | uppercase}}</span></td>
+                                <td class=""><span class="label label-{{pm.label_class}}">{{pm.status | uppercase}}</span></td>
                                 <td class="mail-options">
                                     <a ng-click="kill(pm)" title="kill"><span class="si-close-circle"></span></a>
                                     <a ng-click="delete(pm)" title="delete"><span class="si-trash"></span></a>
