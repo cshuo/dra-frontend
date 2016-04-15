@@ -1,6 +1,8 @@
 'use strict';
 
 var detail_url = "http://114.212.189.132:9000/api/vm/";
+var meters_url = "http://114.212.189.132:9000/api/meters/";
+var vnc_url = "http://114.212.189.132:9000/api/vnc/";
 
 var detail = angular.module('sher.detail',['ngMaterial', 'ngMessages', 'material.svgAssetsCache', 'chart.js', 'ui.router']);
 
@@ -82,11 +84,47 @@ detail.controller("vmMemCtrl", function ($scope, $http) {
 	},10000)
 });
 
-// detail.controller('stateCtrl', ['$rootScope', '$scope', function($rootScope, $scope){
-//     $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
-//         $rootScope.previousState = fromState.name;
-//         $rootScope.currentState = toState.name;
-//         console.log(fromState.name + '-----------------------');
-//         console.log(toState.name + '**************************');
-//     });
-// }])
+
+detail.controller('vncCtrl', [
+    '$scope',
+    '$sce',
+    '$stateParams',
+    '$http',
+    function($scope, $sce, $stateParams, $http) {
+        var get_vnc_url = function() {
+            $http({
+                method: 'GET',
+                url: vnc_url + $stateParams.vmID,
+                params: {
+                    'tenant': 'admin',
+                    'username': 'admin',
+                    'password': 'cshuo',
+                }
+            }).then(function success(response) {
+                $scope.vnc_url = $sce.trustAsResourceUrl(response.data.vnc);
+            }, function error(response) {
+                //    error
+            });
+        }
+        get_vnc_url();
+    }
+]);
+// detail.controller('vncCtrl', ['$scope', '$http', function($scope, $http){
+//     var get_vnc_url = function(){
+//         $http({
+//             method: 'GET',
+//             url: meters_url + 'cpu_util',
+//             params: {
+//                 'tenant': 'admin',
+//                 'username': 'admin',
+//                 'password': 'cshuo',
+//                 'resource': $stateParams.vmID,
+//                 'interval': '1'
+//             }
+//         }).then(function success(response) {
+//             $scope.series = ['cpu'];
+//             $scope.labels = response.data.time;
+//             $scope.data = [response.data.value];
+//         }, function error(response) {
+//         });
+// }]);
