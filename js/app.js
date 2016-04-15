@@ -34,8 +34,9 @@ angular.module('sher', [
         templateUrl: "/app/js/templates/vm.detail.html",
         controller: ''
       }).state("navbar.pm_detail", {
-      url: "/pm/:pmID",
+      url: "/pm/:pmID/:pmName",
       templateUrl: "/app/js/templates/pm.detail.html",
+      //   params: {pmName: null},
       controller: ''
       }).state("navbar.overview", {
         url: "/overview",
@@ -61,4 +62,11 @@ angular.module('sher', [
 					$state.go('login');
 				}
 			});
+
+            $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
+                $rootScope.previousState = fromState.name;
+                $rootScope.currentState = toState.name;
+                console.log(fromState.name + '-----------------------');
+                // console.log(toState.name + '**************************');
+            });
 		}]);

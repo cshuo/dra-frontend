@@ -23,6 +23,20 @@ angular.module('sher.overview')
 
         return {
             // 刷新任务
+            overview_data: function(){
+                return $http({
+                    method: 'GET',
+                    url: base_url + 'usages',
+                    params: {
+                        'tenant': 'admin',
+                        'username': 'admin',
+                        'password': 'cshuo'
+                    }
+                }).then(function (response){
+                    return response.data
+                });
+            },
+
             refresh: function() {
                 return getTasks(function(response) {
                     vms = response.vms;

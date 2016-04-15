@@ -2,23 +2,25 @@
 	<div class="row chartGroup">
 		<h1>Overview</h1>
 		<hr style="margin-top: 5px;"/>
-		<div class="col-sm-4" ng-controller="pcpuCtrl">
-			<h3 style="margin-left:60px">CPU</h3>
-			<canvas id="pcpu" class="chart chart-doughnut" 
-			  chart-data="data" chart-labels="labels" chart-legend="false">
-			</canvas>
-		</div>
-		<div class="col-sm-4" ng-controller="pmemCtrl">
-			<h3 style="margin-left:60px">MEM</h3>
-			<canvas id="pmem" class="chart chart-doughnut" chart-data="data"
-			  chart-data="data" chart-labels="labels" chart-legend="false">
-			</canvas> 
-		</div>
-		<div class="col-sm-4" ng-controller="pnetCtrl">
-			<h3 style="margin-left:60px">NET</h3>
-			<canvas id="pnet" class="chart chart-doughnut" chart-data="data"
-			  chart-data="data" chart-labels="labels" chart-legend="false">
-			</canvas> 
+		<div ng-controller="chartCtrl">
+			<div class="col-sm-4">
+				<h3 style="margin-left:60px">VCPUS</h3>
+				<canvas id="pcpu" class="chart chart-pie"
+				  chart-data="cpu_data" chart-labels="labels" chart-legend="false">
+				</canvas>
+			</div>
+			<div class="col-sm-4">
+				<h3 style="margin-left:60px">MEM</h3>
+				<canvas id="pmem" class="chart chart-pie" chart-data="mem_data"
+					chart-labels="labels" chart-legend="false">
+				</canvas>
+			</div>
+			<div class="col-sm-4">
+				<h3 style="margin-left:60px">Disk</h3>
+				<canvas id="pnet" class="chart chart-pie" chart-data="disk_data"
+					chart-labels="labels" chart-legend="false">
+				</canvas>
+			</div>
 		</div>
 	</div>
 	<div class="tableGroup" ng-controller="tableCtrl">
@@ -29,7 +31,7 @@
 					<tr>
 						<th>Name</th>
                         <th>IP</th>
-						<th>CPU</th>
+						<th>VCPUs</th>
 						<th>Memory</th>
 						<th>Disk</th>
                         <th>Created</th>

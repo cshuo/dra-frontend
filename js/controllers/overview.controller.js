@@ -46,17 +46,27 @@ overview.controller("tableCtrl", [
     }
 ]);
 
-overview.controller("pcpuCtrl", function ($scope) {
-    $scope.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
-    $scope.data = [300, 100, 100];
-});
+overview.controller("chartCtrl", ['$scope', 'VmOverview', function ($scope, VmOverview) {
+    $scope.labels = ["Used", "Free"];
+    var reload = function(){
+        VmOverview.overview_data().then(function(d){
+            $scope.cpu_data = [d.vcpus_used, d.vcpus - d.vcpus_used];
+            $scope.mem_data = [d.memory_mb_used, d.free_ram_mb];
+            $scope.disk_data = [d.local_gb_used, d.free_disk_gb];
+        })
+    };
+    reload();
+    setInterval(function(){
+        reload();
+    }, 10000);
+}]);
 
-overview.controller("pmemCtrl", function ($scope) {
-    $scope.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
-    $scope.data = [200, 500, 100];
-});
-
-overview.controller("pnetCtrl", function ($scope) {
-    $scope.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
-    $scope.data = [300, 500, 400];
-});
+// overview.controller("pmemCtrl", function ($scope) {
+//     $scope.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
+//     $scope.data = [200, 500, 100];
+// });
+//
+// overview.controller("pnetCtrl", function ($scope) {
+//     $scope.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
+//     $scope.data = [300, 500, 400];
+// });

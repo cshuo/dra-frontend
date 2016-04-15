@@ -44,22 +44,9 @@ angular.module('sher.pm', ['ngResource', 'ui.bootstrap'])
                 $state.go('pm', {query: $scope.search_key})
             }
 
-            // 打开提交任务的模态框
-            $scope.openTaskModal = function () {
-                var modalInstance = $uibModal.open({
-                    animation: true,
-                    templateUrl: '/app/js/templates/task.modal.html',
-                    controller: TaskModalCtrl,
-                    size: 'md',
-                    windowTemplateUrl: '/app/js/components/modal/modal.window.html',
-                    resolve: {
 
-                    }
-                });
-            }
-
-            $scope.rowClick = function(pmID){
-                $state.go('navbar.pm_detail',{pmID: pmID});
+            $scope.rowClick = function(pmID, pmName){
+                $state.go('navbar.pm_detail',{pmID: pmID, pmName:pmName});
             };
 
             // 加载任务, 定时监控
@@ -68,65 +55,3 @@ angular.module('sher.pm', ['ngResource', 'ui.bootstrap'])
                 PMs.monitor(reload($scope.query))
             },10000)
         }]);
-
-
-// 模块对话框控制器
-var TaskModalCtrl = function ($scope, $uibModalInstance, Tasks) {
-    // 数据初始化
-    $scope.task = {
-        cpus:'0.1',
-        mem:'32',
-        disk:'0',
-        docker_image:'busybox',
-        cmd:'ls',
-        volumes: [
-            {
-                container_path: "/data",
-                host_path: "/vagrant",
-                mode: "RW"
-            }
-        ],
-        port_mappings: [
-            {
-                container_port: "8000",
-                host_port: "8080",
-                protocol: "TCP"
-            }
-        ]
-    }
-
-    $scope.addPortMapping = function() {
-        $scope.task.port_mappings.push({
-            container_port: "8000",
-            host_port: "8080",
-            protocol: "TCP"
-        })
-    }
-
-    $scope.deletePortMapping = function(index) {
-        $scope.task.port_mappings.splice(index, 1);
-    }
-
-    $scope.addVolume = function() {
-        $scope.task.volumes.push({
-            container_path: "/data",
-            host_path: "/vagrant",
-            mode: "RW"
-        })
-    }
-
-    $scope.deleteVolume = function(index) {
-        $scope.task.volumes.splice(index, 1);
-    }
-
-    $scope.submit = function () {
-        Tasks.submitTask($scope.task, function(){
-            // TODO 消息通知
-        });
-        $uibModalInstance.close();
-    };
-
-    $scope.cancel = function () {
-        $uibModalInstance.dismiss('cancel');
-    };
-};

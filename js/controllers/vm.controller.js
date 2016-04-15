@@ -17,7 +17,7 @@ angular.module('sher.vm', ['ngResource', 'ui.bootstrap'])
 function($scope, $http, $timeout, $state, $stateParams, $uibModal, VMs) {
     $scope.query = $stateParams.query || "all";
     $scope.filter = $scope.query;
-	
+
     // 加载数据
     var reload = function (query) {
         VMs.refresh().$promise.then(function(response) {
@@ -27,23 +27,23 @@ function($scope, $http, $timeout, $state, $stateParams, $uibModal, VMs) {
     }
 
     // 提交任务
-    $scope.submitTask = function (task) {
-        VMs.submitTask(task, reload($scope.query))
+    $scope.submitTask = function (vm) {
+        VMs.submitTask(vm, reload($scope.query))
     }
 
     // 杀死任务
-    $scope.kill = function (task) {
-        VMs.killTask(task.name, reload($scope.query));
+    $scope.kill = function (vm) {
+        VMs.killTask(vm.name, reload($scope.query));
     }
 
     // 删除任务
-    $scope.delete = function (task) {
-        VMs.deleteTask(task.name, reload($scope.query));
+    $scope.delete = function (vm) {
+        VMs.deleteTask(vm.name, reload($scope.query));
     }
 
     // 搜索任务
     $scope.search = function () {
-        $state.go('task', {query: $scope.search_key})
+        $state.go('vm', {query: $scope.search_key})
     }
 
     // 打开提交任务的模态框
@@ -59,7 +59,7 @@ function($scope, $http, $timeout, $state, $stateParams, $uibModal, VMs) {
             }
         });
     }
-    
+
     $scope.rowClick = function(vmID){
 		$state.go('navbar.detail',{vmID: vmID});
 	};
@@ -69,7 +69,7 @@ function($scope, $http, $timeout, $state, $stateParams, $uibModal, VMs) {
     setInterval(function(){
         reload($scope.query);
         //VMs.monitor(reload($scope.query))
-    },10000)   
+    },10000)
 }]);
 
 
