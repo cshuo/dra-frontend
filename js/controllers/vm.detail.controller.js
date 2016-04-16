@@ -39,6 +39,7 @@ detail.controller("stateCtrl", [
 ]);
 
 detail.controller("vmCpuCtrl", ['$scope', '$http', '$stateParams', function ($scope, $http, $stateParams) {
+    var vmid = $stateParams.vmID;
     var reload_chart = function(){
         $http({
             method: 'GET',
@@ -47,7 +48,7 @@ detail.controller("vmCpuCtrl", ['$scope', '$http', '$stateParams', function ($sc
                 'tenant': 'admin',
                 'username': 'admin',
                 'password': 'cshuo',
-                'resource': $stateParams.vmID,
+                'resource': vmid,
                 'interval': '1'
             }
         }).then(function success(response) {
@@ -62,7 +63,7 @@ detail.controller("vmCpuCtrl", ['$scope', '$http', '$stateParams', function ($sc
     reload_chart();
 	setInterval(function(){
         reload_chart();
-	},60000)
+	},6000)
 }]);
 
 detail.controller("vmMemCtrl", function ($scope, $http) {

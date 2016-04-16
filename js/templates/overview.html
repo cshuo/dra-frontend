@@ -6,19 +6,19 @@
 			<div class="col-sm-4">
 				<h3 style="margin-left:60px">VCPUS</h3>
 				<canvas id="pcpu" class="chart chart-pie"
-				  chart-data="cpu_data" chart-labels="labels" chart-legend="false">
+				  chart-data="cpu_data" chart-labels="labels" chart-legend="true">
 				</canvas>
 			</div>
 			<div class="col-sm-4">
-				<h3 style="margin-left:60px">MEM</h3>
-				<canvas id="pmem" class="chart chart-pie" chart-data="mem_data"
-					chart-labels="labels" chart-legend="false">
+				<h3 style="margin-left:60px">MEM (MB)</h3>
+				<canvas id="pmem" class="chart chart-pie" 
+				chart-data="mem_data" chart-labels="labels" chart-legend="true">
 				</canvas>
 			</div>
 			<div class="col-sm-4">
-				<h3 style="margin-left:60px">Disk</h3>
-				<canvas id="pnet" class="chart chart-pie" chart-data="disk_data"
-					chart-labels="labels" chart-legend="false">
+				<h3 style="margin-left:60px">Disk (GB)</h3>
+				<canvas id="pnet" class="chart chart-pie" 
+				chart-data="disk_data"chart-labels="labels" chart-legend="true">
 				</canvas>
 			</div>
 		</div>

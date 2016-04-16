@@ -66,7 +66,7 @@ angular.module('sher', [
             $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
                 $rootScope.previousState = fromState.name;
                 $rootScope.currentState = toState.name;
-                console.log(fromState.name + '-----------------------');
+                // console.log(fromState.name + '-----------------------');
                 // console.log(toState.name + '**************************');
             });
 		}]);
