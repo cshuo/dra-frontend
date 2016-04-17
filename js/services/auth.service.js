@@ -1,31 +1,28 @@
 ﻿'use strict';
 
+var auth_url = "http://114.212.189.132:9000/api/login";
 angular.module('sher.auth',['ngCookies'])
 
 .factory('AuthenticationService',
-    ['Base64', '$state', '$cookieStore', '$rootScope', '$timeout',
-    function (Base64, $http, $cookieStore, $rootScope, $timeout) {
+    ['Base64', '$http', '$state', '$cookieStore', '$rootScope', '$timeout',
+    function (Base64, $http, $state, $cookieStore, $rootScope, $timeout) {
         var service = {};
 
         service.Login = function (username, password, callback) {
-
-            /* Dummy authentication for testing, uses $timeout to simulate api call
-             ----------------------------------------------*/
-            $timeout(function () {
-                var response = { success: username === 'test' && password === 'test' };
-                if (!response.success) {
-                    response.message = 'Username or password is incorrect';
+            $http({
+                method: "POST",
+                url: auth_url,
+                data: {
+                    username: username,
+                    password: password
                 }
-                callback(response);
-            }, 1000);
-
-
-            /* Use this for real authentication
-             ----------------------------------------------*/
-            //$http.post('/api/authenticate', { username: username, password: password })
-            //    .success(function (response) {
-            //        callback(response);
-            //    });
+            }).then(
+                function (response){
+                    callback(response);
+                }, function (response) {
+                    callback(response);
+                }
+            );
 
         };
 

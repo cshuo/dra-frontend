@@ -11,11 +11,11 @@ angular.module('sher.auth')
         $scope.login = function () {
             $scope.dataLoading = true;
             AuthenticationService.Login($scope.username, $scope.password, function (response) {
-                if (response.success) {
+                if (response.data.access) {
                     AuthenticationService.SetCredentials($scope.username, $scope.password);
                     $state.go('navbar.overview');
                 } else {
-                    $scope.error = response.message;
+                    $scope.error = "Username or password is not correct";
                     $scope.dataLoading = false;
                 }
             });

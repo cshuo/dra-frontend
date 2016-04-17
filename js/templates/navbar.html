@@ -10,8 +10,8 @@
 		<div class="navbar">
 		  <a class="navbar-minimalize"><span class="navbar-minimalize-inner"><span class="si-menu"></span></span></a>
 		  <ul class="nav">
-			<li ui-sref-active="active"><a ui-sref=".overview"><span class="si-cloud"></span><span class="nav-label">Dashboard</span></a></li>
-			<li ui-sref-active="active"><a ui-sref=".vm"><span class="si-browser"></span><span class="nav-label">Instances</span></a></li>
+			<li ui-sref-active="active"><a ui-sref=".overview"><span class="si-display1"></span><span class="nav-label">Dashboard</span></a></li>
+			<li ui-sref-active="active"><a ui-sref=".vm"><span class="si-box1"></span><span class="nav-label">Instances</span></a></li>
 			<li ui-sref-active="active"><a ui-sref=".pm"><span class="si-server"></span><span class="nav-label">Hypervisors</span></a></li>
 		  </ul>
 		</div>
@@ -22,8 +22,86 @@
   <![endif]-->
 
   <div class="main-wrapper" id="main-wrapper">
-	<div class="header">
-	  <!-- <h3 class="tab-title">Task Manager | </h3> -->
-	</div>
-	<div ui-view></div>
+	  <div class="navbar navbar-default">
+		  <!-- <h3 class="tab-title">Task Manager | </h3> -->
+		  <ul class="nav navbar-top-links navbar-right">
+			  <li class="dropdown">
+				  <a class="dropdown-toggle" data-toggle="dropdown">
+					  <i class="fa fa-envelope fa-fw"></i>  <i class="fa fa-caret-down"></i>
+				  </a>
+				  <ul class="dropdown-menu dropdown-messages">
+					  <li>
+						  <a href="#">
+							  <div>
+								  <strong>John Smith</strong>
+								  <span class="pull-right text-muted">
+									  <em>Yesterday</em>
+								  </span>
+							  </div>
+							  <div>Specific messages...</div>
+						  </a>
+					  </li>
+					  <li class="divider"></li>
+					  <li>
+						  <a class="text-center" href="#">
+							  <strong>Read All Messages</strong>
+							  <i class="fa fa-angle-right"></i>
+						  </a>
+					  </li>
+				  </ul>
+				  <!-- /.dropdown-messages -->
+			  </li>
+			  <!-- /.dropdown -->
+			  <li class="dropdown">
+				  <a class="dropdown-toggle" data-toggle="dropdown">
+					  <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
+				  </a>
+				  <ul class="dropdown-menu dropdown-alerts">
+					  <li>
+						  <a href="#">
+							  <div>
+								  <i class="fa fa-tasks fa-fw"></i> New Task
+								  <span class="pull-right text-muted small">4 minutes ago</span>
+							  </div>
+						  </a>
+					  </li>
+					  <li class="divider"></li>
+					  <li>
+						  <a href="#">
+							  <div>
+								  <i class="fa fa-upload fa-fw"></i> Server Rebooted
+								  <span class="pull-right text-muted small">4 minutes ago</span>
+							  </div>
+						  </a>
+					  </li>
+					  <li class="divider"></li>
+					  <li>
+						  <a class="text-center" href="#">
+							  <strong>See All Alerts</strong>
+							  <i class="fa fa-angle-right"></i>
+						  </a>
+					  </li>
+				  </ul>
+				  <!-- /.dropdown-alerts -->
+			  </li>
+			  <!-- /.dropdown -->
+			  <li class="dropdown">
+				  <a class="dropdown-toggle" data-toggle="dropdown">
+					  <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+				  </a>
+				  <ul class="dropdown-menu dropdown-user">
+					  <li><a href="#"><i class="fa fa-user fa-fw"></i>{{ globals.currentUser.username }}</a>
+					  </li>
+					  <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+					  </li>
+					  <li class="divider"></li>
+					  <li><a ui-sref="login"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
+					  </li>
+				  </ul>
+			  </li>
+		  </ul>
+	  </div>
+
+	  <!-- for main content -->
+	  <div ui-view></div>
   </div>
