@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('sher.view2', ['ngRoute'])
+angular.module('dra.view2', ['ngRoute'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/view2', {

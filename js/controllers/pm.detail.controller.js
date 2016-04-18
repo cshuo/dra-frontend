@@ -3,7 +3,7 @@
 var pm_detail_url = "http://114.212.189.132:9000/api/pm/";
 var meters_url = "http://114.212.189.132:9000/api/meters/";
 
-var detail = angular.module('sher.pm_detail',['ngMaterial', 'ngMessages', 'material.svgAssetsCache', 'chart.js', 'ui.router']);
+var detail = angular.module('dra.pm_detail',['ngMaterial', 'ngMessages', 'material.svgAssetsCache', 'chart.js', 'ui.router']);
 
 detail.controller("pmdetailCtrl", ['$scope', '$http', '$stateParams', 'PMs',
     function($scope, $http, $stateParams, PMs){

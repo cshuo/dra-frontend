@@ -4,7 +4,7 @@
 
 var FILTER_NAME = ['All', 'Running', 'Finished', 'Failed', 'Killed', 'Lost', 'Staging', 'Error'];
 
-angular.module('sher.vm', ['ngResource', 'ui.bootstrap'])
+angular.module('dra.vm', ['ngResource', 'ui.bootstrap'])
 
 .controller('VmCtrl', [
     '$scope',

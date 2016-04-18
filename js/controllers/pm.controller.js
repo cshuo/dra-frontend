@@ -2,7 +2,7 @@
  * Created by cshuo on 16/3/9.
  */
 
-angular.module('sher.pm', ['ngResource', 'ui.bootstrap'])
+angular.module('dra.pm', ['ngResource', 'ui.bootstrap'])
 
     .controller('PmCtrl', [
         '$scope',

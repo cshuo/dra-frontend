@@ -1,7 +1,7 @@
 'use strict';
 
 var flavor_url = "http://114.212.189.132:9000/api/flavors";
-var overview = angular.module("sher.overview", ['ngResource', 'ui.bootstrap', 'chart.js']);
+var overview = angular.module("dra.overview", ['ngResource', 'ui.bootstrap', 'chart.js']);
 
 overview.controller("tableCtrl", [
     '$scope',

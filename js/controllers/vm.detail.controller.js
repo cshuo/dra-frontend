@@ -4,7 +4,7 @@ var detail_url = "http://114.212.189.132:9000/api/vm/";
 var meters_url = "http://114.212.189.132:9000/api/meters/";
 var vnc_url = "http://114.212.189.132:9000/api/vnc/";
 
-var detail = angular.module('sher.detail',['ngMaterial', 'ngMessages', 'material.svgAssetsCache', 'chart.js', 'ui.router']);
+var detail = angular.module('dra.detail',['ngMaterial', 'ngMessages', 'material.svgAssetsCache', 'chart.js', 'ui.router']);
 
 detail.controller("detailCtrl", [
     '$scope',

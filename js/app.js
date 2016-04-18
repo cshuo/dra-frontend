@@ -1,14 +1,14 @@
 'use strict';
 
 // Declare app level module which depends on views, and components
-angular.module('sher', [
+angular.module('dra', [
   'ui.router',
-  'sher.vm',
-  'sher.detail',
-  'sher.pm',
-  'sher.pm_detail',
-  'sher.overview',
-  'sher.auth',
+  'dra.vm',
+  'dra.detail',
+  'dra.pm',
+  'dra.pm_detail',
+  'dra.overview',
+  'dra.auth',
   'ngRoute',
   'ngCookies'
 ])

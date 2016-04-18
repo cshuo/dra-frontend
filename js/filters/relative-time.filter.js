@@ -3,7 +3,7 @@
  */
 'use strict';
 
-angular.module('sher')
+angular.module('dra')
 
 .filter('relativeDate', function(){
 

@@ -1,7 +1,7 @@
 ﻿'use strict';
 
 var auth_url = "http://114.212.189.132:9000/api/login";
-angular.module('sher.auth',['ngCookies'])
+angular.module('dra.auth',['ngCookies'])
 
 .factory('AuthenticationService',
     ['Base64', '$http', '$state', '$cookieStore', '$rootScope', '$timeout',

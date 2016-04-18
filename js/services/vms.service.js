@@ -1,6 +1,6 @@
 var base_url = 'http://114.212.189.132:9000/api/';
 
-angular.module('sher.vm')
+angular.module('dra.vm')
 
     .factory('VMs', ['$resource', '$http', function($resource, $http) {
         var vms = [];

@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-angular.module('sher.auth')
+angular.module('dra.auth')
 
 .controller('LoginController',
     ['$scope', '$rootScope', '$state', 'AuthenticationService',
