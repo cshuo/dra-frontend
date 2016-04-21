@@ -1,0 +1,70 @@
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-sm-12 animated fadeInRight">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h2>
+                        Rules | {{filter}} ({{rules.length}})
+                    </h2>
+                </div>
+                <div class="ibox-content mailbox-main">
+                    <div class="clearfix table-tools">
+						<span class="pull-left">
+							<button id="task-btn"class="btn btn-block btn-primary compose-mail" ng-click="openTaskModal()">Add Rule</button>
+						</span>
+						<div class="pull-right" id="input-btn">
+							<!--form ng-submit="search()" class="mail-search"-->
+                            <form class="mail-search">
+								<div class="input-group">
+									<input type="text" class="form-control input-sm" ng-model="search_key" placeholder="Search all tasks...">
+								</div>
+							</form>
+							<div class="keep-open btn-group" title="status">
+								<button id="status-btn" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+									<i class="glyphicon glyphicon-th icon-th {{ color_class }}"></i>
+									<span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu" role="menu">
+									<li>
+										<a ng-click="stateSel('all')"> <i class="fa fa-circle"></i>All</a>
+									</li>
+									<li>
+										<a ng-click="stateSel('shutoff')"> <i class="fa fa-circle text-info"></i>SHUTOFF</a>
+									</li>
+									<li>
+										<a ng-click="stateSel('suspend')"> <i class="fa fa-circle text-muted"></i>SUSPEND</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-striped tasks">
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>App</th>
+                                <th>Type</th>
+                                <th>Options</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="read" ng-repeat="rule in rules| filter: search_key | filter: stt" ng-click="rowClick(rule.id)">
+                                <td>{{rule.name}}</td>
+                                <td>{{rule.app}}</td>
+                                <td>{{rule.type}}</td>
+                                <td class="mail-options">
+                                    <a ng-click="kill(rule)" title="kill"><span class="si-close-circle"></span></a>
+                                    <a ng-click="delete(rule)" title="delete"><span class="si-trash"></span></a>
+                                    <a href=""><span class="si-file"></span></a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,43 +1,39 @@
-angular.module('dra.vm', ['ngResource', 'ui.bootstrap'])
+angular.module('dra.rule', ['ngResource', 'ui.bootstrap'])
 
-.controller('VmCtrl', [
+.controller('ruleCtrl', [
     '$scope',
     '$http',
     '$timeout',
     '$state',
     '$stateParams',
     '$uibModal',
-    'VMs',
-function($scope, $http, $timeout, $state, $stateParams, $uibModal, VMs) {
+function($scope, $http, $timeout, $state, $stateParams, $uibModal) {
     $scope.query = $stateParams.query || "all";
     $scope.filter = $scope.query;
 
     // 加载数据
     var reload = function (query) {
-        VMs.refresh().$promise.then(function(response) {
-            //TODO 错误处理
-            $scope.vms = VMs.getTasks(query)
-        });
-    };
-
-    // 提交任务
-    $scope.submitTask = function (vm) {
-        VMs.submitTask(vm, reload($scope.query))
-    };
-
-    // 杀死任务
-    $scope.kill = function (vm) {
-        VMs.killTask(vm.name, reload($scope.query));
+        $scope.rules = [
+            {
+                'name': 'r1',
+                'app': 'app1',
+                'type': 'CT'
+            },
+            {
+                'name': 'r2',
+                'app': 'app2',
+                'type': 'NS'
+            }
+        ]
     };
 
     // 删除任务
     $scope.delete = function (vm) {
-        VMs.deleteTask(vm.name, reload($scope.query));
     };
 
     // 搜索任务
     $scope.search = function () {
-        $state.go('navbar.vm', {query: $scope.search_key})
+        // $state.go('navbar.vm', {query: $scope.search_key})
     };
 
     $scope.stateSel = function (stt) {
@@ -49,15 +45,6 @@ function($scope, $http, $timeout, $state, $stateParams, $uibModal, VMs) {
         switch(stt){
             case "active":
                 $scope.color_class = "text-navy";
-                break;
-            case "error":
-                $scope.color_class = "text-danger";
-                break;
-            case "reboot":
-                $scope.color_class = "text-warning";
-                break;
-            case "suspend":
-                $scope.color_class = "text-muted";
                 break;
             case "shutoff":
                 $scope.color_class = "text-info";
@@ -82,7 +69,7 @@ function($scope, $http, $timeout, $state, $stateParams, $uibModal, VMs) {
     };
 
     $scope.rowClick = function(vmID){
-		$state.go('navbar.detail',{vmID: vmID});
+        // add some response action
 	};
 
     // 加载任务, 定时监控
