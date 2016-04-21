@@ -24,27 +24,54 @@ function($scope, $http, $timeout, $state, $stateParams, $uibModal, VMs) {
             //TODO 错误处理
             $scope.vms = VMs.getTasks(query)
         });
-    }
+    };
 
     // 提交任务
     $scope.submitTask = function (vm) {
         VMs.submitTask(vm, reload($scope.query))
-    }
+    };
 
     // 杀死任务
     $scope.kill = function (vm) {
         VMs.killTask(vm.name, reload($scope.query));
-    }
+    };
 
     // 删除任务
     $scope.delete = function (vm) {
         VMs.deleteTask(vm.name, reload($scope.query));
-    }
+    };
 
     // 搜索任务
     $scope.search = function () {
-        $state.go('vm', {query: $scope.search_key})
-    }
+        $state.go('navbar.vm', {query: $scope.search_key})
+    };
+
+    $scope.stateSel = function (stt) {
+        if(stt != "all"){
+            $scope.stt = {status: stt};
+        } else {
+            $scope.stt = {};
+        }
+        switch(stt){
+            case "active":
+                $scope.color_class = "text-navy";
+                break;
+            case "error":
+                $scope.color_class = "text-danger";
+                break;
+            case "reboot":
+                $scope.color_class = "text-warning";
+                break;
+            case "suspend":
+                $scope.color_class = "text-muted";
+                break;
+            case "shutoff":
+                $scope.color_class = "text-info";
+                break;
+            default:
+                $scope.color_class = "";
+        }
+    };
 
     // 打开提交任务的模态框
     $scope.openTaskModal = function () {
@@ -58,7 +85,7 @@ function($scope, $http, $timeout, $state, $stateParams, $uibModal, VMs) {
 
             }
         });
-    }
+    };
 
     $scope.rowClick = function(vmID){
 		$state.go('navbar.detail',{vmID: vmID});

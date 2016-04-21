@@ -10,34 +10,25 @@
                 <div class="ibox-content mailbox-main">
                     <div class="clearfix table-tools">
                         <div class="pull-right" id="input-btn">
-                            <form ng-submit="search()" class="mail-search">
+                            <form class="mail-search">
                                 <div class="input-group">
-                                    <input type="text" class="form-control input-sm" ng-model="search_key" placeholder="Search all tasks...">
+                                    <input type="text" class="form-control input-sm" ng-model="search_key" placeholder="Search all hosts...">
                                 </div>
                             </form>
                             <div class="keep-open btn-group" title="status">
                                 <button id="status-btn" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                    <i class="glyphicon glyphicon-th icon-th"></i>
+                                    <i class="glyphicon glyphicon-th icon-th {{ color_class }}"></i>
                                     <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-                                        <a ui-sref="task({query: 'all'})"> <i class="fa fa-circle"></i> All</a>
+                                        <a ng-click="stateSel('all')"> <i class="fa fa-circle"></i>All</a>
                                     </li>
                                     <li>
-                                        <a ui-sref="task({query: 'running'})"> <i class="fa fa-circle text-info"></i> Running</a>
+                                        <a ng-click="stateSel('up')"> <i class="fa fa-circle text-navy"></i>UP</a>
                                     </li>
                                     <li>
-                                        <a ui-sref="task({query: 'staging'})"> <i class="fa fa-circle text-navy"></i> Staging</a>
-                                    </li>
-                                    <li>
-                                        <a ui-sref="task({query: 'killed'})"> <i class="fa fa-circle text-warning"></i> Killed</a>
-                                    </li>
-                                    <li>
-                                        <a ui-sref="task({query: 'failed'})"> <i class="fa fa-circle text-danger"></i> Failed</a>
-                                    </li>
-                                    <li>
-                                        <a ui-sref="task({query: 'finished'})"> <i class="fa fa-circle text-primary"></i> Finished</a>
+                                        <a ng-click="stateSel('down')"> <i class="fa fa-circle text-warning"></i>DOWN</a>
                                     </li>
                                 </ul>
                             </div>
@@ -56,7 +47,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr class="read" ng-repeat="pm in pms" ng-click="rowClick(pm.id, pm.hypervisor_hostname)">
+                            <tr class="read" ng-repeat="pm in pms | filter: search_key | filter: stt" ng-click="rowClick(pm.id, pm.hypervisor_hostname)">
                                 <td>{{pm.id}}</td>
                                 <td>{{pm.hypervisor_hostname}}</td>
                                 <td class=""><span class="label label-{{pm.label_class}}">{{pm.state | uppercase}}</span></td>

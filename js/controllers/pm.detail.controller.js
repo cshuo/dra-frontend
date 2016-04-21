@@ -13,7 +13,7 @@ detail.controller("pmdetailCtrl", ['$scope', '$http', '$stateParams', 'PMs',
             params: {
                 'tenant': 'admin',
                 'username': 'admin',
-                'password': 'cshuo'
+                'password': 'artemis'
             }
         }).then(function success(response) {
             $scope.data= response.data;
@@ -31,7 +31,7 @@ detail.controller("pmCpuCtrl", ['$scope', '$http', '$stateParams', function ($sc
             params: {
                 'tenant': 'admin',
                 'username': 'admin',
-                'password': 'cshuo',
+                'password': 'artemis',
                 'resource': $stateParams.pmName+'_'+$stateParams.pmName,
                 'interval': '1'
             }

@@ -15,7 +15,7 @@ angular.module('dra.vm')
             return resource.query({
                 'tenant':'admin',
                 'username':'admin',
-                'password':'cshuo'
+                'password':'artemis'
             }, function(r) {
                 return callback && callback(r);
             })
@@ -41,7 +41,7 @@ angular.module('dra.vm')
                                 vms[i].label_class="info";
                                 break;
                             case "SUSPENDED":
-                                vms[i].label_class="info";
+                                vms[i].label_class="muted";
                                 break;
                             default:
                                 vms[i].label_class="default";

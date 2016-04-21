@@ -15,7 +15,7 @@ angular.module('dra.overview')
             return resource.query({
                 'tenant':'admin',
                 'username':'admin',
-                'password':'cshuo'
+                'password':'artemis'
             }, function(r) {
                 return callback && callback(r);
             })
@@ -30,7 +30,7 @@ angular.module('dra.overview')
                     params: {
                         'tenant': 'admin',
                         'username': 'admin',
-                        'password': 'cshuo'
+                        'password': 'artemis'
                     }
                 }).then(function (response){
                     return response.data
@@ -40,28 +40,7 @@ angular.module('dra.overview')
             refresh: function() {
                 return getTasks(function(response) {
                     vms = response.vms;
-                    for(var i = 0; i < vms.length; i++) {
-                        switch (vms[i].status) {
-                            case "ACTIVE":
-                                vms[i].label_class="primary";
-                                break;
-                            case "ERROR":
-                                vms[i].label_class="danger";
-                                break;
-                            case "REBOOT":
-                                vms[i].label_class="warning";
-                                break;
-                            case "SHUTOFF":
-                                vms[i].label_class="info";
-                                break;
-                            case "SUSPENDED":
-                                vms[i].label_class="info";
-                                break;
-                            default:
-                                vms[i].label_class="default";
-                        }
-                    }
-                })
+                });
             },
 
             // 重置数据

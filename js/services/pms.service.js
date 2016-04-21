@@ -15,7 +15,7 @@ angular.module('dra.pm')
             return resource.query({
                 'tenant':'admin',
                 'username':'admin',
-                'password':'cshuo'
+                'password':'artemis'
             }, function(r) {
                 return callback && callback(r);
             })
@@ -76,21 +76,6 @@ angular.module('dra.pm')
                 }
             },
 
-            // 提交任务
-            submitTask: function(task, callback) {
-                $http({
-                    method: 'POST',
-                    url: API + '/pms',
-                    data : task,
-                    headers:{
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json; ; charset=UTF-8'
-                    }
-                }).success(function(response) {
-                    return callback;
-                });
-            },
-
             // 监控任务
             monitor: function(callback) {
                 $http({
@@ -99,7 +84,7 @@ angular.module('dra.pm')
                     params:{
                         'tenant':'admin',
                         'username': 'admin',
-                        'password': 'cshuo'
+                        'password': 'artemis'
                     }
                 }).success(function(response) {
                     return callback && callback(response);
@@ -126,4 +111,4 @@ angular.module('dra.pm')
                 })
             }
         }
-    }])
+    }]);

@@ -19,7 +19,7 @@ detail.controller("detailCtrl", [
             params: {
                 'tenant': 'admin',
                 'username': 'admin',
-                'password': 'cshuo'
+                'password': 'artemis'
             }
         }).then(function success(response) {
             $scope.data= response.data;
@@ -47,7 +47,7 @@ detail.controller("vmCpuCtrl", ['$scope', '$http', '$stateParams', function ($sc
             params: {
                 'tenant': 'admin',
                 'username': 'admin',
-                'password': 'cshuo',
+                'password': 'artemis',
                 'resource': vmid,
                 'interval': '1'
             }
@@ -99,7 +99,7 @@ detail.controller('vncCtrl', [
                 params: {
                     'tenant': 'admin',
                     'username': 'admin',
-                    'password': 'cshuo',
+                    'password': 'artemis',
                 }
             }).then(function success(response) {
                 $scope.vnc_url = $sce.trustAsResourceUrl(response.data.vnc);
@@ -118,7 +118,7 @@ detail.controller('vncCtrl', [
 //             params: {
 //                 'tenant': 'admin',
 //                 'username': 'admin',
-//                 'password': 'cshuo',
+//                 'password': 'artemis',
 //                 'resource': $stateParams.vmID,
 //                 'interval': '1'
 //             }

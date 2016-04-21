@@ -19,7 +19,7 @@ overview.controller("tableCtrl", [
             params: {
                 'tenant': 'admin',
                 'username': 'admin',
-                'password': 'cshuo'
+                'password': 'artemis'
             }
         }).then(function success(response) {
             $scope.flavors = response.data;
@@ -64,9 +64,4 @@ overview.controller("chartCtrl", ['$scope', 'VmOverview', function ($scope, VmOv
 // overview.controller("pmemCtrl", function ($scope) {
 //     $scope.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
 //     $scope.data = [200, 500, 100];
-// });
-//
-// overview.controller("pnetCtrl", function ($scope) {
-//     $scope.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
-//     $scope.data = [300, 500, 400];
 // });
