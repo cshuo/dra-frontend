@@ -9,70 +9,70 @@
                 </div>
                 <div class="ibox-content mailbox-main">
                     <div class="clearfix table-tools">
-						<span class="pull-left">
-							<button id="task-btn"class="btn btn-block btn-primary compose-mail" ng-click="openTaskModal()">Create VM</button>
-						</span>
-						<div class="pull-right" id="input-btn">
-							<!--form ng-submit="search()" class="mail-search"-->
+                        <span class="pull-left">
+                            <button id="task-btn"class="btn btn-block btn-primary compose-mail" ng-click="openTaskModal()">Create VM</button>
+                        </span>
+                        <div class="pull-right" id="input-btn">
+                            <!--form ng-submit="search()" class="mail-search"-->
                             <form class="mail-search">
-								<div class="input-group">
-									<input type="text" class="form-control input-sm" ng-model="search_key" placeholder="Search all tasks...">
-								</div>
-							</form>
-							<div class="keep-open btn-group" title="status">
-								<button id="status-btn" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-									<i class="glyphicon glyphicon-th icon-th {{ color_class }}"></i>
-									<span class="caret"></span>
-								</button>
-								<ul class="dropdown-menu" role="menu">
-									<li>
-										<a ng-click="stateSel('all')"> <i class="fa fa-circle"></i>All</a>
-									</li>
-									<li>
-										<a ng-click="stateSel('active')"> <i class="fa fa-circle text-navy"></i>ACTIVE</a>
-									</li>
-									<li>
-										<a ng-click="stateSel('error')"> <i class="fa fa-circle text-danger"></i>ERROR</a>
-									</li>
-									<li>
-										<a ng-click="stateSel('reboot')"> <i class="fa fa-circle text-warning"></i>REBOOT</a>
-									</li>
-									<li>
-										<a ng-click="stateSel('shutoff')"> <i class="fa fa-circle text-info"></i>SHUTOFF</a>
-									</li>
-									<li>
-										<a ng-click="stateSel('suspend')"> <i class="fa fa-circle text-muted"></i>SUSPEND</a>
-									</li>
-								</ul>
-							</div>
-						</div>
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" ng-model="search_key" placeholder="Search all tasks...">
+                                </div>
+                            </form>
+                            <div class="keep-open btn-group" title="status">
+                                <button id="status-btn" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                    <i class="glyphicon glyphicon-th icon-th {{ color_class }}"></i>
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a ng-click="stateSel('all')"> <i class="fa fa-circle"></i>All</a>
+                                    </li>
+                                    <li>
+                                        <a ng-click="stateSel('active')"> <i class="fa fa-circle text-navy"></i>ACTIVE</a>
+                                    </li>
+                                    <li>
+                                        <a ng-click="stateSel('error')"> <i class="fa fa-circle text-danger"></i>ERROR</a>
+                                    </li>
+                                    <li>
+                                        <a ng-click="stateSel('reboot')"> <i class="fa fa-circle text-warning"></i>REBOOT</a>
+                                    </li>
+                                    <li>
+                                        <a ng-click="stateSel('shutoff')"> <i class="fa fa-circle text-info"></i>SHUTOFF</a>
+                                    </li>
+                                    <li>
+                                        <a ng-click="stateSel('suspend')"> <i class="fa fa-circle text-muted"></i>SUSPEND</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="table-responsive">
                         <table class="table table-striped tasks">
                             <thead>
-                            <tr>
-                                <th>name</th>
-                                <th>IP</th>
-                                <th>Host</th>
-                                <th>State</th>
-                                <th>Created</th>
-                                <th>Options</th>
-                            </tr>
+                                <tr>
+                                    <th>name</th>
+                                    <th>IP</th>
+                                    <th>Host</th>
+                                    <th>State</th>
+                                    <th>Created</th>
+                                    <th>Options</th>
+                                </tr>
                             </thead>
                             <tbody>
-                            <tr class="read" ng-repeat="vm in vms | filter: search_key | filter: stt" ng-click="rowClick(vm.id)">
-                                <td>{{vm.name}}</td>
-                                <td>{{vm.ip}}</td>
-                                <td>{{vm.host}}</td>
-                                <td class=""><span class="label label-{{vm.label_class}}">{{vm.status}}</span></td>
-                                <td class="mail-date">{{vm.created}}</td>
-                                <td class="mail-options">
-                                    <a ng-click="kill(vm)" title="kill"><span class="si-close-circle"></span></a>
-                                    <a ng-click="delete(vm)" title="delete"><span class="si-trash"></span></a>
-                                    <a href=""><span class="si-file"></span></a>
-                                </td>
-                            </tr>
+                                <tr class="read" ng-repeat="vm in vms | filter: search_key | filter: stt" ng-click="rowClick(vm.id)">
+                                    <td>{{vm.name}}</td>
+                                    <td>{{vm.ip}}</td>
+                                    <td>{{vm.host}}</td>
+                                    <td class=""><span class="label label-{{vm.label_class}}">{{vm.status}}</span></td>
+                                    <td class="mail-date">{{vm.created}}</td>
+                                    <td class="mail-options">
+                                        <a ng-click="stop(vm.id, $event)" title="stop"><span class="si-close-circle"></span></a>
+                                        <a ng-click="start(vm.id, $event)" title="start"><span class="si-refresh-2"></span></a>
+                                        <a ng-click="delete(vm.id, $event)" title="delete"><span class="si-trash"></span></a>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -81,8 +81,3 @@
         </div>
     </div>
 </div>
-
-
-
-
-

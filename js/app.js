@@ -52,8 +52,8 @@ angular.module('dra', [
     $urlRouterProvider.otherwise('/login');
 }])
 
-.run(['$rootScope', '$state', '$cookieStore', '$http',
-function ($rootScope, $state, $cookieStore, $http) {
+.run(['$rootScope', '$state', '$cookieStore', '$http', '$location',
+function ($rootScope, $state, $cookieStore, $http, $location) {
     // keep user logged in after page refresh
     $rootScope.globals = $cookieStore.get('globals') || {};
     if ($rootScope.globals.currentUser) {
@@ -68,9 +68,7 @@ function ($rootScope, $state, $cookieStore, $http) {
         }
     });
 
-    $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
-        $rootScope.previousState = fromState.name;
-        $rootScope.currentState = toState.name;
-        // console.log(toState.name + '**************************');
+    $rootScope.$on('$locationChangeSuccess', function(event, absNewUrl, absOldUrl){
+        $rootScope.previousUrl = absOldUrl;
     });
 }]);

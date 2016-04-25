@@ -16,23 +16,24 @@ function($scope, $http, $timeout, $state, $stateParams, $uibModal, VMs) {
     var reload = function (query) {
         VMs.refresh().$promise.then(function(response) {
             //TODO 错误处理
-            $scope.vms = VMs.getTasks(query)
+            $scope.vms = VMs.getTasks(query);
         });
     };
 
-    // 提交任务
-    $scope.submitTask = function (vm) {
-        VMs.submitTask(vm, reload($scope.query))
-    };
+    $scope.stop = function(vmId, e){
+        VMs.stopVm(vmId, reload($scope.query));
+        e.stopPropagation();
+    }
 
-    // 杀死任务
-    $scope.kill = function (vm) {
-        VMs.killTask(vm.name, reload($scope.query));
-    };
+    $scope.start = function(vmId, e){
+        VMs.startVm(vmId, reload($scope.query));
+        e.stopPropagation();
+    }
 
-    // 删除任务
-    $scope.delete = function (vm) {
-        VMs.deleteTask(vm.name, reload($scope.query));
+    // delete vm
+    $scope.delete = function(vmId, e) {
+        VMs.deleteVm(vmId, reload($scope.query));
+        e.stopPropagation();
     };
 
     // 搜索任务
@@ -89,7 +90,6 @@ function($scope, $http, $timeout, $state, $stateParams, $uibModal, VMs) {
     reload($scope.query);
     setInterval(function(){
         reload($scope.query);
-        //VMs.monitor(reload($scope.query))
     },10000)
 }]);
 

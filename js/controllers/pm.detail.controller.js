@@ -68,3 +68,27 @@ detail.controller("pmMemCtrl", function ($scope, $http) {
         });
     },10000)
 });
+
+
+detail.controller("pmVmsCtrl", [
+    '$scope',
+    '$http',
+    '$state',
+    '$stateParams',
+    'VMs',
+    function ($scope, $http, $state, $stateParams, VMs) {
+        var reload = function(){
+            VMs.refresh().$promise.then(function(response){
+                $scope.vms = VMs.getTasks($stateParams.pmName);
+            });
+        }
+
+        $scope.rowClick = function(vmID){
+            $state.go('navbar.detail', {vmID: vmID});
+        };
+        reload();
+        setInterval(function(){
+            reload();
+        }, 10000);
+    }
+]);

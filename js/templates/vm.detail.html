@@ -1,6 +1,7 @@
 <div class="animated fadeInRight">
-	<div id="backTask" ng-controller=stateCtrl>
-		<a id="backUrl" ui-sref="{{ previousState }}">
+	<div id="backTask">
+		<!-- <a id="backUrl" ui-sref="{{ previousState }}"> -->
+		<a id="backUrl" href="{{ previousUrl }}">
 			<i class="glyphicon glyphicon-arrow-left" style="margin-right:5px; font-size: 14px!important;"></i>
 			<span>Instances</span>
 		</a>
@@ -45,9 +46,9 @@
 				<li>
 					<span>Options</span>
 					<dd>
-						<a ng-click="kill(task)" title="kill"><span class="si-close-circle"></span></a>
-						<a ng-click="delete(task)" title="delete"><span class="si-trash"></span></a>
-						<a href=""><span class="si-file"></span></a>
+						<a ng-click="stop(data.id)" title="stop"><span class="si-close-circle"></span></a>
+						<a ng-click="start(data.id)" title="start"><span class="si-refresh-2"></span></a>
+						<a ng-click="delete(data.id)" title="delete"><span class="si-trash"></span></a>
 					</dd>
 				</li>
 			</ul>
@@ -68,26 +69,19 @@
 										height="80">
 										</canvas>
 									</div>
-								<!--div ng-controller="memCtrl">
-									<h2>MEM</h2>
-									<canvas id="mem" class="chart chart-line" chart-data="data"
-										chart-labels="labels" chart-legend="true" chart-series="series"
-										height="60">
-									</canvas>
-								</div-->
 								</div>
 							</div>
-						</md-content>
-					</md-tab>
-					<md-tab label="two">
-						<md-content class="md-padding">
-							<h1 class="md-display-2">Tab Two</h1>
-							<p>Reminding to complete</p>
 						</md-content>
 					</md-tab>
 					<md-tab label="Shell">
 						<md-content class="md-padding" ng-controller='vncCtrl'>
 							<iframe ng-src="{{ vnc_url }}" style='width:100%; height:500px'></iframe>
+						</md-content>
+					</md-tab>
+					<md-tab label="three">
+						<md-content class="md-padding">
+							<h1 class="md-display-2">Tab Two</h1>
+							<p>Reminding to complete</p>
 						</md-content>
 					</md-tab>
 				</md-tabs>

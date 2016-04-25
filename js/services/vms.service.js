@@ -1,4 +1,5 @@
 var base_url = 'http://114.212.189.132:9000/api/';
+var auth_d = {'tenant': 'admin', 'username':'admin', 'password': 'artemis'};
 
 angular.module('dra.vm')
 
@@ -20,6 +21,26 @@ angular.module('dra.vm')
                 return callback && callback(r);
             })
         };
+
+        // for stop and start vms
+        var action = function(cmd, vmId, callback){
+            if(confirm('Sure to '+ cmd+'?')){
+                var put_d = auth_d;
+                put_d['cmd'] = cmd;
+                $http({
+                    url: detail_url + vmId,
+                    method: 'PUT',
+                    data: put_d
+                }).then(
+                    function(response){
+                        return callback;
+                    },
+                    function(response){
+                        console.log(cmd + ' instance fail');
+                    }
+                );
+            }
+        }
 
 		return {
             // 刷新任务
@@ -104,16 +125,6 @@ angular.module('dra.vm')
                 });
             },
 
-            // 监控任务
-            monitor: function(callback) {
-                $http({
-                    method: 'GET',
-                    url: API,
-                }).success(function(response) {
-                    return callback && callback(response);
-                });
-            },
-
             // 删除任务
             deleteTask: function(id, callback) {
                 $http({
@@ -124,14 +135,31 @@ angular.module('dra.vm')
                 })
             },
 
-            // 杀死任务
-            killTask: function(id, callback) {
-                $http({
-                    method: 'PUT',
-                    url: API + '/vms/' + id + '/kill'
-                }).success(function(response) {
-                    return callback && callback(response);
-                })
+            // stop vms
+            stopVm: function(vmId, callback){
+                action('stop', vmId, callback);
+            },
+
+            startVm: function(vmId, callback){
+                action('start', vmId, callback);
+            },
+
+            deleteVm: function(vmId, callback){
+                if(confirm('Sure to delete?')){
+                    $http({
+                        url: detail_url + vmId,
+                        method: 'DELETE',
+                        data: auth_d,
+                        headers: {"Content-Type": "application/json"}
+                    }).then(
+                        function(response){
+                            return callback && callback();
+                        },
+                        function(response){
+                            console.log('delete instance fail');
+                        }
+                    );
+                }
             }
         }
     }])

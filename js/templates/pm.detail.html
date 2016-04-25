@@ -45,46 +45,65 @@
         <div ng-cloak="" class="tabsdemoDynamicHeight">
             <md-content>
                 <md-tabs md-dynamic-height="" md-border-bottom="">
-                    <md-tab label="one">
+                    <md-tab label="Meters">
                         <md-content class="md-padding">
                             <div class="row tabContent">
                                 <div class="col-sm-12">
                                     <div ng-controller="pmCpuCtrl">
                                         <h2>CPU</h2>
                                         <canvas id="cpu" class="chart chart-line" chart-data="data"
-                                                chart-labels="labels" chart-legend="true" chart-series="series"
-                                                height="80">
-                                        </canvas>
-                                    </div>
-                                    <!--div ng-controller="memCtrl">
-                                        <h2>MEM</h2>
-                                        <canvas id="mem" class="chart chart-line" chart-data="data"
-                                                chart-labels="labels" chart-legend="true" chart-series="series"
-                                                height="60">
-                                        </canvas>
-                                    </div-->
+                                        chart-labels="labels" chart-legend="true" chart-series="series"
+                                        height="80">
+                                    </canvas>
                                 </div>
-                            </div>
-                        </md-content>
-                    </md-tab>
-                    <md-tab label="two">
-                        <md-content class="md-padding">
-                            <h1 class="md-display-2">Tab Two</h1>
-                            <p>Reminding to complete</p>
-                        </md-content>
-                    </md-tab>
-                    <md-tab label="three">
-                        <md-content class="md-padding">
-                            <h1 class="md-display-2">Tab Three</h1>
-                            <p>Reminding to complete</p>
-                        </md-content>
-                    </md-tab>
-                </md-tabs>
+                                <!--div ng-controller="memCtrl">
+                                <h2>MEM</h2>
+                                <canvas id="mem" class="chart chart-line" chart-data="data"
+                                chart-labels="labels" chart-legend="true" chart-series="series"
+                                height="60">
+                            </canvas>
+                        </div-->
+                    </div>
+                </div>
             </md-content>
-        </div>
-        <!--
-        Copyright 2016 Google Inc. All Rights Reserved.
-        Use of this source code is governed by an MIT-style license that can be in foundin the LICENSE file at http://material.angularjs.org/license.
-        -->
-    </div>
+        </md-tab>
+        <md-tab label="Instances">
+            <md-content class="md-padding">
+                <h2>VMs</h2>
+                <div class="table-responsive" ng-controller="pmVmsCtrl">
+                    <table class="table table-striped tasks">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Id</th>
+                                <th>IP</th>
+                                <th>Created</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="read" ng-repeat="vm in vms" ng-click="rowClick(vm.id)">
+                                <td>{{vm.name}}</td>
+                                <td>{{vm.id}}</td>
+                                <td>{{vm.ip}}</td>
+                                <td class="mail-date">{{vm.created}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </md-content>
+        </md-tab>
+        <md-tab label="three">
+            <md-content class="md-padding">
+                <h1 class="md-display-2">Tab Three</h1>
+                <p>Reminding to complete</p>
+            </md-content>
+        </md-tab>
+    </md-tabs>
+</md-content>
+</div>
+<!--
+Copyright 2016 Google Inc. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that can be in foundin the LICENSE file at http://material.angularjs.org/license.
+-->
+</div>
 </div>
