@@ -46,9 +46,9 @@
 				<li>
 					<span>Options</span>
 					<dd>
-						<a ng-click="stop(data.id)" title="stop"><span class="si-close-circle"></span></a>
-						<a ng-click="start(data.id)" title="start"><span class="si-refresh-2"></span></a>
-						<a ng-click="delete(data.id)" title="delete"><span class="si-trash"></span></a>
+						<a ng-click="stop(data.id, $event)" title="stop"><span class="si-close-circle"></span></a>
+						<a ng-click="start(data.id, $event)" title="start"><span class="si-refresh-2"></span></a>
+						<a ng-click="delete(data.id, $event)" title="delete"><span class="si-trash"></span></a>
 					</dd>
 				</li>
 			</ul>

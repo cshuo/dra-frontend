@@ -1,4 +1,4 @@
-angular.module('dra.vm', ['ngResource', 'ui.bootstrap'])
+angular.module('dra.vm', ['ngResource', 'ui.bootstrap', 'ngMaterial'])
 
 .controller('VmCtrl', [
     '$scope',
@@ -7,8 +7,9 @@ angular.module('dra.vm', ['ngResource', 'ui.bootstrap'])
     '$state',
     '$stateParams',
     '$uibModal',
+    '$mdDialog',
     'VMs',
-function($scope, $http, $timeout, $state, $stateParams, $uibModal, VMs) {
+function($scope, $http, $timeout, $state, $stateParams, $uibModal, $mdDialog, VMs) {
     $scope.query = $stateParams.query || "all";
     $scope.filter = $scope.query;
 
@@ -20,20 +21,47 @@ function($scope, $http, $timeout, $state, $stateParams, $uibModal, VMs) {
         });
     };
 
-    $scope.stop = function(vmId, e){
-        VMs.stopVm(vmId, reload($scope.query));
-        e.stopPropagation();
+    $scope.stop = function(vmId, ev){
+        var cfir = $mdDialog.confirm()
+              .title('Sure to stop vm?')
+              .targetEvent(ev)
+              .ok('ok')
+              .cancel('cancel');
+        $mdDialog.show(cfir).then(function() {
+            VMs.stopVm(vmId, reload($scope.query));
+        }, function() {
+            // do nothing when cancel clicked
+        });
+        ev.stopPropagation();
     }
 
-    $scope.start = function(vmId, e){
-        VMs.startVm(vmId, reload($scope.query));
-        e.stopPropagation();
+    $scope.start = function(vmId, ev){
+        var cfir = $mdDialog.confirm()
+              .title('Sure to start vm?')
+              .targetEvent(ev)
+              .ok('ok')
+              .cancel('cancel');
+        $mdDialog.show(cfir).then(function() {
+            VMs.startVm(vmId, reload($scope.query));
+        }, function() {
+            // do nothing when cancel clicked
+        });
+        ev.stopPropagation();
     }
 
     // delete vm
-    $scope.delete = function(vmId, e) {
-        VMs.deleteVm(vmId, reload($scope.query));
-        e.stopPropagation();
+    $scope.delete = function(vmId, ev) {
+        var cfir = $mdDialog.confirm()
+              .title('Sure to delete vm?')
+              .targetEvent(ev)
+              .ok('ok')
+              .cancel('cancel');
+        $mdDialog.show(cfir).then(function() {
+            VMs.deleteVm(vmId, reload($scope.query));
+        }, function() {
+            // do nothing when cancel clicked
+        });
+        ev.stopPropagation();
     };
 
     // 搜索任务
@@ -82,8 +110,8 @@ function($scope, $http, $timeout, $state, $stateParams, $uibModal, VMs) {
         });
     };
 
-    $scope.rowClick = function(vmID){
-		$state.go('navbar.detail',{vmID: vmID});
+    $scope.rowClick = function(vmID, e){
+        $state.go('navbar.detail',{vmID: vmID});
 	};
 
     // 加载任务, 定时监控

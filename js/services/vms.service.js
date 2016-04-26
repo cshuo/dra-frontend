@@ -3,7 +3,7 @@ var auth_d = {'tenant': 'admin', 'username':'admin', 'password': 'artemis'};
 
 angular.module('dra.vm')
 
-    .factory('VMs', ['$resource', '$http', function($resource, $http) {
+    .factory('VMs', ['$resource', '$http', '$mdToast', function($resource, $http, $mdToast) {
         var vms = [];
         var resource = $resource(base_url+'vms', {}, {
             query: {
@@ -24,7 +24,7 @@ angular.module('dra.vm')
 
         // for stop and start vms
         var action = function(cmd, vmId, callback){
-            if(confirm('Sure to '+ cmd+'?')){
+            // if(confirm('Sure to '+ cmd+'?')){
                 var put_d = auth_d;
                 put_d['cmd'] = cmd;
                 $http({
@@ -33,13 +33,20 @@ angular.module('dra.vm')
                     data: put_d
                 }).then(
                     function(response){
-                        return callback;
+                        $mdToast.show(
+                          $mdToast.simple()
+                            .textContent(cmd + ' successfully!')
+                            .position('right')
+                            .hideDelay(3000)
+                            .theme('success-toast')
+                        );
+                        return callback && callback();
                     },
                     function(response){
                         console.log(cmd + ' instance fail');
                     }
                 );
-            }
+            // }
         }
 
 		return {
@@ -145,7 +152,7 @@ angular.module('dra.vm')
             },
 
             deleteVm: function(vmId, callback){
-                if(confirm('Sure to delete?')){
+                // if(confirm('Sure to delete?')){
                     $http({
                         url: detail_url + vmId,
                         method: 'DELETE',
@@ -153,13 +160,20 @@ angular.module('dra.vm')
                         headers: {"Content-Type": "application/json"}
                     }).then(
                         function(response){
+                            $mdToast.show(
+                              $mdToast.simple()
+                                .textContent('Delete vm successfully!')
+                                .position('right')
+                                .hideDelay(3000)
+                                .theme('success-toast')
+                            );
                             return callback && callback();
                         },
                         function(response){
                             console.log('delete instance fail');
                         }
                     );
-                }
+                // }
             }
         }
     }])

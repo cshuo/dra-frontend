@@ -13,8 +13,9 @@ detail.controller("detailCtrl", [
     '$http',
     '$state',
     '$stateParams',
+    '$mdDialog',
     'VMs',
-    function($scope, $rootScope, $http, $state, $stateParams, VMs){
+    function($scope, $rootScope, $http, $state, $stateParams, $mdDialog, VMs){
         var reload = function(){
             $http({
                 method: 'GET',
@@ -26,16 +27,44 @@ detail.controller("detailCtrl", [
             });
         }
 
-        $scope.stop = function(vmId){
-            VMs.stopVm(vmId, reload());
+        $scope.stop = function(vmId, e){
+            var cfir = $mdDialog.confirm()
+              .title('Sure to stop vm?')
+              .targetEvent(e)
+              .ok('ok')
+              .cancel('cancel');
+            $mdDialog.show(cfir).then(function() {
+                VMs.stopVm(vmId, reload());
+            }, function() {
+                // do nothing when cancel clicked
+            });
         }
 
-        $scope.start = function(vmId){
-            VMs.startVm(vmId, reload());
+        $scope.start = function(vmId, e){
+            var cfir = $mdDialog.confirm()
+              .title('Sure to start vm?')
+              .targetEvent(e)
+              .ok('ok')
+              .cancel('cancel');
+            $mdDialog.show(cfir).then(function() {
+                VMs.startVm(vmId, reload());
+            }, function() {
+                // do nothing when cancel clicked
+            });
         }
 
-        $scope.delete= function(vmId){
-            VMs.deleteVm(vmId, function(){$state.go('navbar.vm');});
+        $scope.delete= function(vmId, e){
+            var cfir = $mdDialog.confirm()
+              .title('Sure to delete vm?')
+              .targetEvent(e)
+              .ok('ok')
+              .cancel('cancel');
+            $mdDialog.show(cfir).then(function() {
+                VMs.deleteVm(vmId, function(){$state.go('navbar.vm');});
+            }, function() {
+                // do nothing when cancel clicked
+            });
+            
         }
         reload();
     }
