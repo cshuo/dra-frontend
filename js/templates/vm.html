@@ -69,9 +69,24 @@
                                     <td class=""><span class="label label-{{vm.label_class}}">{{vm.status}}</span></td>
                                     <td class="mail-date">{{vm.created}}</td>
                                     <td class="mail-options">
-                                        <a ng-click="stop(vm.id, $event)" title="stop"><span class="si-close-circle"></span></a>
+                                    <!--     <a ng-click="stop(vm.id, $event)" title="stop"><span class="si-close-circle"></span></a>
                                         <a ng-click="start(vm.id, $event)" title="start"><span class="si-refresh-2"></span></a>
-                                        <a ng-click="delete(vm.id, $event)" title="delete"><span class="si-trash"></span></a>
+                                        <a ng-click="delete(vm.id, $event)" title="delete"><span class="si-trash"></span></a> -->
+                                        <md-menu>
+                                          <!-- <md-button aria-label="Open demo menu" class="md-fab md-mini md-default" ng-click="$mdOpenMenu($event)">
+                                            <md-icon md-svg-src="img/icons/cake.svg"></md-icon>
+                                          </md-button> -->
+                                          <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="openMenu($mdOpenMenu, $event)">
+                                            <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
+                                          </md-button>
+                                          <md-menu-content width="3">
+                                            <md-menu-item ng-repeat="item in ['stop', 'start', 'delete']">
+                                              <md-button ng-click="opClick(item, vm.id)">
+                                                {{item}}
+                                              </md-button>
+                                            </md-menu-item>
+                                          </md-menu-content>
+                                        </md-menu>
                                     </td>
                                 </tr>
                             </tbody>

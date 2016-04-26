@@ -21,48 +21,32 @@ function($scope, $http, $timeout, $state, $stateParams, $uibModal, $mdDialog, VM
         });
     };
 
-    $scope.stop = function(vmId, ev){
-        var cfir = $mdDialog.confirm()
-              .title('Sure to stop vm?')
-              .targetEvent(ev)
-              .ok('ok')
-              .cancel('cancel');
-        $mdDialog.show(cfir).then(function() {
-            VMs.stopVm(vmId, reload($scope.query));
-        }, function() {
-            // do nothing when cancel clicked
-        });
-        ev.stopPropagation();
-    }
-
-    $scope.start = function(vmId, ev){
-        var cfir = $mdDialog.confirm()
-              .title('Sure to start vm?')
-              .targetEvent(ev)
-              .ok('ok')
-              .cancel('cancel');
-        $mdDialog.show(cfir).then(function() {
-            VMs.startVm(vmId, reload($scope.query));
-        }, function() {
-            // do nothing when cancel clicked
-        });
-        ev.stopPropagation();
-    }
-
-    // delete vm
-    $scope.delete = function(vmId, ev) {
-        var cfir = $mdDialog.confirm()
-              .title('Sure to delete vm?')
-              .targetEvent(ev)
-              .ok('ok')
-              .cancel('cancel');
-        $mdDialog.show(cfir).then(function() {
-            VMs.deleteVm(vmId, reload($scope.query));
-        }, function() {
-            // do nothing when cancel clicked
-        });
-        ev.stopPropagation();
+    var originatorEv;
+    $scope.openMenu = function($mdOpenMenu, ev) {
+        originatorEv = ev;
+        $mdOpenMenu(ev);
     };
+
+    $scope.opClick = function(item, vmId){
+        var cfir = $mdDialog.confirm()
+              .title("Sure to " + item + " vm?")
+              .targetEvent(originatorEv)
+              .ok('ok')
+              .cancel('cancel');
+        $mdDialog.show(cfir).then(function() {
+            if(item == 'stop'){
+                VMs.stopVm(vmId, reload($scope.query));
+            } else if (item == 'start'){
+                VMs.startVm(vmId, reload($scope.query));
+            } else {
+                VMs.deleteVm(vmId, reload($scope.query));
+            }    
+        }, function() {
+            // do nothing when cancel clicked
+        });
+        
+        originatorEv = null;
+    }
 
     // 搜索任务
     $scope.search = function () {
