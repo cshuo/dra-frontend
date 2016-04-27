@@ -34,7 +34,7 @@ detail.controller("detailCtrl", [
               .ok('ok')
               .cancel('cancel');
             $mdDialog.show(cfir).then(function() {
-                VMs.stopVm(vmId, reload());
+                VMs.stopVm(vmId, function(){reload();});
             }, function() {
                 // do nothing when cancel clicked
             });
@@ -47,7 +47,7 @@ detail.controller("detailCtrl", [
               .ok('ok')
               .cancel('cancel');
             $mdDialog.show(cfir).then(function() {
-                VMs.startVm(vmId, reload());
+                VMs.startVm(vmId, function(){reload();});
             }, function() {
                 // do nothing when cancel clicked
             });

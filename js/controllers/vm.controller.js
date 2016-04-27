@@ -8,8 +8,9 @@ angular.module('dra.vm', ['ngResource', 'ui.bootstrap', 'ngMaterial'])
     '$stateParams',
     '$uibModal',
     '$mdDialog',
+    '$timeout',
     'VMs',
-function($scope, $http, $timeout, $state, $stateParams, $uibModal, $mdDialog, VMs) {
+function($scope, $http, $timeout, $state, $stateParams, $uibModal, $mdDialog, $timeout, VMs) {
     $scope.query = $stateParams.query || "all";
     $scope.filter = $scope.query;
 
@@ -35,11 +36,11 @@ function($scope, $http, $timeout, $state, $stateParams, $uibModal, $mdDialog, VM
               .cancel('cancel');
         $mdDialog.show(cfir).then(function() {
             if(item == 'stop'){
-                VMs.stopVm(vmId, reload($scope.query));
+                VMs.stopVm(vmId, function(){reload($scope.query);});
             } else if (item == 'start'){
-                VMs.startVm(vmId, reload($scope.query));
+                VMs.startVm(vmId, function(){reload($scope.query);});
             } else {
-                VMs.deleteVm(vmId, reload($scope.query));
+                VMs.deleteVm(vmId, function(){reload($scope.query);});
             }    
         }, function() {
             // do nothing when cancel clicked

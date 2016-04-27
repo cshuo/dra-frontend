@@ -3,7 +3,7 @@ var auth_d = {'tenant': 'admin', 'username':'admin', 'password': 'artemis'};
 
 angular.module('dra.vm')
 
-    .factory('VMs', ['$resource', '$http', '$mdToast', function($resource, $http, $mdToast) {
+    .factory('VMs', ['$resource', '$http', '$mdToast', '$timeout', function($resource, $http, $mdToast, $timeout) {
         var vms = [];
         var resource = $resource(base_url+'vms', {}, {
             query: {
@@ -40,10 +40,16 @@ angular.module('dra.vm')
                             .hideDelay(3000)
                             .theme('success-toast')
                         );
-                        return callback && callback();
+                        $timeout(function() {return callback && callback();}, 4000);
                     },
                     function(response){
-                        console.log(cmd + ' instance fail');
+                        $mdToast.show(
+                          $mdToast.simple()
+                            .textContent('fail to '+ cmd + ' vm!')
+                            .position('right')
+                            .hideDelay(3000)
+                            .theme('error-toast')
+                        );
                     }
                 );
             // }
@@ -167,10 +173,16 @@ angular.module('dra.vm')
                                 .hideDelay(3000)
                                 .theme('success-toast')
                             );
-                            return callback && callback();
+                            $timeout(function() {return callback && callback();}, 4000);
                         },
                         function(response){
-                            console.log('delete instance fail');
+                            $mdToast.show(
+                              $mdToast.simple()
+                                .textContent('fail to delete vm!')
+                                .position('right')
+                                .hideDelay(3000)
+                                .theme('error-toast')
+                            );
                         }
                     );
                 // }
