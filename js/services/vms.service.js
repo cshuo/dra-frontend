@@ -123,29 +123,57 @@ angular.module('dra.vm')
                 }
             },
 
-            // 提交任务
-            submitTask: function(task, callback) {
-                $http({
-                    method: 'POST',
-                    url: API + '/vms',
-                    data : task,
-                    headers:{
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json; ; charset=UTF-8'
+            getInfos: function(){
+                return $http({
+                    method: 'get',
+                    url: base_url + 'infos',
+                    params:{
+                        'tenant':'admin',
+                        'username': 'admin',
+                        'password': 'artemis'
                     }
-                }).success(function(response) {
-                    return callback;
                 });
             },
 
-            // 删除任务
-            deleteTask: function(id, callback) {
+            test: function(){
+                return 'test';
+            },
+
+            // 提交任务
+            submitTask: function(info) {
+                post_d = auth_d;
+                server_info = {
+                    'name': info.name,
+                    'imageRef': info.image,
+                    'key_name': info.keypair,
+                    'flavorRef': info.flavor,
+                    'min_count': info.count,
+                    'max_count': info.count,
+                    'networks': []
+                };
+                for(var i=0; i < info.nets.length; i++){
+                    server_info['networks'].push({'uuid': info.nets[i]});
+                }
+                post_d['server'] = JSON.stringify(server_info);
+                console.log(post_d);
                 $http({
-                    method: 'DELETE',
-                    url: API + '/vms/' + id
-                }).success(function(response) {
-                    return callback && callback(response);
-                })
+                    method: 'POST',
+                    url: base_url + 'vms',
+                    data : post_d,
+                }).then(
+                    function(response){
+                        $mdToast.show(
+                            $mdToast.simple()
+                            .textContent(info.name + ' created successfully!')
+                            .position('right')
+                            .hideDelay(3000)
+                            .theme('success-toast')
+                        );
+                    },
+                    function(response){
+                        console.log(response.data);
+                    }
+                )
             },
 
             // stop vms
@@ -159,32 +187,32 @@ angular.module('dra.vm')
 
             deleteVm: function(vmId, callback){
                 // if(confirm('Sure to delete?')){
-                    $http({
-                        url: detail_url + vmId,
-                        method: 'DELETE',
-                        data: auth_d,
-                        headers: {"Content-Type": "application/json"}
-                    }).then(
-                        function(response){
-                            $mdToast.show(
-                              $mdToast.simple()
-                                .textContent('Delete vm successfully!')
-                                .position('right')
-                                .hideDelay(3000)
-                                .theme('success-toast')
-                            );
-                            $timeout(function() {return callback && callback();}, 4000);
-                        },
-                        function(response){
-                            $mdToast.show(
-                              $mdToast.simple()
-                                .textContent('fail to delete vm!')
-                                .position('right')
-                                .hideDelay(3000)
-                                .theme('error-toast')
-                            );
-                        }
-                    );
+                $http({
+                    url: detail_url + vmId,
+                    method: 'DELETE',
+                    data: auth_d,
+                    headers: {"Content-Type": "application/json"}
+                }).then(
+                    function(response){
+                        $mdToast.show(
+                            $mdToast.simple()
+                            .textContent('Delete vm successfully!')
+                            .position('right')
+                            .hideDelay(3000)
+                            .theme('success-toast')
+                        );
+                        $timeout(function() {return callback && callback();}, 4000);
+                    },
+                    function(response){
+                        $mdToast.show(
+                            $mdToast.simple()
+                            .textContent('fail to delete vm!')
+                            .position('right')
+                            .hideDelay(3000)
+                            .theme('error-toast')
+                        );
+                    }
+                );
                 // }
             }
         }

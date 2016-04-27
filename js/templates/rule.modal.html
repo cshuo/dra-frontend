@@ -10,9 +10,10 @@
             <div><input type="text" id="name-field" ng-model="vm.name" class="form-control"></div>
         </div>
         <div class="col-sm-6">
-            <label for="flavor-field" class="control-label">Flavor</label>
-            <select type="text" id="flavor-field" ng-model="vm.flavor" class="form-control">
-                <option value='{{ flavor.id}}' ng-repeat='flavor in infos.flavors' required>{{ flavor.name }}</option>
+            <label for="network-field" class="control-label">Flavor</label>
+            <select type="text" id="network-field" ng-model="vm.flavor" class="form-control">
+                <option value="HOST">m1.small</option>
+                <option value="BRIDGE">m1.tiny</option>
             </select>
         </div>
         <div class="col-sm-6">
@@ -20,9 +21,10 @@
             <div><input type="number" min="1" id="name-field" ng-model="vm.count" class="form-control"></div>
         </div>
         <div class="col-sm-6">
-            <label for="image-field" class="control-label">Boot Source</label>
-            <select type="text" id="image-field" ng-model="vm.image" class="form-control">
-                <option value='{{ image.id }}' ng-repeat='image in infos.images'>{{ image.name }}</option>
+            <label for="network-field" class="control-label">Boot Source</label>
+            <select type="text" id="network-field" ng-model="vm.boot_source" class="form-control">
+                <option value="HOST">cirros</option>
+                <option value="BRIDGE">ubuntu</option>
             </select>
         </div>
     </div>
@@ -37,23 +39,25 @@
                 <div class="panel-body">
                     <h4>Access && Security</h4>
                     <div class="row duplicable-row">
-                        <div class="col-sm-6">
+                        <div class="col-sm-4">
                             <div class="form-group">
                                 <label class="control-label">Key Pair</label>
-                                <select type="text" ng-model="vm.keypair" class="form-control">
-                                    <option ng-repeat='key in infos.keys'>{{ key.keypair.name }}</option>
-                                </select>
+                                <div><select type="text" ng-model="port_mapping.protocol" class="form-control">
+                                    <option value="TCP">admin_key</option>
+                                    <option value="UDP">demo_key</option>
+                                </select></div>
                             </div>
                         </div>
                     </div>
                     <h4>Network</h4>
                     <div class="row duplicable-row">
-                        <div class="col-sm-6">
+                        <div class="col-sm-4">
                             <div class="form-group">
                                 <label class="control-label">Available Network</label>
-                                <select multiple type="text" ng-model="vm.nets" class="form-control">
-                                    <option value="{{ net.id}}" ng-repeat='net in infos.networks'>{{ net.label }}</option>
-                                </select>
+                                <div><select type="text" ng-model="volume.mode" class="form-control">
+                                    <option value="RO">pv</option>
+                                    <option value="RW">public</option>
+                                </select></div>
                             </div>
                         </div>
                     </div>

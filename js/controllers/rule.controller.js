@@ -58,8 +58,8 @@ function($scope, $http, $timeout, $state, $stateParams, $uibModal) {
     $scope.openTaskModal = function () {
         var modalInstance = $uibModal.open({
             animation: true,
-            templateUrl: '/app/js/templates/task.modal.html',
-            controller: TaskModalCtrl,
+            templateUrl: '/app/js/templates/rule.modal.html',
+            controller: RuleModalCtrl,
             size: 'md',
             windowTemplateUrl: '/app/js/components/modal/modal.window.html',
             resolve: {
@@ -82,7 +82,7 @@ function($scope, $http, $timeout, $state, $stateParams, $uibModal) {
 
 
 // 模块对话框控制器
-var TaskModalCtrl = function ($scope, $uibModalInstance, VMs) {
+var RuleModalCtrl = function ($scope, $uibModalInstance, VMs) {
     // 数据初始化
     $scope.task = {
         cpus:'0.1',

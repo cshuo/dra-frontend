@@ -1,7 +1,7 @@
 md-toast.md-success-toast-theme .md-toast-content {
-  background-color: green;
+	background-color: green;
 }
 
 md-toast.md-error-toast-theme .md-toast-content {
-  background-color: #B14141;
+	background-color: #B14141;
 }
