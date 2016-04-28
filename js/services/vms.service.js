@@ -155,7 +155,6 @@ angular.module('dra.vm')
                     server_info['networks'].push({'uuid': info.nets[i]});
                 }
                 post_d['server'] = JSON.stringify(server_info);
-                console.log(post_d);
                 $http({
                     method: 'POST',
                     url: base_url + 'vms',

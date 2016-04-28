@@ -64,7 +64,7 @@
                             <tbody>
                                 <tr class="read" ng-repeat="vm in vms | filter: search_key | filter: stt" ng-click="rowClick(vm.id)">
                                     <td>{{vm.name}}</td>
-                                    <td>{{vm.ip}}</td>
+                                    <td>{{vm.ip }}</td>
                                     <td>{{vm.host}}</td>
                                     <td class=""><span class="label label-{{vm.label_class}}">{{vm.status}}</span></td>
                                     <td class="mail-date">{{vm.created}}</td>

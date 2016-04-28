@@ -13,7 +13,6 @@ angular.module('dra.vm', ['ngResource', 'ui.bootstrap', 'ngMaterial'])
     function($scope, $http, $timeout, $state, $stateParams, $uibModal, $mdDialog, $timeout, VMs) {
         $scope.query = $stateParams.query || "all";
         $scope.filter = $scope.query;
-        console.log($scope.query + 'asdfasdf');
 
         // 加载数据
         var reload = function (query) {
@@ -109,7 +108,6 @@ angular.module('dra.vm', ['ngResource', 'ui.bootstrap', 'ngMaterial'])
 
     // 模块对话框控制器
     var TaskModalCtrl = function ($scope, $uibModalInstance, $mdToast, VMs) {
-        console.log($scope.query);
         VMs.getInfos().then(
             function(response){
                 $scope.infos = response.data;
@@ -124,22 +122,23 @@ angular.module('dra.vm', ['ngResource', 'ui.bootstrap', 'ngMaterial'])
         }
 
         $scope.submit = function () {
-            if($scope.vm.name == undefined || $scope.vm.count == undefined || $scope.vm.flavor == undefined
+            if($scope.vm == undefined || $scope.vm.name == undefined || $scope.vm.count == undefined || $scope.vm.flavor == undefined
                 || $scope.vm.image == undefined || $scope.vm.nets == undefined || $scope.vm.keypair == undefined){
-                $mdToast.show(
-                    $mdToast.simple()
-                    .textContent('Field missed!')
-                    .position('right')
-                    .hideDelay(3000)
-                    .theme('error-toast')
-                );
-            } else {
-                VMs.submitTask($scope.vm);
-                $uibModalInstance.close();
-            }
-        };
+                    $mdToast.show(
+                        $mdToast.simple()
+                        .textContent('Field missed!')
+                        .position('right')
+                        .hideDelay(3000)
+                        .theme('error-toast')
+                    );
+                }
+                else {
+                    VMs.submitTask($scope.vm);
+                    $uibModalInstance.close();
+                }
+            };
 
-        $scope.cancel = function () {
-            $uibModalInstance.dismiss('cancel');
+            $scope.cancel = function () {
+                $uibModalInstance.dismiss('cancel');
+            };
         };
-    };

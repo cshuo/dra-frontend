@@ -5,3 +5,11 @@ md-toast.md-success-toast-theme .md-toast-content {
 md-toast.md-error-toast-theme .md-toast-content {
 	background-color: #B14141;
 }
+
+md-backdrop.md-select-backdrop {
+	z-index: 9998;
+}
+
+.md-select-menu-container {
+	z-index: 9999;
+}
