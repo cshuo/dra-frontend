@@ -9,13 +9,12 @@ var detail = angular.module('dra.detail',['ngMaterial', 'ngMessages', 'material.
 
 detail.controller("detailCtrl", [
     '$scope',
-    '$rootScope',
     '$http',
     '$state',
     '$stateParams',
     '$mdDialog',
     'VMs',
-    function($scope, $rootScope, $http, $state, $stateParams, $mdDialog, VMs){
+    function($scope, $http, $state, $stateParams, $mdDialog, VMs){
         var reload = function(){
             $http({
                 method: 'GET',
@@ -64,13 +63,18 @@ detail.controller("detailCtrl", [
             }, function() {
                 // do nothing when cancel clicked
             });
-            
+
         }
         reload();
     }
 ]);
 
-detail.controller("vmCpuCtrl", ['$scope', '$http', '$stateParams', function ($scope, $http, $stateParams) {
+detail.controller("vmCpuCtrl", [
+    '$scope',
+    '$interval',
+    '$http',
+    '$stateParams',
+    function ($scope, $interval, $http, $stateParams) {
     var vmid = $stateParams.vmID;
     var reload_chart = function(){
         $http({
@@ -93,30 +97,14 @@ detail.controller("vmCpuCtrl", ['$scope', '$http', '$stateParams', function ($sc
     }
 
     reload_chart();
-    setInterval(function(){
+    var cpu_interval = $interval(function () {
         reload_chart();
-    },6000)
+    }, 6000);
+
+    $scope.$on('$destroy', function() {
+        $interval.cancel(cpu_interval);
+    });
 }]);
-
-detail.controller("vmMemCtrl", function ($scope, $http) {
-
-    $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
-    // $scope.series = ['Series A', 'Series B'];
-    $scope.data = [
-        [28, 42, 41, 19, 86, 27, 90],
-        [30, 56, 40, 14, 80, 23, 91],
-    ];
-    setInterval(function(){
-        $http.get('data/status.json').success(function(data) {
-            $scope.series = ['Series', 'Series B'];
-            $scope.data = [
-                [65, 59, 80, 81, 56, 55, 40],
-                [22, 44, 49, 12, 81, 22, 94]
-            ];
-        });
-    },10000)
-});
-
 
 detail.controller('vncCtrl', [
     '$scope',

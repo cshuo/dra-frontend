@@ -6,20 +6,20 @@ angular.module('dra.pm', ['ngResource', 'ui.bootstrap'])
 
     .controller('PmCtrl', [
         '$scope',
+        '$interval',
         '$http',
         '$timeout',
         '$state',
         '$stateParams',
         '$uibModal',
         'PMs',
-        function($scope, $http, $timeout, $state, $stateParams, $uibModal, PMs) {
+        function($scope, $interval, $http, $timeout, $state, $stateParams, $uibModal, PMs) {
             $scope.query = $stateParams.query || "all";
             $scope.filter = $scope.query;
 
             // 加载数据
             var reload = function (query) {
                 PMs.refresh().$promise.then(function(response) {
-                    //TODO 错误处理
                     $scope.pms = PMs.getTasks(query)
                 });
             };
@@ -52,14 +52,17 @@ angular.module('dra.pm', ['ngResource', 'ui.bootstrap'])
                     $scope.color_class = ""
                 }
             };
-            
+
             $scope.rowClick = function(pmID, pmName){
                 $state.go('navbar.pm_detail',{pmID: pmID, pmName:pmName});
             };
 
             // 加载任务, 定时监控
             reload($scope.query);
-            setInterval(function(){
-                PMs.monitor(reload($scope.query))
-            },10000)
-        }]);
+            var pm_interval = $interval(function () {
+                reload($scope.query);
+            }, 60000);
+            $scope.$on('$destroy', function() {
+                $interval.cancel(pm_interval);
+            });
+    }]);

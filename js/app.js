@@ -70,5 +70,11 @@ function ($rootScope, $state, $cookieStore, $http, $location) {
 
     $rootScope.$on('$locationChangeSuccess', function(event, absNewUrl, absOldUrl){
         $rootScope.previousUrl = absOldUrl;
-    });
+	});
+
+	$rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
+		$rootScope.currentState = toState.name;
+		// console.log('preset: '+ toState.name);
+		// console.log('previous: '+fromState.name);
+	});
 }]);

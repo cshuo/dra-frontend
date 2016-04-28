@@ -23,7 +23,7 @@ detail.controller("pmdetailCtrl", ['$scope', '$http', '$stateParams', 'PMs',
     }
 ]);
 
-detail.controller("pmCpuCtrl", ['$scope', '$http', '$stateParams', function ($scope, $http, $stateParams) {
+detail.controller("pmCpuCtrl", ['$scope', '$interval', '$http', '$stateParams', function ($scope, $interval, $http, $stateParams) {
     var reload_chart = function(){
         $http({
             method: 'GET',
@@ -44,39 +44,24 @@ detail.controller("pmCpuCtrl", ['$scope', '$http', '$stateParams', function ($sc
         });
     }
     reload_chart();
-    setInterval(function(){
+    var cpu_interval = $interval(function () {
         reload_chart();
-    },60000)
+    }, 60000);
+    $scope.$on('$destroy', function() {
+        $interval.cancel(cpu_interval);
+    });
 }
 ]);
-
-detail.controller("pmMemCtrl", function ($scope, $http) {
-
-    $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
-    $scope.series = ['Series A', 'Series B'];
-    $scope.data = [
-        [28, 42, 41, 19, 86, 27, 90],
-        [30, 56, 40, 14, 80, 23, 91],
-    ];
-    setInterval(function(){
-        $http.get('data/status.json').success(function(data) {
-            $scope.series = ['Series A', 'Series B'];
-            $scope.data = [
-                [65, 59, 80, 81, 56, 55, 40],
-                [22, 44, 49, 12, 81, 22, 94]
-            ];
-        });
-    },10000)
-});
 
 
 detail.controller("pmVmsCtrl", [
     '$scope',
+    '$interval',
     '$http',
     '$state',
     '$stateParams',
     'VMs',
-    function ($scope, $http, $state, $stateParams, VMs) {
+    function ($scope, $interval, $http, $state, $stateParams, VMs) {
         var reload = function(){
             VMs.refresh().$promise.then(function(response){
                 $scope.vms = VMs.getTasks($stateParams.pmName);
@@ -87,8 +72,11 @@ detail.controller("pmVmsCtrl", [
             $state.go('navbar.detail', {vmID: vmID});
         };
         reload();
-        setInterval(function(){
+        var vms_interval = $interval(function () {
             reload();
         }, 10000);
+        $scope.$on('$destroy', function() {
+            $interval.cancel(vms_interval);
+        });
     }
 ]);

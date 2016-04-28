@@ -2,12 +2,13 @@ angular.module('dra.rule', ['ngResource', 'ui.bootstrap'])
 
 .controller('ruleCtrl', [
     '$scope',
+    '$interval',
     '$http',
     '$timeout',
     '$state',
     '$stateParams',
     '$uibModal',
-function($scope, $http, $timeout, $state, $stateParams, $uibModal) {
+function($scope, $interval, $http, $timeout, $state, $stateParams, $uibModal) {
     $scope.query = $stateParams.query || "all";
     $scope.filter = $scope.query;
 
@@ -74,10 +75,12 @@ function($scope, $http, $timeout, $state, $stateParams, $uibModal) {
 
     // 加载任务, 定时监控
     reload($scope.query);
-    setInterval(function(){
+    var rule_interval = $interval(function () {
         reload($scope.query);
-        //VMs.monitor(reload($scope.query))
-    },10000)
+    },60000);
+    $scope.$on('$destroy', function() {
+        $interval.cancel(rule_interval);
+    });
 }]);
 
 

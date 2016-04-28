@@ -2,6 +2,7 @@ angular.module('dra.vm', ['ngResource', 'ui.bootstrap', 'ngMaterial'])
 
 .controller('VmCtrl', [
     '$scope',
+    '$interval',
     '$http',
     '$timeout',
     '$state',
@@ -10,7 +11,7 @@ angular.module('dra.vm', ['ngResource', 'ui.bootstrap', 'ngMaterial'])
     '$mdDialog',
     '$timeout',
     'VMs',
-    function($scope, $http, $timeout, $state, $stateParams, $uibModal, $mdDialog, $timeout, VMs) {
+    function($scope, $interval, $http, $timeout, $state, $stateParams, $uibModal, $mdDialog, $timeout, VMs) {
         $scope.query = $stateParams.query || "all";
         $scope.filter = $scope.query;
 
@@ -100,9 +101,12 @@ angular.module('dra.vm', ['ngResource', 'ui.bootstrap', 'ngMaterial'])
 
         // 加载任务, 定时监控
         reload($scope.query);
-        setInterval(function(){
+        var vms_interval = $interval(function () {
             reload($scope.query);
-        },10000)
+        }, 10000);
+        $scope.$on('$destroy', function() {
+            $interval.cancel(vms_interval);
+        });
     }]);
 
 

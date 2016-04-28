@@ -5,11 +5,12 @@ var overview = angular.module("dra.overview", ['ngResource', 'ui.bootstrap', 'ch
 
 overview.controller("tableCtrl", [
     '$scope',
+    '$interval',
     '$http',
     '$state',
     '$stateParams',
     'VmOverview',
-    function ($scope, $http, $state, $stateParams, VmOverview) {
+    function ($scope, $interval, $http, $state, $stateParams, VmOverview) {
         $scope.query = $stateParams.query || "all";
         $scope.filter = $scope.query;
 
@@ -38,15 +39,17 @@ overview.controller("tableCtrl", [
             $state.go('navbar.detail',{vmID: vmID});
         };
 
-
         reload($scope.query);
-        setInterval(function(){
+        var vms_intval = $interval(function () {
             reload($scope.query);
-        }, 10000)
+        }, 10000);
+        $scope.$on('$destroy', function() {
+            $interval.cancel(vms_intval);
+        });
     }
 ]);
 
-overview.controller("chartCtrl", ['$scope', 'VmOverview', function ($scope, VmOverview) {
+overview.controller("chartCtrl", ['$scope', '$interval', 'VmOverview', function ($scope, $interval, VmOverview) {
     $scope.labels = ["Used", "Free"];
     var reload = function(){
         VmOverview.overview_data().then(function(d){
@@ -56,12 +59,10 @@ overview.controller("chartCtrl", ['$scope', 'VmOverview', function ($scope, VmOv
         })
     };
     reload();
-    setInterval(function(){
+    var chart_intval = $interval(function () {
         reload();
     }, 10000);
+    $scope.$on('$destroy', function() {
+        $interval.cancel(chart_intval);
+    });
 }]);
-
-// overview.controller("pmemCtrl", function ($scope) {
-//     $scope.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
-//     $scope.data = [200, 500, 100];
-// });
