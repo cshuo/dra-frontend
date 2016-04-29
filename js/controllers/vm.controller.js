@@ -29,7 +29,7 @@ angular.module('dra.vm', ['ngResource', 'ui.bootstrap', 'ngMaterial'])
             $mdOpenMenu(ev);
         };
 
-        $scope.opClick = function(item, vmId){
+        $scope.opClick = function(item, vmId, vmName){
             var cfir = $mdDialog.confirm()
             .title("Sure to " + item + " vm?")
             .targetEvent(originatorEv)
@@ -37,11 +37,11 @@ angular.module('dra.vm', ['ngResource', 'ui.bootstrap', 'ngMaterial'])
             .cancel('cancel');
             $mdDialog.show(cfir).then(function() {
                 if(item == 'stop'){
-                    VMs.stopVm(vmId, function(){reload($scope.query);});
+                    VMs.stopVm(vmId, vmName, function(){reload($scope.query);});
                 } else if (item == 'start'){
-                    VMs.startVm(vmId, function(){reload($scope.query);});
+                    VMs.startVm(vmId, vmName, function(){reload($scope.query);});
                 } else {
-                    VMs.deleteVm(vmId, function(){reload($scope.query);});
+                    VMs.deleteVm(vmId, vmName, function(){reload($scope.query);});
                 }
             }, function() {
                 // do nothing when cancel clicked
@@ -128,13 +128,7 @@ angular.module('dra.vm', ['ngResource', 'ui.bootstrap', 'ngMaterial'])
         $scope.submit = function () {
             if($scope.vm == undefined || $scope.vm.name == undefined || $scope.vm.count == undefined || $scope.vm.flavor == undefined
                 || $scope.vm.image == undefined || $scope.vm.nets == undefined || $scope.vm.keypair == undefined){
-                    $mdToast.show(
-                        $mdToast.simple()
-                        .textContent('Field missed!')
-                        .position('right')
-                        .hideDelay(3000)
-                        .theme('error-toast')
-                    );
+		    $scope.error = "All fields are required!!!";
                 }
                 else {
                     VMs.submitTask($scope.vm);

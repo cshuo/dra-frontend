@@ -23,7 +23,7 @@ angular.module('dra.vm')
         };
 
         // for stop and start vms
-        var action = function(cmd, vmId, callback){
+        var action = function(cmd, vmId, vmName, callback){
             // if(confirm('Sure to '+ cmd+'?')){
                 var put_d = auth_d;
                 put_d['cmd'] = cmd;
@@ -35,7 +35,7 @@ angular.module('dra.vm')
                     function(response){
                         $mdToast.show(
                           $mdToast.simple()
-                            .textContent(cmd + ' successfully!')
+                            .textContent(cmd + ' '+vmName+ ' successfully!')
                             .position('right')
                             .hideDelay(3000)
                             .theme('success-toast')
@@ -45,7 +45,7 @@ angular.module('dra.vm')
                     function(response){
                         $mdToast.show(
                           $mdToast.simple()
-                            .textContent('fail to '+ cmd + ' vm!')
+                            .textContent('fail to '+ cmd + '' + vmName)
                             .position('right')
                             .hideDelay(3000)
                             .theme('error-toast')
@@ -170,21 +170,27 @@ angular.module('dra.vm')
                         );
                     },
                     function(response){
-                        console.log(response.data);
+                        $mdToast.show(
+                            $mdToast.simple()
+                            .textContent('failed to create ' + info.name)
+                            .position('right')
+                            .hideDelay(3000)
+                            .theme('error-toast')
+                        );
                     }
                 )
             },
 
             // stop vms
-            stopVm: function(vmId, callback){
-                action('stop', vmId, callback);
+            stopVm: function(vmId, vmName, callback){
+                action('stop', vmId, vmName,  callback);
             },
 
-            startVm: function(vmId, callback){
-                action('start', vmId, callback);
+            startVm: function(vmId, vmName, callback){
+                action('start', vmId, vmName, callback);
             },
 
-            deleteVm: function(vmId, callback){
+            deleteVm: function(vmId, vmName, callback){
                 // if(confirm('Sure to delete?')){
                 $http({
                     url: detail_url + vmId,
@@ -195,7 +201,7 @@ angular.module('dra.vm')
                     function(response){
                         $mdToast.show(
                             $mdToast.simple()
-                            .textContent('Delete vm successfully!')
+                            .textContent('delete '+ vmName + ' successfully!')
                             .position('right')
                             .hideDelay(3000)
                             .theme('success-toast')
@@ -205,7 +211,7 @@ angular.module('dra.vm')
                     function(response){
                         $mdToast.show(
                             $mdToast.simple()
-                            .textContent('fail to delete vm!')
+                            .textContent('fail to delete ' + vmName)
                             .position('right')
                             .hideDelay(3000)
                             .theme('error-toast')
