@@ -149,6 +149,7 @@ angular.module('dra.vm')
                     'flavorRef': info.flavor,
                     'min_count': info.count,
                     'max_count': info.count,
+                    'app_type': info.app_type || 'general',
                     'networks': []
                 };
                 for(var i=0; i < info.nets.length; i++){
