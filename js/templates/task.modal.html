@@ -1,27 +1,27 @@
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal"><span class="si-close modal-close" ng-click="cancel()"></span><span class="sr-only">Close</span></button>
-    <h4 class="modal-title">Create task</h4>
+    <h4 class="modal-title">{{ 'CREATE_VM' | translate}}</h4>
 </div>
 <div class="modal-body">
-    <h4>Basic</h4>
+    <h4>{{ 'BASIC' | translate }}</h4>
     <div ng-show="error" class="alert alert-danger"> {{ error }}</div>
     <div class="row form-group">
         <div class="col-sm-6">
-            <label for="name-field" class="control-label">Name</label>
+            <label for="name-field" class="control-label">{{ 'NAME' | translate }}</label>
             <div><input type="text" id="name-field" ng-model="vm.name" class="form-control"></div>
         </div>
         <div class="col-sm-6">
-            <label for="flavor-field" class="control-label">Flavor</label>
+            <label for="flavor-field" class="control-label">{{ 'FLAVOR' | translate }}</label>
             <select type="text" id="flavor-field" ng-model="vm.flavor" class="form-control">
                 <option value='{{ flavor.id}}' ng-repeat='flavor in infos.flavors' required>{{ flavor.name }}</option>
             </select>
         </div>
         <div class="col-sm-6">
-            <label for="name-field" class="control-label">Instance Count</label>
+            <label for="name-field" class="control-label">{{ 'INSTANCE_NUM' | translate }}</label>
             <div><input type="number" min="1" id="name-field" ng-model="vm.count" class="form-control"></div>
         </div>
         <div class="col-sm-6">
-            <label for="image-field" class="control-label">Boot Source</label>
+            <label for="image-field" class="control-label">{{ 'BOOT_SOURCE' | translate }}</label>
             <select type="text" id="image-field" ng-model="vm.image" class="form-control">
                 <option value='{{ image.id }}' ng-repeat='image in infos.images'>{{ image.name }}</option>
             </select>
@@ -31,27 +31,27 @@
         <div class="panel panel-default">
             <div class="panel-heading clickable">
                 <div class="panel-title">
-                    <a data-toggle="collapse" data-target=".DockerSetting" aria-expanded="true"><span class="si-angle-right"></span>Advance</a>
+                    <a data-toggle="collapse" data-target=".DockerSetting" aria-expanded="true"><span class="si-angle-right"></span>{{ 'ADVANCE' | translate }}</a>
                 </div>
             </div>
             <div id="DockerSetting" class="DockerSetting panel-collapse collapse" aria-expanded="true">
                 <div class="panel-body">
-                    <h4>Access && Security</h4>
+                    <h4>{{ 'ACCESS_SECURE' | translate }}</h4>
                     <div class="row duplicable-row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label class="control-label">Key Pair</label>
+                                <label class="control-label">{{ 'KEY_PAIR' | translate }}</label>
                                 <select type="text" ng-model="vm.keypair" class="form-control">
                                     <option ng-repeat='key in infos.keys'>{{ key.keypair.name }}</option>
                                 </select>
                             </div>
                         </div>
                     </div>
-                    <h4>Network</h4>
+                    <h4>{{ 'NETWORK' | translate }}</h4>
                     <div class="row duplicable-row">
                         <div class="col-sm-6">
                             <md-input-container>
-                                <label>options</label>
+                                <label>{{ 'OPTION' | translate }}</label>
                                 <md-select ng-model="vm.nets" multiple>
                                     <md-option ng-value="net.id" ng-repeat="net in infos.networks">{{ net.label }}</md-option>
                                 </md-select>
@@ -64,10 +64,9 @@
                             </div> -->
                         </div>
                     </div>
-                    <h4>App Type</h4>
+                    <h4>{{ 'APP_TYPE' | translate }}</h4>
                     <div class="row duplicable-row">
                         <div class="col-sm-6">
-                            <label for="type-field" class="control-label">Type</label>
                             <div><input type="text" id="type-field" ng-model="vm.app_type" class="form-control"></div>
                         </div>
                     </div>
@@ -78,6 +77,6 @@
 </div>
 
 <div class="modal-footer">
-    <button type="button" class="btn btn-white" ng-click="cancel()">Cancel</button>
-    <button type="button" class="btn btn-primary" ng-click="submit()">Create</button>
+    <button type="button" class="btn btn-white" ng-click="cancel()">{{ 'CANCEL' | translate }}</button>
+    <button type="button" class="btn btn-primary" ng-click="submit()">{{ 'OK' | translate }}</button>
 </div>

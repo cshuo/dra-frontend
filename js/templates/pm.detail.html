@@ -7,31 +7,31 @@
     </div>
     <div class="padContent" ng-controller="pmdetailCtrl">
         <div class="detailContent animated fadeInRight" style="background-color: #ffffff">
-            <h1>Hypervisors Details</h1>
+            <h1>{{ 'DETAILS' | translate }}</h1>
             <hr style="margin-top: 5px;"/>
             <ul class="specs">
                 <li>
-                    <span>ID</span>
+                    <span>{{ 'ID' | translate }}</span>
                     <dd title="{{ data.id }}">{{data.id}}</dd>
                 </li>
                 <li>
-                    <span>Name</span>
+                    <span>{{ 'NAME' | translate }}</span>
                     <dd>{{data.hypervisor_hostname}}</dd>
                 </li>
                 <li>
-                    <span>Type</span>
+                    <span>{{ 'TYPE' | translate }}</span>
                     <dd>{{data.hypervisor_type}}</dd>
                 </li>
                 <li>
-                    <span>State</span>
+                    <span>{{ 'STATE' | translate }}</span>
                     <dd>{{data.state}}</dd>
                 </li>
                 <li>
-                    <span>IP</span>
+                    <span>{{ 'IP' | translate }}</span>
                     <dd title="{{data.host_ip}}">{{data.host_ip}}</dd>
                 </li>
                 <li>
-                    <span>Options</span>
+                    <span>{{ 'OPTIONS' | translate }}</span>
                     <dd>
                         <a ng-click="kill(task)" title="kill"><span class="si-close-circle"></span></a>
                         <a ng-click="delete(task)" title="delete"><span class="si-trash"></span></a>
@@ -44,18 +44,18 @@
     <div class="wrapper wrapper-content">
         <div ng-cloak="" class="tabsdemoDynamicHeight">
             <md-content>
-                <md-tabs md-dynamic-height="" md-border-bottom="">
-                    <md-tab label="Meters">
-                        <md-content class="md-padding">
-                            <div class="row tabContent">
-                                <div class="col-sm-12">
-                                    <div ng-controller="pmCpuCtrl">
-                                        <h2>CPU</h2>
-                                        <canvas id="cpu" class="chart chart-line" chart-data="data"
-                                        chart-labels="labels" chart-legend="true" chart-series="series"
-                                        height="80">
-                                    </canvas>
-                                </div>
+            <md-tabs md-dynamic-height="" md-border-bottom="">
+            <md-tab label="{{ 'METERS' | translate }}">
+            <md-content class="md-padding">
+            <div class="row tabContent">
+                <div class="col-sm-12">
+                    <div ng-controller="pmCpuCtrl">
+                        <h2>CPU</h2>
+                        <canvas id="cpu" class="chart chart-line" chart-data="data"
+                        chart-labels="labels" chart-legend="true" chart-series="series"
+                        height="80">
+                    </canvas>
+                </div>
                                 <!--div ng-controller="memCtrl">
                                 <h2>MEM</h2>
                                 <canvas id="mem" class="chart chart-line" chart-data="data"
@@ -67,38 +67,38 @@
                 </div>
             </md-content>
         </md-tab>
-        <md-tab label="Instances">
-            <md-content class="md-padding">
-                <h2>VMs</h2>
-                <div class="table-responsive" ng-controller="pmVmsCtrl">
-                    <table class="table table-striped tasks">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Id</th>
-                                <th>IP</th>
-                                <th>Created</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="read" ng-repeat="vm in vms" ng-click="rowClick(vm.id)">
-                                <td>{{vm.name}}</td>
-                                <td>{{vm.id}}</td>
-                                <td>{{vm.ip}}</td>
-                                <td class="mail-date">{{vm.created}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </md-content>
-        </md-tab>
-        <md-tab label="three">
-            <md-content class="md-padding">
-                <h1 class="md-display-2">Tab Three</h1>
-                <p>Reminding to complete</p>
-            </md-content>
-        </md-tab>
-    </md-tabs>
+        <md-tab label="{{ 'INSTANCES' | translate }}">
+        <md-content class="md-padding">
+        <h2>{{ 'VMS' | translate }}</h2>
+        <div class="table-responsive" ng-controller="pmVmsCtrl">
+            <table class="table table-striped tasks">
+                <thead>
+                    <tr>
+                        <th>{{ 'NAME' | translate }}</th>
+                        <th>{{ 'ID' | translate }}</th>
+                        <th>{{ 'IP' | translate }}</th>
+                        <th>{{ 'CREATED' | translate }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="read" ng-repeat="vm in vms" ng-click="rowClick(vm.id)">
+                        <td>{{vm.name}}</td>
+                        <td>{{vm.id}}</td>
+                        <td>{{vm.ip}}</td>
+                        <td class="mail-date">{{vm.created}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </md-content>
+</md-tab>
+<!-- <md-tab label="three">
+<md-content class="md-padding">
+<h1 class="md-display-2">Tab Three</h1>
+<p>Reminding to complete</p>
+</md-content>
+</md-tab> -->
+</md-tabs>
 </md-content>
 </div>
 <!--

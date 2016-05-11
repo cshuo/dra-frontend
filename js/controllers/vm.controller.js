@@ -10,8 +10,9 @@ angular.module('dra.vm', ['ngResource', 'ui.bootstrap', 'ngMaterial'])
     '$uibModal',
     '$mdDialog',
     '$timeout',
+    '$filter',
     'VMs',
-    function($scope, $interval, $http, $timeout, $state, $stateParams, $uibModal, $mdDialog, $timeout, VMs) {
+    function($scope, $interval, $http, $timeout, $state, $stateParams, $uibModal, $mdDialog, $timeout, $filter, VMs) {
         $scope.query = $stateParams.query || "all";
         $scope.filter = $scope.query;
 
@@ -29,12 +30,22 @@ angular.module('dra.vm', ['ngResource', 'ui.bootstrap', 'ngMaterial'])
             $mdOpenMenu(ev);
         };
 
+        var tips_translate = function(item){
+            if(item == 'stop'){
+                return $filter('translate')('STOP_TIPS');
+            } else if(item == 'start'){
+                return $filter('translate')('START_TIPS');
+            } else {
+                return $filter('translate')('DELETE_TIPS');
+            }
+        }
+
         $scope.opClick = function(item, vmId, vmName){
             var cfir = $mdDialog.confirm()
-            .title("Sure to " + item + " vm?")
+            .title(tips_translate(item))
             .targetEvent(originatorEv)
-            .ok('ok')
-            .cancel('cancel');
+            .ok($filter('translate')('OK'))
+            .cancel($filter('translate')('CANCEL'));
             $mdDialog.show(cfir).then(function() {
                 if(item == 'stop'){
                     VMs.stopVm(vmId, vmName, function(){reload($scope.query);});

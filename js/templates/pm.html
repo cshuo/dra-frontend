@@ -4,7 +4,7 @@
             <div class="ibox">
                 <div class="ibox-title">
                     <h2>
-                        Hypervisors | {{filter}} ({{pms.length}})
+                        {{ 'HYPERVISORS' | translate }}| {{filter}} ({{pms.length}})
                     </h2>
                 </div>
                 <div class="ibox-content mailbox-main">
@@ -12,7 +12,7 @@
                         <div class="pull-right" id="input-btn">
                             <form class="mail-search">
                                 <div class="input-group">
-                                    <input type="text" class="form-control input-sm" ng-model="search_key" placeholder="Search all hosts...">
+                                    <input type="text" class="form-control input-sm" ng-model="search_key" placeholder="{{ 'SEARCH_TASK' | translate }}">
                                 </div>
                             </form>
                             <div class="keep-open btn-group" title="status">
@@ -22,13 +22,13 @@
                                 </button>
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-                                        <a ng-click="stateSel('all')"> <i class="fa fa-circle"></i>All</a>
+                                        <a ng-click="stateSel('all')"> <i class="fa fa-circle"></i> All</a>
                                     </li>
                                     <li>
-                                        <a ng-click="stateSel('up')"> <i class="fa fa-circle text-navy"></i>UP</a>
+                                        <a ng-click="stateSel('up')"> <i class="fa fa-circle text-navy"></i> UP</a>
                                     </li>
                                     <li>
-                                        <a ng-click="stateSel('down')"> <i class="fa fa-circle text-warning"></i>DOWN</a>
+                                        <a ng-click="stateSel('down')"> <i class="fa fa-circle text-warning"></i> DOWN</a>
                                     </li>
                                 </ul>
                             </div>
@@ -39,11 +39,11 @@
                         <table class="table table-striped tasks">
                             <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>State</th>
-                                <th>Status</th>
-                                <th>Options</th>
+                                <th>{{ 'ID' | translate }}</th>
+                                <th>{{ 'NAME' | translate }}</th>
+                                <th>{{ 'STATE' | translate }}</th>
+                                <th>{{ 'STATUS' | translate }}</th>
+                                <th>{{ 'OPTIONS' | translate }}</th>
                             </tr>
                             </thead>
                             <tbody>

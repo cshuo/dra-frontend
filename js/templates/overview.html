@@ -1,22 +1,22 @@
 <div id="overview" class="animated fadeInRight">
 	<div class="row chartGroup">
-		<h1>Overview</h1>
+		<h1>{{ 'OVERVIEW' | translate }}</h1>
 		<hr style="margin-top: 5px;"/>
 		<div ng-controller="chartCtrl">
 			<div class="col-sm-4">
-				<h3 style="margin-left:60px">VCPUS</h3>
+				<h3 style="margin-left:60px">{{ 'VCPUS' | translate }}</h3>
 				<canvas id="pcpu" class="chart chart-pie"
 				  chart-data="cpu_data" chart-labels="labels" chart-legend="true">
 				</canvas>
 			</div>
 			<div class="col-sm-4">
-				<h3 style="margin-left:60px">MEM (MB)</h3>
+				<h3 style="margin-left:60px">{{ 'MEM' | translate }}(MB)</h3>
 				<canvas id="pmem" class="chart chart-pie" 
 				chart-data="mem_data" chart-labels="labels" chart-legend="true">
 				</canvas>
 			</div>
 			<div class="col-sm-4">
-				<h3 style="margin-left:60px">Disk (GB)</h3>
+				<h3 style="margin-left:60px">{{ 'DISK' | translate }}(GB)</h3>
 				<canvas id="pnet" class="chart chart-pie" 
 				chart-data="disk_data"chart-labels="labels" chart-legend="true">
 				</canvas>
@@ -29,12 +29,12 @@
 				<table class="table table-striped">
 					<thead>
 					<tr>
-						<th>Name</th>
-                        <th>IP</th>
-						<th>VCPUs</th>
-						<th>Memory</th>
-						<th>Disk</th>
-                        <th>Created</th>
+						<th>{{ 'NAME' | translate }}</th>
+                        <th>{{ 'IP' | translate }}</th>
+						<th>{{ 'VCPUS' | translate }}</th>
+						<th>{{ 'MEMORY' | translate }}</th>
+						<th>{{ 'DISK' | translate }}</th>
+                        <th>{{ 'CREATED' | translate }}</th>
 					</tr>
 					</thead>
 					<tbody>

@@ -13,8 +13,9 @@ detail.controller("detailCtrl", [
     '$state',
     '$stateParams',
     '$mdDialog',
+    '$filter',
     'VMs',
-    function($scope, $http, $state, $stateParams, $mdDialog, VMs){
+    function($scope, $http, $state, $stateParams, $mdDialog, $filter, VMs){
         var reload = function(){
             $http({
                 method: 'GET',
@@ -28,10 +29,10 @@ detail.controller("detailCtrl", [
 
         $scope.stop = function(vmId, e){
             var cfir = $mdDialog.confirm()
-              .title('Sure to stop vm?')
+              .title($filter('translate')('STOP_TIPS'))
               .targetEvent(e)
-              .ok('ok')
-              .cancel('cancel');
+              .ok($filter('translate')('OK'))
+              .cancel($filter('translate')('CANCEL'));
             $mdDialog.show(cfir).then(function() {
                 VMs.stopVm(vmId, function(){reload();});
             }, function() {
@@ -41,10 +42,10 @@ detail.controller("detailCtrl", [
 
         $scope.start = function(vmId, e){
             var cfir = $mdDialog.confirm()
-              .title('Sure to start vm?')
+              .title($filter('translate')('START_TIPS'))
               .targetEvent(e)
-              .ok('ok')
-              .cancel('cancel');
+              .ok($filter('translate')('OK'))
+              .cancel($filter('translate')('CANCEL'));
             $mdDialog.show(cfir).then(function() {
                 VMs.startVm(vmId, function(){reload();});
             }, function() {
@@ -54,10 +55,10 @@ detail.controller("detailCtrl", [
 
         $scope.delete= function(vmId, e){
             var cfir = $mdDialog.confirm()
-              .title('Sure to delete vm?')
+              .title($filter('translate')('DELETE_TIPS'))
               .targetEvent(e)
-              .ok('ok')
-              .cancel('cancel');
+              .ok($filter('translate')('OK'))
+              .cancel($filter('translate')('CANCEL'));
             $mdDialog.show(cfir).then(function() {
                 VMs.deleteVm(vmId, function(){$state.go('navbar.vm');});
             }, function() {

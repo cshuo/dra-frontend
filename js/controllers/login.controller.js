@@ -3,8 +3,8 @@
 angular.module('dra.auth')
 
 .controller('LoginController',
-    ['$scope', '$rootScope', '$state', 'AuthenticationService',
-    function ($scope, $rootScope, $state, AuthenticationService) {
+    ['$scope', '$rootScope', '$state', '$filter', 'AuthenticationService',
+    function ($scope, $rootScope, $state, $filter, AuthenticationService) {
         // reset login status
         AuthenticationService.ClearCredentials();
 
@@ -15,7 +15,7 @@ angular.module('dra.auth')
                     AuthenticationService.SetCredentials($scope.username, $scope.password);
                     $state.go('navbar.overview');
                 } else {
-                    $scope.error = "Username or password is not correct";
+                    $scope.error = $filter('translate')('ERROR_LOGIN_TIPS');
                     $scope.dataLoading = false;
                 }
             });
