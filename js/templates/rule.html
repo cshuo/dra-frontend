@@ -45,15 +45,13 @@
                             <tr>
                                 <th>{{ 'NAME' | translate }}</th>
                                 <th>{{ 'APP' | translate }}</th>
-                                <th>{{ 'TYPE' | translate }}</th>
                                 <th>{{ 'OPTIONS' | translate }}</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr class="read" ng-repeat="rule in rules| filter: search_key | filter: stt" ng-click="rowClick(rule.id)">
                                 <td>{{rule.name}}</td>
-                                <td>{{rule.app}}</td>
-                                <td>{{rule.type}}</td>
+                                <td>{{rule.app_type}}</td>
                                 <td class="mail-options">
                                     <a ng-click="kill(rule)" title="kill"><span class="si-close-circle"></span></a>
                                     <a ng-click="delete(rule)" title="delete"><span class="si-trash"></span></a>

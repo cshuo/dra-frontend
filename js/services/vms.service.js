@@ -3,7 +3,8 @@ var auth_d = {'tenant': 'admin', 'username':'admin', 'password': 'artemis'};
 
 angular.module('dra.vm')
 
-    .factory('VMs', ['$resource', '$http', '$mdToast', '$timeout', function($resource, $http, $mdToast, $timeout) {
+    .factory('VMs', ['$resource', '$http', '$mdToast', '$timeout', '$filter', 
+        function($resource, $http, $mdToast, $timeout, $filter) {
         var vms = [];
         var resource = $resource(base_url+'vms', {}, {
             query: {
@@ -22,6 +23,34 @@ angular.module('dra.vm')
             })
         };
 
+        var action_tips = function(cmd, sign){
+            if(cmd == 'stop'){
+                if(sign == 'success'){
+                    return $filter('translate')('STOP_SUCCESS_TIPS');
+                } else {
+                    return $filter('translate')('STOP_FAIL_TIPS');
+                }
+            } else if(cmd == 'start') {
+                if(sign == 'success'){
+                    return $filter('translate')('START_SUCCESS_TIPS');
+                } else {
+                    return $filter('translate')('START_FAIL_TIPS');
+                }
+            } else if(cmd == 'create'){
+                if(sign == 'success'){
+                    return $filter('translate')('CREATE_SUCCESS_TIPS');
+                } else {
+                    return $filter('translate')('CREATE_FAIL_TIPS');
+                }
+            } else {
+                if(sign == 'success'){
+                    return $filter('translate')('DELETE_SUCCESS_TIPS');
+                } else {
+                    return $filter('translate')('DELETE_FAIL_TIPS');
+                }
+            }
+        };
+
         // for stop and start vms
         var action = function(cmd, vmId, vmName, callback){
             // if(confirm('Sure to '+ cmd+'?')){
@@ -35,7 +64,7 @@ angular.module('dra.vm')
                     function(response){
                         $mdToast.show(
                           $mdToast.simple()
-                            .textContent(cmd + ' '+vmName+ ' successfully!')
+                            .textContent(action_tips(cmd, 'success') + vmName)
                             .position('right')
                             .hideDelay(3000)
                             .theme('success-toast')
@@ -45,7 +74,7 @@ angular.module('dra.vm')
                     function(response){
                         $mdToast.show(
                           $mdToast.simple()
-                            .textContent('fail to '+ cmd + '' + vmName)
+                            .textContent(action_tips(cmd, 'fail') + vmName)
                             .position('right')
                             .hideDelay(3000)
                             .theme('error-toast')
@@ -164,7 +193,7 @@ angular.module('dra.vm')
                     function(response){
                         $mdToast.show(
                             $mdToast.simple()
-                            .textContent(info.name + ' created successfully!')
+                            .textContent(action_tips('create', 'success') + info.name)
                             .position('right')
                             .hideDelay(3000)
                             .theme('success-toast')
@@ -173,7 +202,7 @@ angular.module('dra.vm')
                     function(response){
                         $mdToast.show(
                             $mdToast.simple()
-                            .textContent('failed to create ' + info.name)
+                            .textContent(action_tips('create', 'fail') + info.name)
                             .position('right')
                             .hideDelay(3000)
                             .theme('error-toast')
@@ -202,7 +231,7 @@ angular.module('dra.vm')
                     function(response){
                         $mdToast.show(
                             $mdToast.simple()
-                            .textContent('delete '+ vmName + ' successfully!')
+                            .textContent(action_tips('delete', 'success') + vmName)
                             .position('right')
                             .hideDelay(3000)
                             .theme('success-toast')
@@ -212,7 +241,7 @@ angular.module('dra.vm')
                     function(response){
                         $mdToast.show(
                             $mdToast.simple()
-                            .textContent('fail to delete ' + vmName)
+                            .textContent(action_tips('delete', 'fail') + vmName)
                             .position('right')
                             .hideDelay(3000)
                             .theme('error-toast')

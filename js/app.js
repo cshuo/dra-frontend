@@ -113,8 +113,15 @@ angular.module('dra', [
         APP_TYPE: 'App Type',
         ERROR_LOGIN_TIPS: 'Username or password is not correct',
         USERNAME_REQ: 'Username is required',
-        PASSWORD_REQ: 'Password is required'
-
+        PASSWORD_REQ: 'Password is required',
+        STOP_SUCCESS_TIPS: 'Successfully, stop',
+        START_SUCCESS_TIPS: 'Successfully, start',
+        DELETE_SUCCESS_TIPS: 'Successfully, delete',
+        CREATE_SUCCESS_TIPS: 'Successfully, create',
+        DELETE_FAIL_TIPS: 'Failed to delete',
+        STOP_FAIL_TIPS: 'Failed to stop',
+        START_FAIL_TIPS: 'Failed to start',
+        CREATE_FAIL_TIPS: 'Failed to create',
     });
     $translateProvider.translations('cn', {
         LOGIN: '登录',
@@ -175,7 +182,15 @@ angular.module('dra', [
         APP_TYPE: '应用类型',
         ERROR_LOGIN_TIPS: '用户名或密码错误',
         USERNAME_REQ: '用户名必填',
-        PASSWORD_REQ: '密码必填'
+        PASSWORD_REQ: '密码必填',
+        STOP_SUCCESS_TIPS: '成功停止',
+        START_SUCCESS_TIPS: '成功启动',
+        DELETE_SUCCESS_TIPS: '成功删除',
+        CREATE_SUCCESS_TIPS: '成功创建',
+        DELETE_FAIL_TIPS: '未成功删除',
+        STOP_FAIL_TIPS: '未成功停止',
+        START_FAIL_TIPS: '未成功启动',
+        CREATE_FAIL_TIPS: '未成功创建',
     });
     $translateProvider.preferredLanguage('cn');
 }])

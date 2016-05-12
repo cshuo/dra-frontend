@@ -17,13 +17,11 @@ function($scope, $interval, $http, $timeout, $state, $stateParams, $uibModal) {
         $scope.rules = [
             {
                 'name': 'r1',
-                'app': 'app1',
-                'type': 'CT'
+                'app_type': 'app1',
             },
             {
                 'name': 'r2',
-                'app': 'app2',
-                'type': 'NS'
+                'app_type': 'app2',
             }
         ]
     };
