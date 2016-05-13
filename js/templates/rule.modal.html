@@ -1,73 +1,28 @@
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal"><span class="si-close modal-close" ng-click="cancel()"></span><span class="sr-only">Close</span></button>
-    <h4 class="modal-title">Create task</h4>
+    <h4 class="modal-title">{{ 'CREATE_RULE' | translate}}</h4>
 </div>
 <div class="modal-body">
-    <h4>Basic</h4>
+    <div ng-show="error" class="alert alert-danger"> {{ error }}</div>
     <div class="row form-group">
         <div class="col-sm-6">
-            <label for="name-field" class="control-label">Name</label>
-            <div><input type="text" id="name-field" ng-model="vm.name" class="form-control"></div>
+            <label for="name-field" class="control-label">{{'NAME' | translate}}</label>
+            <div><input type="text" id="name-field" ng-model="rule.name" class="form-control"></div>
         </div>
         <div class="col-sm-6">
-            <label for="network-field" class="control-label">Flavor</label>
-            <select type="text" id="network-field" ng-model="vm.flavor" class="form-control">
-                <option value="HOST">m1.small</option>
-                <option value="BRIDGE">m1.tiny</option>
-            </select>
-        </div>
-        <div class="col-sm-6">
-            <label for="name-field" class="control-label">Instance Count</label>
-            <div><input type="number" min="1" id="name-field" ng-model="vm.count" class="form-control"></div>
-        </div>
-        <div class="col-sm-6">
-            <label for="network-field" class="control-label">Boot Source</label>
-            <select type="text" id="network-field" ng-model="vm.boot_source" class="form-control">
-                <option value="HOST">cirros</option>
-                <option value="BRIDGE">ubuntu</option>
-            </select>
+            <label for="name-field" class="control-label">{{'APP_TYPE' | translate}}</label>
+            <div><input type="text" id="name-field" ng-model="rule.app_type" class="form-control"></div>
         </div>
     </div>
-    <div class="row full-bleed">
-        <div class="panel panel-default">
-            <div class="panel-heading clickable">
-                <div class="panel-title">
-                    <a data-toggle="collapse" data-target=".DockerSetting" aria-expanded="true"><span class="si-angle-right"></span>Advance</a>
-                </div>
-            </div>
-            <div id="DockerSetting" class="DockerSetting panel-collapse collapse" aria-expanded="true">
-                <div class="panel-body">
-                    <h4>Access && Security</h4>
-                    <div class="row duplicable-row">
-                        <div class="col-sm-4">
-                            <div class="form-group">
-                                <label class="control-label">Key Pair</label>
-                                <div><select type="text" ng-model="port_mapping.protocol" class="form-control">
-                                    <option value="TCP">admin_key</option>
-                                    <option value="UDP">demo_key</option>
-                                </select></div>
-                            </div>
-                        </div>
-                    </div>
-                    <h4>Network</h4>
-                    <div class="row duplicable-row">
-                        <div class="col-sm-4">
-                            <div class="form-group">
-                                <label class="control-label">Available Network</label>
-                                <div><select type="text" ng-model="volume.mode" class="form-control">
-                                    <option value="RO">pv</option>
-                                    <option value="RW">public</option>
-                                </select></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div class="row form-group">
+        <div class="col-sm-12">
+            <label for="name-field" class="control-label">{{'CONTENT' | translate}}</label>
+            <div><textarea id="text" cols="80" rows="12" required="string" ng-model="rule.content"></textarea></div>
         </div>
     </div>
 </div>
 
 <div class="modal-footer">
-    <button type="button" class="btn btn-white" ng-click="cancel()">Cancel</button>
-    <button type="button" class="btn btn-primary" ng-click="submit()">Create</button>
+    <button type="button" class="btn btn-white" ng-click="cancel()">{{'CANCEL' | translate}}</button>
+    <button type="button" class="btn btn-primary" ng-click="submit()">{{'OK' | translate}}</button>
 </div>

@@ -1,3 +1,4 @@
+<div class="animated fadeInRight">
 <div class="wrapper wrapper-content">
     <div class="row">
         <div class="col-sm-12 animated fadeInRight">
@@ -19,23 +20,6 @@
 									<input type="text" class="form-control input-sm" ng-model="search_key" placeholder="{{ 'SEARCH_TASK' | translate }}">
 								</div>
 							</form>
-							<div class="keep-open btn-group" title="status">
-								<button id="status-btn" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-									<i class="glyphicon glyphicon-th icon-th {{ color_class }}"></i>
-									<span class="caret"></span>
-								</button>
-								<ul class="dropdown-menu" role="menu">
-									<li>
-										<a ng-click="stateSel('all')"> <i class="fa fa-circle"></i>All</a>
-									</li>
-									<li>
-										<a ng-click="stateSel('shutoff')"> <i class="fa fa-circle text-info"></i>SHUTOFF</a>
-									</li>
-									<li>
-										<a ng-click="stateSel('suspend')"> <i class="fa fa-circle text-muted"></i>SUSPEND</a>
-									</li>
-								</ul>
-							</div>
 						</div>
                     </div>
 
@@ -49,13 +33,11 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr class="read" ng-repeat="rule in rules| filter: search_key | filter: stt" ng-click="rowClick(rule.id)">
+                            <tr class="read" ng-repeat="rule in rules| filter: search_key | filter: stt" ng-click="rowClick(rule.name, rule.content, $event)">
                                 <td>{{rule.name}}</td>
                                 <td>{{rule.app_type}}</td>
                                 <td class="mail-options">
-                                    <a ng-click="kill(rule)" title="kill"><span class="si-close-circle"></span></a>
-                                    <a ng-click="delete(rule)" title="delete"><span class="si-trash"></span></a>
-                                    <a href=""><span class="si-file"></span></a>
+                                    <a ng-click="delete(rule.name, $event)" title="kill"><span class="si-close-circle"></span></a>
                                 </td>
                             </tr>
                             </tbody>
@@ -65,4 +47,5 @@
             </div>
         </div>
     </div>
+</div>
 </div>
