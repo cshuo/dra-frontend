@@ -9,6 +9,7 @@ angular.module('dra', [
     'dra.pm_detail',
     'dra.rule',
     'dra.overview',
+    'dra.topology',
     'dra.auth',
     'ngRoute',
     'ngCookies',
@@ -44,6 +45,10 @@ angular.module('dra', [
         templateUrl: "/app/js/templates/pm.detail.html",
         //   params: {pmName: null},
         controller: ''
+    }).state("navbar.topology", {
+        url: "/topology",
+        templateUrl: "/app/js/templates/topology.html",
+        controller: 'topologyCtrl'
     }).state("navbar.overview", {
         url: "/overview",
         templateUrl: "/app/js/templates/overview.html",
@@ -127,7 +132,8 @@ angular.module('dra', [
         CREATE_FAIL_TIPS: 'Failed to create ',
         ADD_RULE_SUCCESS: 'Successfully, add rule ',
         ADD_RULE_FAIL: 'Failed to add rule ',
-        ALL_FIELDS_REQ: 'All fields are required!!!'
+        ALL_FIELDS_REQ: 'All fields are required!!!',
+        TOPOLOGY: 'Topology'
     });
     $translateProvider.translations('cn', {
         LOGIN: '登录',
@@ -202,7 +208,8 @@ angular.module('dra', [
         CREATE_FAIL_TIPS: '未成功创建',
         ADD_RULE_SUCCESS: '成功添加规则',
         ADD_RULE_FAIL: '未成功添加规则',
-        ALL_FIELDS_REQ: '所有字段都需填写!!!'
+        ALL_FIELDS_REQ: '所有字段都需填写!!!',
+        TOPOLOGY: 'VMs 拓扑图'
     });
     $translateProvider.preferredLanguage('cn');
 }])
