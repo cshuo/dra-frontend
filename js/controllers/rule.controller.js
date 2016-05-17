@@ -15,11 +15,8 @@ angular.module('dra.rule', ['ngResource', 'ui.bootstrap', 'ngMaterial'])
     '$mdToast',
     '$filter',
     function($scope, $interval, $http, $timeout, $state, $stateParams, $uibModal, $mdDialog, $mdMedia, $mdToast, $filter) {
-        $scope.query = $stateParams.query || "all";
-        $scope.filter = $scope.query;
-
         // 加载数据.
-        var reload = function (query) {
+        var reload = function () {
             $http({
                 method:'get',
                 url: base_url + 'rules'
@@ -116,9 +113,9 @@ angular.module('dra.rule', ['ngResource', 'ui.bootstrap', 'ngMaterial'])
             };
 
             // 加载任务, 定时监控
-            reload($scope.query);
+            reload();
             var rule_interval = $interval(function () {
-                reload($scope.query);
+                reload();
             },60000);
             $scope.$on('$destroy', function() {
                 $interval.cancel(rule_interval);
