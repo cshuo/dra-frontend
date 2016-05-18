@@ -1,17 +1,32 @@
 <div class="animated fadeInRight">
 	<div class="wrapper wrapper-content">
-		<div class="row">
-			<div class="col-sm-12 animated fadeInRight">
-				<div class="ibox">
-					<div class="ibox-title">
-						<h2>
-							{{ 'TOPOLOGY' | translate }}
-						</h2>
-					</div>
-					<div class="ibox-content mailbox-main">
-						<vis-network data="data" options="options"></vis-network>
-					</div>
-				</div>
+		<div ng-cloak="" class="tabsdemoDynamicHeight">
+			<md-content>
+				<md-tabs md-dynamic-height="" md-border-bottom="">
+					<md-tab label="{{ 'RULES' | translate }}">
+						<md-content class="md-padding">
+							<p>Hello</p>
+						</md-content>
+					</md-tab>
+					<md-tab label="{{ 'TOPOLOGY' | translate }}">
+						<md-content class="md-padding">
+							<div class="row">
+								<div class="col-sm-12 animated fadeInRight">
+									<div class="ibox">
+										<div class="ibox-title">
+											<h2>
+												{{ 'TOPOLOGY' | translate }}
+											</h2>
+										</div>
+										<div class="ibox-content mailbox-main">
+											<vis-network data="data" options="options"></vis-network>
+										</div>
+									</div>
+								</div>
+							</div>
+						</md-content>
+					</md-tab>
+				</md-tabs>
 			</div>
 		</div>
 	</div>

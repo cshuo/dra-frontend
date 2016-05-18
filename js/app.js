@@ -133,7 +133,8 @@ angular.module('dra', [
         ADD_RULE_SUCCESS: 'Successfully, add rule ',
         ADD_RULE_FAIL: 'Failed to add rule ',
         ALL_FIELDS_REQ: 'All fields are required!!!',
-        TOPOLOGY: 'Topology'
+        TOPOLOGY: 'Vms Topology',
+        DYNAMIC_SCHEDULE: 'Dynamic Schedule'
     });
     $translateProvider.translations('cn', {
         LOGIN: '登录',
@@ -209,7 +210,8 @@ angular.module('dra', [
         ADD_RULE_SUCCESS: '成功添加规则',
         ADD_RULE_FAIL: '未成功添加规则',
         ALL_FIELDS_REQ: '所有字段都需填写!!!',
-        TOPOLOGY: 'VMs 拓扑图'
+        TOPOLOGY: 'VMs 拓扑图',
+        DYNAMIC_SCHEDULE: '动态调度'
     });
     $translateProvider.preferredLanguage('cn');
 }])
