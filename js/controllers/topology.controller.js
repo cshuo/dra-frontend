@@ -1,36 +1,22 @@
-angular.module('dra.topology', ['ngVis'])
+angular.module('dra.topology', ['ngVis', 'ngWebSocket'])
 
-.controller('topologyCtrl', function ($scope, $location, $timeout) {
-    // create an array with nodes
+.controller('topologyCtrl', [
+    '$scope',
+    '$http',
+    '$location',
+    '$timeout',
+    '$interval',
+    '$websocket',
+    'VmsMap',
+    function ($scope, $http, $location, $timeout, $interval, $websocket, VmsMap) {
 
-    var nodes = [
-        {id: 'compute1', label: 'Compute1', group:'host'},
-        {id: 2, label: 'vm2', group:'vms'},
-        {id: 3, label: 'vm3', group:'vms'},
-        {id: 4, label: 'vm4', group:'vms'},
-        {id: 5, label: 'vm5', group:'vms'},
-        {id: 11, label: 'Compute2', group:'host'},
-        {id: 12, label: 'vm6', group:'vms'},
-        {id: 13, label: 'vm7', group:'vms'},
-        {id: 14, label: 'vm8', group:'vms'},
-    ];
+    // init vms map to hosts
+    var map_url = "http://114.212.189.132:9000/api/maps";
+    VmsMap.get_mtd(map_url).then(function(response){
+        VmsMap.init(response.data);
+        $scope.data = VmsMap.data;
+    }, function(response){})
 
-    // create an array with edges
-    var edges = [
-        {from: 'compute1', to: 3},
-        {from: 'compute1', to: 2},
-        {from: 'compute1', to: 4},
-        {from: 'compute1', to: 5},
-        {from: 11, to: 13},
-        {from: 11, to: 12},
-        {from: 11, to: 14},
-    ];
-
-    // create a network
-    $scope.data = {
-        nodes: new vis.DataSet(nodes),
-        edges: new vis.DataSet(edges)
-    };
 
     $scope.options = {
         autoResize: true,
@@ -43,7 +29,6 @@ angular.module('dra.topology', ['ngVis'])
                     face: 'FontAwesome',
                     code: '\uf1c0',
                     size: 50,
-                    // color: '#57169a'
                 }
             },
             vms:{
@@ -57,4 +42,15 @@ angular.module('dra.topology', ['ngVis'])
             }
         }
     };
-});
+
+    var ws = $websocket('ws://114.212.189.132:8070/soc');
+    ws.onMessage(function(message){
+        update_msg = JSON.parse(message.data);
+        console.log(update_msg);
+        VmsMap.update(update_msg.vm_id, update_msg.host);
+    });
+    ws.onClose(function(event){
+        console.log('connection closed...');
+    });
+
+}]);

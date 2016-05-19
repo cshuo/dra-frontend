@@ -48,11 +48,17 @@ angular.module('dra.vm', ['ngResource', 'ui.bootstrap', 'ngMaterial'])
             .cancel($filter('translate')('CANCEL'));
             $mdDialog.show(cfir).then(function() {
                 if(item == 'stop'){
-                    VMs.stopVm(vmId, vmName, function(){reload($scope.query);});
+                    VMs.stopVm(vmId, vmName, function(){
+                        reload($scope.query);
+                    });
                 } else if (item == 'start'){
-                    VMs.startVm(vmId, vmName, function(){reload($scope.query);});
+                    VMs.startVm(vmId, vmName, function(){
+                        reload($scope.query);
+                    });
                 } else {
-                    VMs.deleteVm(vmId, vmName, function(){reload($scope.query);});
+                    VMs.deleteVm(vmId, vmName, function(){
+                        reload($scope.query);
+                    });
                 }
             }, function() {
                 // do nothing when cancel clicked

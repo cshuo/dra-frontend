@@ -3,7 +3,7 @@ var auth_d = {'tenant': 'admin', 'username':'admin', 'password': 'artemis'};
 
 angular.module('dra.vm')
 
-    .factory('VMs', ['$resource', '$http', '$mdToast', '$timeout', '$filter', 
+    .factory('VMs', ['$resource', '$http', '$mdToast', '$timeout', '$filter',
         function($resource, $http, $mdToast, $timeout, $filter) {
         var vms = [];
         var resource = $resource(base_url+'vms', {}, {

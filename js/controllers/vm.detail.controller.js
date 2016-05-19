@@ -16,6 +16,7 @@ detail.controller("detailCtrl", [
     '$filter',
     'VMs',
     function($scope, $http, $state, $stateParams, $mdDialog, $filter, VMs){
+
         var reload = function(){
             $http({
                 method: 'GET',
@@ -53,14 +54,17 @@ detail.controller("detailCtrl", [
             });
         }
 
-        $scope.delete= function(vmId, e){
+        $scope.delete= function(vmId, vmName, e){
             var cfir = $mdDialog.confirm()
               .title($filter('translate')('DELETE_TIPS'))
               .targetEvent(e)
               .ok($filter('translate')('OK'))
               .cancel($filter('translate')('CANCEL'));
             $mdDialog.show(cfir).then(function() {
-                VMs.deleteVm(vmId, function(){$state.go('navbar.vm');});
+                VMs.deleteVm(vmId, vmName, function(){
+                    console.log('delete success');
+                    $state.go('navbar.vm');
+                });
             }, function() {
                 // do nothing when cancel clicked
             });

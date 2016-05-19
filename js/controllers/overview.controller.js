@@ -1,6 +1,7 @@
 'use strict';
 
 var flavor_url = "http://114.212.189.132:9000/api/flavors";
+var map_url = "http://114.212.189.132:9000/api/maps";
 var overview = angular.module("dra.overview", ['ngResource', 'ui.bootstrap', 'chart.js']);
 
 overview.controller("tableCtrl", [
@@ -14,15 +15,19 @@ overview.controller("tableCtrl", [
         $scope.query = $stateParams.query || "all";
         $scope.filter = $scope.query;
 
-        $http({
-            method: 'GET',
-            url: flavor_url,
-            params: {
-                'tenant': 'admin',
-                'username': 'admin',
-                'password': 'artemis'
-            }
-        }).then(function success(response) {
+        var get_mthd = function(url){
+            return $http({
+                method: 'GET',
+                url: url,
+                params: {
+                    'tenant': 'admin',
+                    'username': 'admin',
+                    'password': 'artemis'
+                }
+            })
+        }
+
+        get_mthd(flavor_url).then(function success(response) {
             $scope.flavors = response.data;
         }, function error(response) {
             //    error
