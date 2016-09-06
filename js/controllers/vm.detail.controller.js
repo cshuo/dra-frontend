@@ -16,7 +16,6 @@ detail.controller("detailCtrl", [
     '$filter',
     'VMs',
     function($scope, $http, $state, $stateParams, $mdDialog, $filter, VMs){
-
         var reload = function(){
             $http({
                 method: 'GET',
@@ -24,6 +23,7 @@ detail.controller("detailCtrl", [
                 params: auth_d
             }).then(function success(response) {
                 $scope.data= response.data;
+		console.log(response.data.addresses);
             }, function error(response) {
             });
         }
