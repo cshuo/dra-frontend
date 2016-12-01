@@ -12,11 +12,23 @@ angular.module('dra.topology', ['ngVis', 'ngWebSocket'])
 
     // init vms map to hosts
     var map_url = "http://114.212.189.132:9000/api/maps";
+
     VmsMap.get_mtd(map_url).then(function(response){
         VmsMap.init(response.data);
         $scope.data = VmsMap.data;
     }, function(response){})
 
+    /*** 
+    var topo_interval = $interval(function(){
+        VmsMap.get_mtd(map_url).then(function(response){
+            VmsMap.init(response.data);
+        }, function(response){})
+    }, 3000);
+    
+    $scope.$on('$destroy', function(){
+        $interval.cancel(topo_interval);
+    });
+    ***/
 
     $scope.options = {
         autoResize: true,
@@ -46,7 +58,8 @@ angular.module('dra.topology', ['ngVis', 'ngWebSocket'])
     var ws = $websocket('ws://114.212.189.132:8070/soc');
     ws.onMessage(function(message){
         update_msg = JSON.parse(message.data);
-        console.log(update_msg);
+        console.log("websocket msg: ");
+        console.log(update_msg.vm_id + ", " +  update_msg.host);
         VmsMap.update(update_msg.vm_id, update_msg.host);
     });
     ws.onClose(function(event){
