@@ -17,17 +17,25 @@ angular.module('dra.rule', ['ngResource', 'ui.bootstrap', 'ngMaterial'])
     function($scope, $interval, $http, $timeout, $state, $stateParams, $uibModal, $mdDialog, $mdMedia, $mdToast, $filter) {
         // 加载数据.
         var reload = function () {
-            $http({
-                method:'get',
-                url: base_url + 'rules'
-            }).then(
-                function(response){
-                    $scope.rules = response.data;
-                },
-                function(response){
-                    $scope.rules = [];
+            $scope.rules = [
+                {
+                    "name":"test",
+                    "app_type": "web",
+                    "content": " a || c => b"
                 }
-            )
+            ];
+
+            // $http({
+            //     method:'get',
+            //     url: base_url + 'rules'
+            // }).then(
+            //     function(response){
+            //         // $scope.rules = response.data;
+            //     },
+            //     function(response){
+            //         $scope.rules = [];
+            //     }
+            // )
         };
 
         // 删除任务

@@ -5,36 +5,67 @@
 		<div ng-controller="chartCtrl">
 			<div class="col-sm-4">
 				<h3 style="margin-left:60px">{{ 'VCPUS' | translate }}</h3>
+				<!-- <nvd3 options="options" data="cpu_data"></nvd3> -->
 				<canvas id="pcpu" class="chart chart-pie"
-				  chart-data="cpu_data" chart-labels="labels" chart-legend="true">
+				  chart-data="cpu_data" chart-labels="labels" chart-legend="true" height="150">
 				</canvas>
 			</div>
-			<div class="col-sm-4">
+			<div class="col-sm-4"  height="60">
 				<h3 style="margin-left:60px">{{ 'MEM' | translate }}(MB)</h3>
-				<canvas id="pmem" class="chart chart-pie" 
-				chart-data="mem_data" chart-labels="labels" chart-legend="true">
+				<!-- <nvd3 options="options" data="mem_data"></nvd3> -->
+				<canvas id="pmem" class="chart chart-pie"
+				chart-data="mem_data" chart-labels="labels" chart-legend="true" height="150">
 				</canvas>
 			</div>
-			<div class="col-sm-4">
+			<div class="col-sm-4" height="60">
 				<h3 style="margin-left:60px">{{ 'DISK' | translate }}(GB)</h3>
-				<canvas id="pnet" class="chart chart-pie" 
-				chart-data="disk_data"chart-labels="labels" chart-legend="true">
+				<!-- <nvd3 options="options" data="disk_data"></nvd3> -->
+				<canvas id="pnet" class="chart chart-pie"
+				chart-data="disk_data"chart-labels="labels" chart-legend="true" height="150">
 				</canvas>
 			</div>
 		</div>
 	</div>
+
+	<div class="tableGroup" ng-controller="warnCtrl">
+		<div id="tableBack">
+			<h2>{{ 'WARNING' | translate }}</h2>
+			<hr style="margin-top: 5px;"/>
+			<div class="table-responsive">
+				<table class="table table-striped">
+					<thead>
+					<tr>
+						<th>{{ 'LEVEL' | translate }}</th>
+                        <th>{{ 'ID' | translate }}</th>
+						<th>{{ 'DESCRIPTION' | translate }}</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr class="read" ng-repeat="w in warnings" ng-click="rowClick(w.triggerid, w.description, w.priority, w.label_class, $event)">
+                        <td class=""><span class="label label-{{ w.label_class }}">{{ w.priority }}</span></td>
+						<td>{{ w.triggerid }}</td>
+                        <td>{{ w.description }}</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
 	<div class="tableGroup" ng-controller="tableCtrl">
 		<div id="tableBack">
+			<h2>{{ 'INSTANCES' | translate }}</h2>
+			<hr style="margin-top: 5px;"/>
 			<div class="table-responsive">
 				<table class="table table-striped">
 					<thead>
 					<tr>
 						<th>{{ 'NAME' | translate }}</th>
-                        <th>{{ 'IP' | translate }}</th>
+                        			<th>{{ 'IP' | translate }}</th>
 						<th>{{ 'VCPUS' | translate }}</th>
 						<th>{{ 'MEMORY' | translate }}</th>
 						<th>{{ 'DISK' | translate }}</th>
-                        <th>{{ 'CREATED' | translate }}</th>
+                        			<th>{{ 'CREATED' | translate }}</th>
 					</tr>
 					</thead>
 					<tbody>
@@ -51,4 +82,6 @@
 			</div>
 		</div>
 	</div>
+
+
 </div>

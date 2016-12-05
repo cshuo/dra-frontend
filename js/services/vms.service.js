@@ -106,8 +106,11 @@ angular.module('dra.vm')
                             case "SUSPENDED":
                                 vms[i].label_class="muted";
                                 break;
+							case "RESIZE":
+                                vms[i].label_class="warning";
+                                break;
                             default:
-                                vms[i].label_class="default";
+                                vms[i].label_class="warning";
                         }
                     }
                 })

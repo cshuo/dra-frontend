@@ -78,12 +78,29 @@
 							<iframe ng-src="{{ vnc_url }}" style='width:100%; height:500px'></iframe>
 						</md-content>
 					</md-tab>
-					<!-- <md-tab label="three">
+					<md-tab label="{{ 'TASK' | translate }}">
 						<md-content class="md-padding">
-							<h1 class="md-display-2">Tab Two</h1>
-							<p>Reminding to complete</p>
+							<h2>Task</h2>
+					        <div class="table-responsive" ng-controller="vmTaskCtrl">
+					            <table class="table table-striped tasks">
+					                <thead>
+					                    <tr>
+					                        <th>{{ 'NAME' | translate }}</th>
+					                        <th>{{ 'ID' | translate }}</th>
+					                        <th>{{ 'CREATED' | translate }}</th>
+					                    </tr>
+					                </thead>
+					                <tbody>
+					                    <tr class="read" ng-click="rowClick()">
+					                        <td>Task#</td>
+					                        <td>234765</td>
+					                        <td>2016-11-20</td>
+					                    </tr>
+					                </tbody>
+					            </table>
+					        </div>
 						</md-content>
-					</md-tab> -->
+					</md-tab>
 				</md-tabs>
 			</md-content>
 		</div>

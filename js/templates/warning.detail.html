@@ -1,0 +1,37 @@
+<md-dialog aria-label="Mango (Fruit)" ng-cloak>
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools label-{{ label }}">
+        <h1>{{ 'WARNING' | translate }}{{ 'DESCRIPTION' | translate }}</h1>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="close()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <div class="md-dialog-content">
+        <h3>{{'ID' | translate }} : {{ id }}</h3>
+        <br/>
+        <h3>{{'LEVEL' | translate }} : {{ level }}</h3>
+        <br/>
+        <h3>{{ 'DESCRIPTION' | translate }} : {{content }}</h3>
+        <br/>
+        <h3>{{ 'KEYRES' | translate }} : </h3>
+        <h3 style="padding-top:8px">
+            <span>{{ 'NAME' | translate }} : <a>{{ 'MEM' | translate }}</a></span>
+            <span style="padding-left:20px">{{ 'ID' | translate }} : 14323</span>
+        </h3>
+        <h3 style="padding-top:8px">
+            <span>{{ 'NAME' | translate }} : <a>{{ 'NETWORK' | translate }}</a></span>
+            <span style="padding-left:20px">{{ 'ID' | translate }} : 14386</span>
+        </h3>
+        <h3 style="padding-top:8px">
+            <span>{{ 'NAME' | translate }} : <a>{{ 'CPU' | translate }}</a></span>
+            <span style="padding-left:20px">{{ 'ID' | translate }} : 14432</span>
+        </h3>
+
+      </div>
+    </md-dialog-content>
+  </form>
+</md-dialog>

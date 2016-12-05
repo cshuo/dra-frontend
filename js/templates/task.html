@@ -1,0 +1,80 @@
+<div class="animated fadeInRight">
+	<div id="backTask">
+		<!-- <a id="backUrl" ui-sref="{{ previousState }}"> -->
+		<a id="backUrl" href="{{ previousUrl }}">
+			<i class="glyphicon glyphicon-arrow-left" style="margin-right:5px; font-size: 14px!important;"></i>
+			<span>{{ 'TASK' | translate }}</span>
+		</a>
+	</div>
+	<div class="padContent" ng-controller="appCtrl">
+		<div class="detailContent animated fadeInRight" style="background-color: #ffffff">
+			<h1>{{ 'DETAILS' | translate }}</h1>
+			<hr style="margin-top: 5px;"/>
+			<ul class="specs">
+				<li>
+					<span>{{ 'ID' | translate }}</span>
+					<dd title="{{ data.id }}">{{data.id}}</dd>
+				</li>
+				<li>
+					<span>{{ 'NAME' | translate }}</span>
+					<dd>{{data.name}}</dd>
+				</li>
+				<li>
+					<span>{{ 'STATE' | translate }}</span>
+					<dd>{{data.status | translate}}</dd>
+				</li>
+                <!-- <li>
+                    <span>{{ 'IP' | translate }}</span>
+					<dd title="{{ data.url}}">{{data.url}}</dd>
+                </li> -->
+				<!-- <li>
+					<span>{{ 'OPTIONS' | translate }}</span>
+					<dd>
+						<a ng-click="" title="stop"><span class="si-close-circle"></span></a>
+						<a ng-click="" title="start"><span class="si-refresh-2"></span></a>
+						<a ng-click="" title="delete"><span class="si-trash"></span></a>
+					</dd>
+				</li> -->
+			</ul>
+		</div>
+	</div>
+	<div class="wrapper wrapper-content">
+		<div ng-cloak="" class="tabsdemoDynamicHeight">
+			<md-content>
+				<md-tabs md-dynamic-height="" md-border-bottom="">
+					<md-tab label="{{ 'PERFORMANCE' | translate }}">
+						<md-content class="md-padding">
+							<div class="row tabContent">
+								<div class="col-sm-12">
+									<!-- <div ng-controller=""> -->
+									<div ng-controller='taskMetricCtrl'>
+										<h2>{{ 'RESPONSETIME' | translate }} & {{ 'THROUGHPUT' | translate }}</h2>
+										<br/>
+										<span style="background-color: rgba(151, 187, 205, 1); margin-left:20px">Response Time (ms)</span>
+										<span style="background-color: rgba(220, 220, 220, 1); float:right; margin-right:20px">Throughput (kbps)</span>
+										<br/>
+										<br/>
+										<canvas id="metric" class="chart chart-line" chart-data="data"
+										chart-labels="labels" chart-series="series"
+										chart-options="options" chart-dataset-override="datasetOverride" height="100">
+										</canvas>
+									</div>
+								</div>
+							</div>
+						</md-content>
+					</md-tab>
+					<!-- <md-tab label="three">
+						<md-content class="md-padding">
+							<h1 class="md-display-2">Tab Two</h1>
+							<p>Reminding to complete</p>
+						</md-content>
+					</md-tab> -->
+				</md-tabs>
+			</md-content>
+		</div>
+		<!--
+		Copyright 2016 Google Inc. All Rights Reserved.
+		Use of this source code is governed by an MIT-style license that can be in foundin the LICENSE file at http://material.angularjs.org/license.
+	-->
+</div>
+</div>

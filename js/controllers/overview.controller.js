@@ -1,8 +1,8 @@
 'use strict';
 
-var flavor_url = "http://114.212.189.132:9000/api/flavors";
-var map_url = "http://114.212.189.132:9000/api/maps";
-var overview = angular.module("dra.overview", ['ngResource', 'ui.bootstrap', 'chart.js']);
+var base_url = 'http://114.212.189.132:9000/api/';
+var overview = angular.module("dra.overview", ['ngResource', 'ui.bootstrap', 'chart.js', 'nvd3']);
+var base_zabbix_ip = '114.212.189.132';
 
 overview.controller("tableCtrl", [
     '$scope',
@@ -27,7 +27,7 @@ overview.controller("tableCtrl", [
             })
         }
 
-        get_mthd(flavor_url).then(function success(response) {
+        get_mthd(base_url+'flavors').then(function success(response) {
             $scope.flavors = response.data;
         }, function error(response) {
             //    error
@@ -64,10 +64,84 @@ overview.controller("chartCtrl", ['$scope', '$interval', 'VmOverview', function 
         })
     };
     reload();
+
     var chart_intval = $interval(function () {
         reload();
     }, 10000);
     $scope.$on('$destroy', function() {
         $interval.cancel(chart_intval);
     });
+
+
+}]);
+
+
+overview.controller("warnCtrl", ['$http', '$scope', '$interval', '$mdDialog', '$mdMedia', function($http, $scope, $interval, $mdDialog,$mdMedia) {
+    var update_warning = function(warnings){
+        for(var i=0; i < warnings.length; i++){
+            switch (warnings[i].priority) {
+                case '1':
+                    warnings[i].label_class = 'warning';
+                    break;
+                case '2':
+                    warnings[i].label_class = 'warning';
+                    break;
+                default:
+                    warnings[i].label_class = 'danger';
+            }
+        }
+        return warnings;
+    }
+    var reload = function () {
+        $http({
+            method:'get',
+            url: base_url + 'warnings',
+            params: {
+                'baseip': base_zabbix_ip
+            }
+        }).then(
+            function(response){
+                $scope.warnings = update_warning(response.data);
+            },
+            function(response){
+                $scope.rules = [];
+        })
+    };
+    reload();
+
+    $scope.rowClick = function(warn_id, warn_content, warn_level, warn_label, ev) {
+        var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
+        $mdDialog.show({
+            locals: {id: warn_id, content: warn_content, level: warn_level, label: warn_label},
+            controller: DialogController,
+            templateUrl: '/app/js/templates/warning.detail.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose:true,
+            fullscreen: useFullScreen
+        })
+        .then(function(answer) {
+        }, function() {
+        });
+        $scope.$watch(function() {
+            return $mdMedia('xs') || $mdMedia('sm');
+        }, function(wantsFullScreen) {
+            $scope.customFullscreen = (wantsFullScreen === true);
+        });
+    };
+
+    var DialogController = function($scope, $mdDialog, id, content, level, label){
+        $scope.id = id;
+        $scope.content = content;
+        $scope.level = level;
+        $scope.label = label;
+        if(content.indexOf('\n') > -1){
+            console.log('contains nnn');
+        }
+        // $scope.content = content;
+        $scope.close = function(){
+            $mdDialog.cancel();
+        }
+    }
+
 }]);

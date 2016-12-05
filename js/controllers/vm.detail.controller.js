@@ -131,3 +131,16 @@ detail.controller('vncCtrl', [
         get_vnc_url();
     }
 ]);
+
+detail.controller("vmTaskCtrl", [
+    '$scope',
+    '$interval',
+    '$http',
+    '$state',
+    '$stateParams',
+    function ($scope, $interval, $http, $state, $stateParams) {
+        $scope.rowClick = function(){
+            $state.go('navbar.task');
+        };
+    }
+]);
