@@ -158,7 +158,7 @@ angular.module('dra', [
         KEYRES: '关键资源',
         LEVEL: '等级',
         RESPONSETIME: '响应时间',
-        THROUGHPUT: '吞吐量',
+        THROUGHPUT: '吞吐率',
         TASK: '任务',
         NORMAL: '正常',
         PERFORMANCE: '性能指标',
