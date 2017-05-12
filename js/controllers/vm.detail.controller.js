@@ -216,7 +216,6 @@ detail.controller("vmLogCtrl", ['$scope','$http', '$interval', '$mdDialog', '$md
         $scope.type = type;
         $scope.time = time;
         $scope.label = label;
-        // $scope.content = content;
         $scope.close = function(){
             $mdDialog.cancel();
         }

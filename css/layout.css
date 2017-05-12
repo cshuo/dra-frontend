@@ -86,3 +86,17 @@ ul.specs > li > dd{
 	box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
 }
 
+#host-panel{
+    height: 550px;
+    overflow-y: scroll;
+}
+
+#host-panel .panel-body{
+	height: 150px;
+	overflow-y: scroll;
+}
+
+#scheduler-panel{
+	max-height: 250px;
+	overflow-y: scroll;
+}

@@ -24,14 +24,15 @@ angular.module('dra.vm')
                 },
 
                 updateEdge: function(vm_id, host){
-                    var arrowId = "arrow" + vm_id;
+                    var date = new Date();
+                    var arrowId = "arrow" + vm_id + date.getTime();
                     var edges = this.data.edges;
                     edges.add({id: arrowId, from: vm_id, to: host, arrows: "to", color: "red", width: 4});
                     edges.update({id: vm_id, dashes: true, width: 4});
                     $timeout(function () {
                         edges.remove({id: arrowId});
                         edges.update({id: vm_id, from: vm_id, to: host, dashes: false, width: 1});
-                    }, 3000);
+                    }, 2000);
                 },
 
                 updateStatus: function(host, status) {
