@@ -1,4 +1,4 @@
-var base_url = 'http://114.212.189.132:9000/api/';
+var base_url = 'http://20.0.1.9:9000/api/';
 
 angular.module('dra.rule', ['ngResource', 'ui.bootstrap', 'ngMaterial'])
 
@@ -113,13 +113,13 @@ angular.module('dra.rule', ['ngResource', 'ui.bootstrap', 'ngMaterial'])
             };
 
             // 加载任务, 定时监控
-            reload();
-            var rule_interval = $interval(function () {
-                reload();
-            },60000);
-            $scope.$on('$destroy', function() {
-                $interval.cancel(rule_interval);
-            });
+            // reload();
+            // var rule_interval = $interval(function () {
+            //     reload();
+            // },60000);
+            // $scope.$on('$destroy', function() {
+            //    $interval.cancel(rule_interval);
+            // });
         }]);
 
 

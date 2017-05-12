@@ -37,7 +37,7 @@ angular.module('dra', [
         templateUrl: "/app/js/templates/rule.html",
         controller: 'ruleCtrl'
     }).state("navbar.detail", {
-        url: "/vm/:vmID",
+        url: "/vm/:vmID/:vmName",
         templateUrl: "/app/js/templates/vm.detail.html",
         controller: ''
     }).state("navbar.pm_detail", {
@@ -96,6 +96,8 @@ angular.module('dra', [
         ID: 'ID',
         METERS: 'Meters',
         SHELL: 'Shell',
+        WARN: 'WARNING LOG',
+        OPLOG: 'OPERATION LOG',
         TYPE: 'Type',
         VMS: 'VMS',
         STOP: 'Stop',
@@ -114,6 +116,7 @@ angular.module('dra', [
         ADVANCE: 'Advance',
         ACCESS_SECURE: 'Access & Security',
         KEY_PAIR: 'Key Pair',
+        KEYRES: 'Related',
         NETWORK: 'Network',
         OPTION: 'option',
         APP_TYPE: 'App Type',
@@ -134,6 +137,8 @@ angular.module('dra', [
         ADD_RULE_FAIL: 'Failed to add rule ',
         ALL_FIELDS_REQ: 'All fields are required!!!',
         TOPOLOGY: 'Vms Topology',
+        LOG: 'Log',
+        RELATED: 'Related Res',
         DYNAMIC_SCHEDULE: 'Dynamic Schedule'
     });
     $translateProvider.translations('cn', {
@@ -173,6 +178,8 @@ angular.module('dra', [
         ID: 'ID',
         METERS: '监控指标',
         SHELL: '终端',
+        WARN: '警报日志',
+        OPLOG: '操作日志',
         TYPE: '类型',
         VMS: '虚拟机',
         STOP: '停止',
@@ -191,6 +198,7 @@ angular.module('dra', [
         ADVANCE: '高级选项',
         ACCESS_SECURE: '访问 & 安全',
         KEY_PAIR: '键值对',
+        KEYRES: "关联资源",
         NETWORK: '网络',
         OPTION: '选项',
         APP_TYPE: '应用类型',
@@ -211,6 +219,8 @@ angular.module('dra', [
         ADD_RULE_FAIL: '未成功添加规则',
         ALL_FIELDS_REQ: '所有字段都需填写!!!',
         TOPOLOGY: 'VMs 拓扑图',
+        LOG: '日志',
+        RELATED: '关联资源',
         DYNAMIC_SCHEDULE: '动态调度'
     });
     $translateProvider.preferredLanguage('cn');

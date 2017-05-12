@@ -1,7 +1,7 @@
 'use strict';
 
-var pm_detail_url = "http://114.212.189.132:9000/api/pm/";
-var meters_url = "http://114.212.189.132:9000/api/meters/";
+var pm_detail_url = "http://20.0.1.9:9000/api/pm/";
+var meters_url = "http://20.0.1.9:9000/api/meters/";
 
 var detail = angular.module('dra.pm_detail',['ngMaterial', 'ngMessages', 'material.svgAssetsCache', 'chart.js', 'ui.router']);
 
@@ -33,7 +33,7 @@ detail.controller("pmCpuCtrl", ['$scope', '$interval', '$http', '$stateParams', 
                 'username': 'admin',
                 'password': 'artemis',
                 'resource': $stateParams.pmName+'_'+$stateParams.pmName,
-                'interval': '1'
+                'interval': '0.5'
             }
         }).then(function success(response) {
             $scope.series = ['cpu'];
@@ -80,3 +80,80 @@ detail.controller("pmVmsCtrl", [
         });
     }
 ]);
+
+detail.controller("pmLogCtrl", ['$scope','$http', '$interval', '$mdDialog', '$mdMedia','$stateParams',
+  function ($scope, $http, $interval, $mdDialog, $mdMedia, $stateParams) {
+    var logs = [];
+    var reload_log = function(){
+      $http({
+          method: 'GET',
+          url: log_url,
+          params: {
+            'holder':$stateParams.pmName,
+            'type': 'all',
+            'num': '6'
+          }
+      }).then(function success(response){
+        console.log('------------------------------');
+        logs = response.data;
+        console.log(logs);
+        for(var i=0; i<logs.length; i++){
+          switch (logs[i].type) {
+            case "warn":
+              logs[i].label_class = 'warning';
+              break;
+            case "operation":
+              logs[i].label_class = 'primary';
+            default:
+              logs[i].label_class = 'primary';
+          }
+        }
+        $scope.logs = logs;
+      }, function error(response){
+        console.log("error");
+      });
+    }
+
+    var rowClick = function(log, ev) {
+        var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
+        $mdDialog.show({
+            locals: {name: log.holder, content: log.info, type: log.type, time: log.time, label: log.label_class},
+            controller: DialogController,
+            templateUrl: '/app/js/templates/log.modal.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose:true,
+            fullscreen: useFullScreen
+        })
+        .then(function(answer) {
+        }, function() {
+        });
+        $scope.$watch(function() {
+            return $mdMedia('xs') || $mdMedia('sm');
+        }, function(wantsFullScreen) {
+            $scope.customFullscreen = (wantsFullScreen === true);
+        });
+    };
+
+    $scope.rowClick = rowClick;
+
+    var DialogController = function($scope, $mdDialog, name, content, type, time, label){
+        $scope.name = name;
+        $scope.content = content;
+        $scope.type = type;
+        $scope.time = time;
+        $scope.label = label;
+        // $scope.content = content;
+        $scope.close = function(){
+            $mdDialog.cancel();
+        }
+    }
+
+    reload_log();
+    var log_interval = $interval(function(){
+      reload_log();
+    }, 30000);
+    $scope.$on('$destroy', function(){
+      $interval.cancel(log_interval);
+    });
+}]);

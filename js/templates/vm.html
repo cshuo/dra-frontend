@@ -11,38 +11,47 @@
                     <div class="ibox-content mailbox-main">
                         <div class="clearfix table-tools">
                             <span class="pull-left">
-                                <button id="task-btn"class="btn btn-block btn-primary compose-mail" ng-click="openTaskModal()">{{ 'CREATE_VM' | translate }}</button>
+                                <button id="task-btn" class="btn btn-block btn-primary compose-mail"
+                                        ng-click="openTaskModal()">{{ 'CREATE_VM' | translate }}</button>
                             </span>
                             <div class="pull-right" id="input-btn">
                                 <!--form ng-submit="search()" class="mail-search"-->
                                 <form class="mail-search">
                                     <div class="input-group">
-                                        <input type="text" class="form-control input-sm" ng-model="search_key" placeholder="{{ 'SEARCH_TASK' | translate }}">
+                                        <input type="text" class="form-control input-sm" ng-model="search_key"
+                                               placeholder="{{ 'SEARCH_TASK' | translate }}">
                                     </div>
                                 </form>
                                 <div class="keep-open btn-group" title="status">
-                                    <button id="status-btn" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                    <button id="status-btn" type="button" class="btn btn-default dropdown-toggle"
+                                            data-toggle="dropdown">
                                         <i class="glyphicon glyphicon-th icon-th {{ color_class }}"></i>
                                         <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu" role="menu">
                                         <li>
-                                            <a ng-click="stateSel('all')"> <i class="fa fa-circle"></i> {{ 'ALL' | translate }}</a>
+                                            <a ng-click="stateSel('all')"> <i class="fa fa-circle"></i> {{ 'ALL' |
+                                                translate }}</a>
                                         </li>
                                         <li>
-                                            <a ng-click="stateSel('active')"> <i class="fa fa-circle text-navy"></i> {{ 'ACTIVE' | translate }}</a>
+                                            <a ng-click="stateSel('active')"> <i class="fa fa-circle text-navy"></i> {{
+                                                'ACTIVE' | translate }}</a>
                                         </li>
                                         <li>
-                                            <a ng-click="stateSel('error')"> <i class="fa fa-circle text-danger"></i> {{ 'ERROR' | translate }}</a>
+                                            <a ng-click="stateSel('error')"> <i class="fa fa-circle text-danger"></i> {{
+                                                'ERROR' | translate }}</a>
                                         </li>
                                         <li>
-                                            <a ng-click="stateSel('reboot')"> <i class="fa fa-circle text-warning"></i> {{ 'REBOOT' | translate }}</a>
+                                            <a ng-click="stateSel('reboot')"> <i class="fa fa-circle text-warning"></i>
+                                                {{ 'REBOOT' | translate }}</a>
                                         </li>
                                         <li>
-                                            <a ng-click="stateSel('shutoff')"> <i class="fa fa-circle text-info"></i> {{ 'SHUTOFF' | translate }}</a>
+                                            <a ng-click="stateSel('shutoff')"> <i class="fa fa-circle text-info"></i> {{
+                                                'SHUTOFF' | translate }}</a>
                                         </li>
                                         <li>
-                                            <a ng-click="stateSel('suspend')"> <i class="fa fa-circle text-muted"></i> {{ 'SUSPEND' | translate }}</a>
+                                            <a ng-click="stateSel('suspend')"> <i class="fa fa-circle text-muted"></i>
+                                                {{ 'SUSPEND' | translate }}</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -52,53 +61,55 @@
                         <div class="table-responsive">
                             <table class="table table-striped tasks">
                                 <thead>
-                                    <tr>
-                                        <th>{{ 'NAME' | translate }}</th>
-                                        <th>{{ 'IP' | translate }}</th>
-                                        <th>{{ 'HOST' | translate }}</th>
-                                        <th>{{ 'STATE' | translate }}</th>
-                                        <th>{{ 'CREATED' | translate }}</th>
-                                        <th>{{ 'OPTIONS' | translate }}</th>
-                                    </tr>
+                                <tr>
+                                    <th>{{ 'NAME' | translate }}</th>
+                                    <th>{{ 'IP' | translate }}</th>
+                                    <th>{{ 'HOST' | translate }}</th>
+                                    <th>{{ 'STATE' | translate }}</th>
+                                    <th>{{ 'CREATED' | translate }}</th>
+                                    <th>{{ 'OPTIONS' | translate }}</th>
+                                </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="read" ng-repeat="vm in vms | filter: search_key | filter: stt" ng-click="rowClick(vm.id)">
-                                        <td>{{vm.name}}</td>
-                                        <td>{{vm.ip }}</td>
-                                        <td>{{vm.host}}</td>
-                                        <td class=""><span class="label label-{{vm.label_class}}">{{vm.status}}</span></td>
-                                        <td class="mail-date">{{vm.created}}</td>
-                                        <td class="mail-options">
-                                            <md-menu>
-                                            <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="openMenu($mdOpenMenu, $event)">
-                                            <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
-                                        </md-button>
-                                        <md-menu-content width="3">
-                                        <md-menu-item>
-                                        <md-button ng-click="opClick('stop', vm.id, vm.name)">
-                                        {{ 'STOP' | translate }}
-                                    </md-button>
-                                </md-menu-item>
-                                <md-menu-item>
-                                <md-button ng-click="opClick('start', vm.id, vm.name)">
-                                {{ 'START' | translate }}
-                            </md-button>
-                        </md-menu-item>
-                        <md-menu-item>
-                        <md-button ng-click="opClick('delete', vm.id, vm.name)">
-                        {{ 'DELETE' | translate }}
-                    </md-button>
-                </md-menu-item>
-            </md-menu-content>
-        </md-menu>
-    </td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+                                <tr class="read" ng-repeat="vm in vms | filter: search_key | filter: stt"
+                                    ng-click="rowClick(vm.id, vm.name)">
+                                    <td>{{vm.name}}</td>
+                                    <td>{{vm.ip }}</td>
+                                    <td>{{vm.host}}</td>
+                                    <td class=""><span class="label label-{{vm.label_class}}">{{vm.status}}</span></td>
+                                    <td class="mail-date">{{vm.created}}</td>
+                                    <td class="mail-options">
+                                        <md-menu>
+                                            <md-button aria-label="Open demo menu" class="md-icon-button"
+                                                       ng-click="openMenu($mdOpenMenu, $event)">
+                                                <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
+                                            </md-button>
+                                            <md-menu-content width="3">
+                                                <md-menu-item>
+                                                    <md-button ng-click="opClick('stop', vm.id, vm.name)">
+                                                        {{ 'STOP' | translate }}
+                                                    </md-button>
+                                                </md-menu-item>
+                                                <md-menu-item>
+                                                    <md-button ng-click="opClick('start', vm.id, vm.name)">
+                                                        {{ 'START' | translate }}
+                                                    </md-button>
+                                                </md-menu-item>
+                                                <md-menu-item>
+                                                    <md-button ng-click="opClick('delete', vm.id, vm.name)">
+                                                        {{ 'DELETE' | translate }}
+                                                    </md-button>
+                                                </md-menu-item>
+                                            </md-menu-content>
+                                        </md-menu>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

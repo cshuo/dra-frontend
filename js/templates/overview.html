@@ -1,54 +1,84 @@
 <div id="overview" class="animated fadeInRight">
-	<div class="row chartGroup">
-		<h1>{{ 'OVERVIEW' | translate }}</h1>
-		<hr style="margin-top: 5px;"/>
-		<div ng-controller="chartCtrl">
-			<div class="col-sm-4">
-				<h3 style="margin-left:60px">{{ 'VCPUS' | translate }}</h3>
-				<canvas id="pcpu" class="chart chart-pie"
-				  chart-data="cpu_data" chart-labels="labels" chart-legend="true">
-				</canvas>
-			</div>
-			<div class="col-sm-4">
-				<h3 style="margin-left:60px">{{ 'MEM' | translate }}(MB)</h3>
-				<canvas id="pmem" class="chart chart-pie" 
-				chart-data="mem_data" chart-labels="labels" chart-legend="true">
-				</canvas>
-			</div>
-			<div class="col-sm-4">
-				<h3 style="margin-left:60px">{{ 'DISK' | translate }}(GB)</h3>
-				<canvas id="pnet" class="chart chart-pie" 
-				chart-data="disk_data"chart-labels="labels" chart-legend="true">
-				</canvas>
-			</div>
-		</div>
-	</div>
-	<div class="tableGroup" ng-controller="tableCtrl">
-		<div id="tableBack">
-			<div class="table-responsive">
-				<table class="table table-striped">
-					<thead>
-					<tr>
-						<th>{{ 'NAME' | translate }}</th>
-                        <th>{{ 'IP' | translate }}</th>
-						<th>{{ 'VCPUS' | translate }}</th>
-						<th>{{ 'MEMORY' | translate }}</th>
-						<th>{{ 'DISK' | translate }}</th>
-                        <th>{{ 'CREATED' | translate }}</th>
-					</tr>
-					</thead>
-					<tbody>
-					<tr class="read" ng-repeat="vm in vms" ng-click="rowClick(vm.id)">
-						<td class="mail-subject">{{vm.name}}</td>
-						<td>{{vm.ip}}</td>
-						<td>{{flavors[vm.flavor].cpu}}</td>
-                        <td>{{flavors[vm.flavor].ram}}MB</td>
-                        <td>{{flavors[vm.flavor].disk}}GB</td>
-                        <td class="mail-date">{{vm.created}}</td>
-					</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</div>
+    <div class="row chartGroup">
+        <h1>{{ 'OVERVIEW' | translate }}</h1>
+        <hr style="margin-top: 5px;"/>
+        <div ng-controller="chartCtrl">
+            <div class="col-sm-4">
+                <h3 style="margin-left:60px">{{ 'VCPUS' | translate }}</h3>
+                <canvas id="pcpu" class="chart chart-pie"
+                        chart-data="cpu_data" chart-labels="labels" chart-legend="true">
+                </canvas>
+            </div>
+            <div class="col-sm-4">
+                <h3 style="margin-left:60px">{{ 'MEM' | translate }}(MB)</h3>
+                <canvas id="pmem" class="chart chart-pie"
+                        chart-data="mem_data" chart-labels="labels" chart-legend="true">
+                </canvas>
+            </div>
+            <div class="col-sm-4">
+                <h3 style="margin-left:60px">{{ 'DISK' | translate }}(GB)</h3>
+                <canvas id="pnet" class="chart chart-pie"
+                        chart-data="disk_data" chart-labels="labels" chart-legend="true">
+                </canvas>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="tableGroup" ng-controller="tableCtrl">
+                <div id="tableBack">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>{{ 'NAME' | translate }}</th>
+                                <th>{{ 'IP' | translate }}</th>
+                                <th>{{ 'VCPUS' | translate }}</th>
+                                <th>{{ 'MEMORY' | translate }}</th>
+                                <th>{{ 'DISK' | translate }}</th>
+                                <th>{{ 'CREATED' | translate }}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="read" ng-repeat="vm in vms" ng-click="rowClick(vm.id, vm.name)">
+                                <td class="mail-subject">{{vm.name}}</td>
+                                <td>{{vm.ip}}</td>
+                                <td>{{flavors[vm.flavor].cpu}}</td>
+                                <td>{{flavors[vm.flavor].ram}}MB</td>
+                                <td>{{flavors[vm.flavor].disk}}GB</td>
+                                <td class="mail-date">{{vm.created}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="tableGroup" ng-controller="logCtrl">
+                <div id="tableBack">
+                    <div class="table-responsive">
+                        <h2>{{ 'LOG' | translate }}</h2>
+                        <hr style="margin-top: 5px;margin-bottom:4px;"/>
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>{{ 'NAME' | translate }}</th>
+                                <th>{{ 'TYPE' | translate }}</th>
+                                <th>{{ 'TIME' | translate }}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="read" ng-repeat="log in logs" ng-click="rowClick(log, $event)">
+                                <td> {{ log.holder }}</td>
+                                <td class=""><span class="label label-{{log.label_class}}">{{log.type}}</span></td>
+                                <td> {{ log.time }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

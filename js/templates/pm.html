@@ -12,11 +12,13 @@
                         <div class="pull-right" id="input-btn">
                             <form class="mail-search">
                                 <div class="input-group">
-                                    <input type="text" class="form-control input-sm" ng-model="search_key" placeholder="{{ 'SEARCH_TASK' | translate }}">
+                                    <input type="text" class="form-control input-sm" ng-model="search_key"
+                                           placeholder="{{ 'SEARCH_TASK' | translate }}">
                                 </div>
                             </form>
                             <div class="keep-open btn-group" title="status">
-                                <button id="status-btn" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                <button id="status-btn" type="button" class="btn btn-default dropdown-toggle"
+                                        data-toggle="dropdown">
                                     <i class="glyphicon glyphicon-th icon-th {{ color_class }}"></i>
                                     <span class="caret"></span>
                                 </button>
@@ -28,7 +30,8 @@
                                         <a ng-click="stateSel('up')"> <i class="fa fa-circle text-navy"></i> UP</a>
                                     </li>
                                     <li>
-                                        <a ng-click="stateSel('down')"> <i class="fa fa-circle text-warning"></i> DOWN</a>
+                                        <a ng-click="stateSel('down')"> <i class="fa fa-circle text-warning"></i>
+                                            DOWN</a>
                                     </li>
                                 </ul>
                             </div>
@@ -47,11 +50,14 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr class="read" ng-repeat="pm in pms | filter: search_key | filter: stt" ng-click="rowClick(pm.id, pm.hypervisor_hostname)">
+                            <tr class="read" ng-repeat="pm in pms | filter: search_key | filter: stt"
+                                ng-click="rowClick(pm.id, pm.hypervisor_hostname)">
                                 <td>{{pm.id}}</td>
                                 <td>{{pm.hypervisor_hostname}}</td>
-                                <td class=""><span class="label label-{{pm.label_class}}">{{pm.state | uppercase}}</span></td>
-                                <td class=""><span class="label label-{{pm.label_class}}">{{pm.status | uppercase}}</span></td>
+                                <td class=""><span
+                                        class="label label-{{pm.label_class}}">{{pm.state | uppercase}}</span></td>
+                                <td class=""><span
+                                        class="label label-{{pm.label_class}}">{{pm.status | uppercase}}</span></td>
                                 <td class="mail-options">
                                     <a ng-click="kill(pm)" title="kill"><span class="si-close-circle"></span></a>
                                     <a ng-click="delete(pm)" title="delete"><span class="si-trash"></span></a>

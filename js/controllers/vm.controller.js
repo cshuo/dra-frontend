@@ -112,8 +112,8 @@ angular.module('dra.vm', ['ngResource', 'ui.bootstrap', 'ngMaterial'])
             });
         };
 
-        $scope.rowClick = function(vmID, e){
-            $state.go('navbar.detail',{vmID: vmID});
+        $scope.rowClick = function(vmID, vmName){
+            $state.go('navbar.detail',{vmID: vmID, vmName:vmName});
         };
 
         // 加载任务, 定时监控

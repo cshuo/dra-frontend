@@ -1,95 +1,176 @@
 <div class="animated fadeInRight">
-	<div id="backTask">
-		<!-- <a id="backUrl" ui-sref="{{ previousState }}"> -->
-		<a id="backUrl" href="{{ previousUrl }}">
-			<i class="glyphicon glyphicon-arrow-left" style="margin-right:5px; font-size: 14px!important;"></i>
-			<span>{{ 'INSTANCES' | translate }}</span>
-		</a>
-	</div>
-	<div class="padContent" ng-controller="detailCtrl">
-		<div class="detailContent animated fadeInRight" style="background-color: #ffffff">
-			<h1>{{ 'DETAILS' | translate }}</h1>
-			<hr style="margin-top: 5px;"/>
-			<ul class="specs">
-				<li>
-					<span>{{ 'ID' | translate }}</span>
-					<dd title="{{ data.id }}">{{data.id}}</dd>
-				</li>
-				<li>
-					<span>{{ 'NAME' | translate }}</span>
-					<dd>{{data.name}}</dd>
-				</li>
-				<li>
-					<span>{{ 'STATUS' | translate }}</span>
-					<dd>{{data.status}}</dd>
-				</li>
+    <div id="backTask">
+        <!-- <a id="backUrl" ui-sref="{{ previousState }}"> -->
+        <a id="backUrl" href="{{ previousUrl }}">
+            <i class="glyphicon glyphicon-arrow-left" style="margin-right:5px; font-size: 14px!important;"></i>
+            <span>{{ 'INSTANCES' | translate }}</span>
+        </a>
+    </div>
+    <div class="padContent" ng-controller="detailCtrl">
+        <div class="detailContent animated fadeInRight" style="background-color: #ffffff">
+            <h1>{{ 'DETAILS' | translate }}</h1>
+            <hr style="margin-top: 5px;"/>
+            <ul class="specs">
+                <li>
+                    <span>{{ 'ID' | translate }}</span>
+                    <dd title="{{ data.id }}">{{data.id}}</dd>
+                </li>
+                <li>
+                    <span>{{ 'NAME' | translate }}</span>
+                    <dd>{{data.name}}</dd>
+                </li>
+                <li>
+                    <span>{{ 'STATUS' | translate }}</span>
+                    <dd>{{data.status}}</dd>
+                </li>
                 <li>
                     <span>{{ 'IP' | translate }}</span>
                     <dd title="{{data.ips[0]}}">{{data.ips[0]}}</dd>
                 </li>
-				<li>
-					<span>{{ 'CREATED' | translate }}</span>
-					<dd>{{data.created}}</dd>
-				</li>
-				<li>
-					<span>{{ 'VCPUS' | translate }}</span>
-					<dd>{{data.cpu}}</dd>
-				</li>
-				<li>
-					<span>{{ 'MEMORY' | translate }}</span>
-					<dd>{{data.ram}}MB</dd>
-				</li>
+                <li>
+                    <span>{{ 'CREATED' | translate }}</span>
+                    <dd>{{data.created}}</dd>
+                </li>
+                <li>
+                    <span>{{ 'VCPUS' | translate }}</span>
+                    <dd>{{data.cpu}}</dd>
+                </li>
+                <li>
+                    <span>{{ 'MEMORY' | translate }}</span>
+                    <dd>{{data.ram}}MB</dd>
+                </li>
                 <li>
                     <span>{{ 'DISK' | translate }}</span>
                     <dd>{{data.disk}}GB</dd>
                 </li>
-				<li>
-					<span>{{ 'OPTIONS' | translate }}</span>
-					<dd>
-						<a ng-click="stop(data.id, $event)" title="stop"><span class="si-close-circle"></span></a>
-						<a ng-click="start(data.id, $event)" title="start"><span class="si-refresh-2"></span></a>
-						<a ng-click="delete(data.id, data.name, $event)" title="delete"><span class="si-trash"></span></a>
-					</dd>
-				</li>
-			</ul>
-		</div>
-	</div>
-	<div class="wrapper wrapper-content">
-		<div ng-cloak="" class="tabsdemoDynamicHeight">
-			<md-content>
-				<md-tabs md-dynamic-height="" md-border-bottom="">
-					<md-tab label="{{ 'METERS' | translate }}">
-						<md-content class="md-padding">
-							<div class="row tabContent">
-								<div class="col-sm-12">
-									<div ng-controller="vmCpuCtrl">
-										<h2>CPU</h2>
-										<canvas id="cpu" class="chart chart-line" chart-data="data"
-										chart-labels="labels" chart-legend="true" chart-series="series"
-										height="80">
-										</canvas>
-									</div>
-								</div>
-							</div>
-						</md-content>
-					</md-tab>
-					<md-tab label="{{ 'SHELL' | translate }}">
-						<md-content class="md-padding" ng-controller='vncCtrl'>
-							<iframe ng-src="{{ vnc_url }}" style='width:100%; height:500px'></iframe>
-						</md-content>
-					</md-tab>
-					<!-- <md-tab label="three">
-						<md-content class="md-padding">
-							<h1 class="md-display-2">Tab Two</h1>
-							<p>Reminding to complete</p>
-						</md-content>
-					</md-tab> -->
-				</md-tabs>
-			</md-content>
-		</div>
-		<!--
-		Copyright 2016 Google Inc. All Rights Reserved.
-		Use of this source code is governed by an MIT-style license that can be in foundin the LICENSE file at http://material.angularjs.org/license.
-	-->
-</div>
+                <li>
+                    <span>{{ 'OPTIONS' | translate }}</span>
+                    <dd>
+                        <a ng-click="stop(data.id, $event)" title="stop"><span class="si-close-circle"></span></a>
+                        <a ng-click="start(data.id, $event)" title="start"><span class="si-refresh-2"></span></a>
+                        <a ng-click="delete(data.id, data.name, $event)" title="delete"><span
+                                class="si-trash"></span></a>
+                    </dd>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="padContent" ng-controller="detailCtrl">
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="tableGroup">
+                    <md-content>
+                        <md-tabs md-dynamic-height="" md-border-bottom="">
+                            <md-tab label="{{ 'METERS' | translate }}">
+                                <md-content class="md-padding">
+                                    <div class="row tabContent">
+                                        <h2> 关键资源 </h2>
+                                        <div class="wrapper wrapper-content">
+                                            <div ng-controller="vmCpuCtrl">
+                                                <h2>CPU</h2>
+                                                <canvas id="cpu" class="chart chart-line" chart-data="cpu_data"
+                                                        chart-labels="cpu_labels" chart-legend="true"
+                                                        chart-series="cpu_series"
+                                                        height="80">
+                                                </canvas>
+                                            </div>
+                                        </div>
+
+                                        <h2> 其它资源 </h2>
+                                        <div class="wrapper wrapper-content">
+                                            <div ng-controller="vmCpuCtrl">
+                                                <h2>MEMORY</h2>
+                                                <canvas id="network" class="chart chart-line" chart-data="mem_data"
+                                                        chart-labels="mem_labels" chart-legend="true"
+                                                        chart-series="mem_series"
+                                                        height="80">
+                                                </canvas>
+                                            </div>
+
+                                            <div ng-controller="vmCpuCtrl">
+                                                <h2>DISK</h2>
+                                                <canvas id="network" class="chart chart-line" chart-data="disk_data"
+                                                        chart-labels="disk_labels" chart-legend="true"
+                                                        chart-series="disk_series"
+                                                        height="80">
+                                                </canvas>
+                                            </div>
+
+                                            <div ng-controller="vmCpuCtrl">
+                                                <h2>NETWORK</h2>
+                                                <canvas id="network" class="chart chart-line" chart-data="net_data"
+                                                        chart-labels="net_labels" chart-series="net_series"
+                                                        chart-options="net_options"
+                                                        chart-dataset-override="net_datasetOverride" height="100">
+                                                </canvas>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </md-content>
+                            </md-tab>
+                            <md-tab label="{{ 'SHELL' | translate }}">
+                                <md-content class="md-padding" ng-controller='vncCtrl'>
+                                    <iframe ng-src="{{ vnc_url }}" style='width:100%; height:500px'></iframe>
+                                </md-content>
+                            </md-tab>
+                        </md-tabs>
+                    </md-content>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="tableGroup" ng-controller="tableCtrl">
+                    <div id="tableBack">
+                        <div class="table-responsive">
+                            <h2>{{ 'RELATED' | translate }}</h2>
+                            <hr style="margin-top: 5px;margin-bottom:-4px;"/>
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>{{ 'NAME' | translate }}</th>
+                                </tr>
+                                </thead>
+                                <br/>
+                                <tbody>
+                                <tr>
+                                    <td>Hello</td>
+                                </tr>
+                                <tr>
+                                    <td>Hello</td>
+                                </tr>
+                                <tr>
+                                    <td>Hello</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="tableGroup" ng-controller="vmLogCtrl">
+                    <div id="tableBack">
+                        <div class="table-responsive">
+                            <h2>{{ 'WARN' | translate }}</h2>
+                            <hr style="margin-top: 5px;"/>
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>{{ 'NAME' | translate }}</th>
+                                    <th>{{ 'TYPE' | translate }}</th>
+                                    <th>{{ 'TIME' | translate }}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="read" ng-repeat="log in logs" ng-click="rowClick(log, $event)">
+                                    <td> {{ log.holder }}</td>
+                                    <td class=""><span class="label label-{{log.label_class}}">{{log.type}}</span></td>
+                                    <td> {{ log.time }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

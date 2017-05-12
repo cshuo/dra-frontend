@@ -1,28 +1,32 @@
 <div class="jumbotron" ng-controller="LoginController">
-	<div class="container">
-		<div style="width:300px;margin-left: auto; margin-right: auto;">
-			<br/><br/><br/>
-			<div style="padding:20px;background-color: #ffffff; border-radius: 8px; box-shadow: 0 12px 30px darkgrey;">
-				<h2 style="text-align: center">DRA-OpenStack</h2>
-				<br/>
-				<div ng-show="error" class="alert alert-danger">{{error}}</div>
-				<form name="form" ng-submit="login()" role="form">
-					<div class="form-group">
-						<label for="username"><h2>{{ 'USERNAME' | translate }}</h2></label>
-						<input type="text" name="username" id="username" class="login-input form-control" ng-model="username" required />
-						<span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">{{'USERNAME_REQ' | translate }}</span>
-					</div>
-					<div class="form-group">
-						<label for="password"><h2>{{ 'PASSWORD' | translate }}</h2></label>
-						<input type="password" name="password" id="password" class="login-input form-control" ng-model="password" required />
-						<span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">{{'PASSWORD_REQ' | translate }}</span>
-					</div>
-					<br/>
-					<div class="form-actions">
-						<button type="submit" ng-disabled="form.$invalid || dataLoading" class="btn btn-danger btn-block">{{ 'LOGIN' | translate }}</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
+    <div class="container">
+        <div style="width:300px;margin-left: auto; margin-right: auto;">
+            <br/><br/><br/>
+            <div style="padding:20px;background-color: #ffffff; border-radius: 8px; box-shadow: 0 12px 30px darkgrey;">
+                <h2 style="text-align: center">DRA-OpenStack</h2>
+                <br/>
+                <div ng-show="error" class="alert alert-danger">{{error}}</div>
+                <form name="form" ng-submit="login()" role="form">
+                    <div class="form-group">
+                        <label for="username"><h2>{{ 'USERNAME' | translate }}</h2></label>
+                        <input type="text" name="username" id="username" class="login-input form-control"
+                               ng-model="username" required/>
+                        <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">{{'USERNAME_REQ' | translate }}</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="password"><h2>{{ 'PASSWORD' | translate }}</h2></label>
+                        <input type="password" name="password" id="password" class="login-input form-control"
+                               ng-model="password" required/>
+                        <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">{{'PASSWORD_REQ' | translate }}</span>
+                    </div>
+                    <br/>
+                    <div class="form-actions">
+                        <button type="submit" ng-disabled="form.$invalid || dataLoading"
+                                class="btn btn-danger btn-block">{{ 'LOGIN' | translate }}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>

@@ -1,28 +1,23 @@
-<div class="animated fadeInRight">
+<div class="animated fadeInRight" ng-init="init()">
 	<div class="wrapper wrapper-content">
 		<div ng-cloak="" class="tabsdemoDynamicHeight">
 			<md-content>
 				<md-tabs md-dynamic-height="" md-border-bottom="">
-					<md-tab label="{{ 'RULES' | translate }}">
-						<md-content class="md-padding">
-							<p>Hello</p>
-						</md-content>
-					</md-tab>
 					<md-tab label="{{ 'TOPOLOGY' | translate }}">
-						<md-content class="md-padding">
+						<md-content class="md-padding" id="topo-panel">
 							<div class="row">
-								<div class="col-sm-12 animated fadeInRight">
-									<div class="ibox">
-										<div class="ibox-title">
-											<h2>
-												{{ 'TOPOLOGY' | translate }}
-											</h2>
-										</div>
-										<div class="ibox-content mailbox-main">
-											<vis-network data="data" options="options"></vis-network>
-										</div>
-									</div>
+								<div class="col-sm-9 animated fadeInRight">
+                                    <vis-network data="data" options="options"></vis-network>
 								</div>
+                                <div class="col-sm-3" id="host-panel">
+                                    <uib-accordion close-others="false">
+                                        <div uib-accordion-group class="panel-default" ng-repeat="host in hosts" is-open="host.open">
+                                            <uib-accordion-heading>
+                                                {{host.label}} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': host.open, 'glyphicon-chevron-right': !host.open}"></i>
+                                            </uib-accordion-heading>
+                                        </div>
+                                    </uib-accordion>
+                                </div>
 							</div>
 						</md-content>
 					</md-tab>
@@ -30,4 +25,13 @@
 			</div>
 		</div>
 	</div>
+    <div class="wrapper wrapper-content animated fadeInRight" style="padding-top: 0;">
+        <md-content class="md-padding">
+            <h2>schedduler</h2>
+            <hr style="margin-top: 5px;"/>
+            <div class="panel-body" id="scheduler-panel">
+            This content is straight in the template.
+            </div>
+        </md-content>
+    </div>
 </div>

@@ -41,69 +41,80 @@
             </ul>
         </div>
     </div>
-    <div class="wrapper wrapper-content">
-        <div ng-cloak="" class="tabsdemoDynamicHeight">
-            <md-content>
-            <md-tabs md-dynamic-height="" md-border-bottom="">
-            <md-tab label="{{ 'METERS' | translate }}">
-            <md-content class="md-padding">
-            <div class="row tabContent">
-                <div class="col-sm-12">
-                    <div ng-controller="pmCpuCtrl">
-                        <h2>CPU</h2>
-                        <canvas id="cpu" class="chart chart-line" chart-data="data"
-                        chart-labels="labels" chart-legend="true" chart-series="series"
-                        height="80">
-                    </canvas>
+    <div class="padContent" ng-controller="detailCtrl">
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="tableGroup">
+                    <md-content>
+                        <md-tabs md-dynamic-height="" md-border-bottom="">
+                            <md-tab label="{{ 'METERS' | translate }}">
+                                <md-content class="md-padding">
+                                    <div class="row tabContent">
+                                        <div ng-controller="pmCpuCtrl">
+                                            <h2>CPU</h2>
+                                            <canvas id="cpu" class="chart chart-line" chart-data="data"
+                                                    chart-labels="labels" chart-legend="true" chart-series="series"
+                                                    height="80">
+                                            </canvas>
+                                        </div>
+                                    </div>
+                                </md-content>
+                            </md-tab>
+                            <md-tab label="{{ 'INSTANCES' | translate }}">
+                                <md-content class="md-padding">
+                                    <h2>{{ 'VMS' | translate }}</h2>
+                                    <div class="table-responsive" ng-controller="pmVmsCtrl">
+                                        <table class="table table-striped tasks">
+                                            <thead>
+                                            <tr>
+                                                <th>{{ 'NAME' | translate }}</th>
+                                                <th>{{ 'ID' | translate }}</th>
+                                                <th>{{ 'IP' | translate }}</th>
+                                                <th>{{ 'CREATED' | translate }}</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr class="read" ng-repeat="vm in vms" ng-click="rowClick(vm.id)">
+                                                <td>{{vm.name}}</td>
+                                                <td>{{vm.id}}</td>
+                                                <td>{{vm.ip}}</td>
+                                                <td class="mail-date">{{vm.created}}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </md-content>
+                            </md-tab>
+                        </md-tabs>
+                    </md-content>
                 </div>
-                                <!--div ng-controller="memCtrl">
-                                <h2>MEM</h2>
-                                <canvas id="mem" class="chart chart-line" chart-data="data"
-                                chart-labels="labels" chart-legend="true" chart-series="series"
-                                height="60">
-                            </canvas>
-                        </div-->
+            </div>
+            <div class="col-sm-4">
+                <div class="tableGroup" ng-controller="pmLogCtrl">
+                    <div id="tableBack">
+                        <div class="table-responsive">
+                            <h2>{{ 'OPLOG' | translate }}</h2>
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>{{ 'NAME' | translate }}</th>
+                                    <th>{{ 'TYPE' | translate }}</th>
+                                    <th>{{ 'TIME' | translate }}</th>
+                                </tr>
+                                </thead>
+                                <br/>
+                                <tbody>
+                                <tr class="read" ng-repeat="log in logs" ng-click="rowClick(log, $event)">
+                                    <td> {{ log.holder }}</td>
+                                    <td class=""><span class="label label-{{log.label_class}}">{{log.type}}</span></td>
+                                    <td> {{ log.time }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </md-content>
-        </md-tab>
-        <md-tab label="{{ 'INSTANCES' | translate }}">
-        <md-content class="md-padding">
-        <h2>{{ 'VMS' | translate }}</h2>
-        <div class="table-responsive" ng-controller="pmVmsCtrl">
-            <table class="table table-striped tasks">
-                <thead>
-                    <tr>
-                        <th>{{ 'NAME' | translate }}</th>
-                        <th>{{ 'ID' | translate }}</th>
-                        <th>{{ 'IP' | translate }}</th>
-                        <th>{{ 'CREATED' | translate }}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="read" ng-repeat="vm in vms" ng-click="rowClick(vm.id)">
-                        <td>{{vm.name}}</td>
-                        <td>{{vm.id}}</td>
-                        <td>{{vm.ip}}</td>
-                        <td class="mail-date">{{vm.created}}</td>
-                    </tr>
-                </tbody>
-            </table>
+            </div>
         </div>
-    </md-content>
-</md-tab>
-<!-- <md-tab label="three">
-<md-content class="md-padding">
-<h1 class="md-display-2">Tab Three</h1>
-<p>Reminding to complete</p>
-</md-content>
-</md-tab> -->
-</md-tabs>
-</md-content>
-</div>
-<!--
-Copyright 2016 Google Inc. All Rights Reserved.
-Use of this source code is governed by an MIT-style license that can be in foundin the LICENSE file at http://material.angularjs.org/license.
--->
-</div>
+    </div>
 </div>

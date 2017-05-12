@@ -3,59 +3,17 @@
         <div ng-cloak="" class="tabsdemoDynamicHeight">
             <md-content>
                 <md-tabs md-dynamic-height="" md-border-bottom="">
-                    <md-tab label="{{ 'RULES' | translate }}">
+                    <md-tab label="{{ 'TOPOLOGY' | translate }}">
                         <md-content class="md-padding">
-                            <div class="row">
-                                <div class="mailbox-main" style='margin: 10px 20px'>
-                                    <div class="clearfix table-tools">
-                                        <span class="pull-left">
-                                            <button id="task-btn"class="btn btn-block btn-primary compose-mail" ng-click="openTaskModal()">{{ 'ADD_RULE' | translate }}</button>
-                                        </span>
-                                        <div class="pull-right" id="input-btn">
-                                            <!--form ng-submit="search()" class="mail-search"-->
-                                            <form class="mail-search">
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control input-sm" ng-model="search_key" placeholder="{{ 'SEARCH_TASK' | translate }}">
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-
-                                    <div class="table-responsive">
-                                        <table class="table table-striped tasks">
-                                            <thead>
-                                                <tr>
-                                                    <th>{{ 'NAME' | translate }}</th>
-                                                    <th>{{ 'APP' | translate }}</th>
-                                                    <th>{{ 'OPTIONS' | translate }}</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr class="read" ng-repeat="rule in rules| filter: search_key | filter: stt" ng-click="rowClick(rule.name, rule.content, $event)">
-                                                    <td>{{rule.name}}</td>
-                                                    <td>{{rule.app_type}}</td>
-                                                    <td class="mail-options">
-                                                        <a ng-click="delete(rule.name, $event)" title="kill"><span class="si-close-circle"></span></a>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                            <div class="row" ng-controller='topologyCtrl'>
+                                <div class="mailbox-main" stype='margin: 10px 20px'>
+                                    <vis-network data="data" options="options"></vis-network>
                                 </div>
                             </div>
                         </md-content>
                     </md-tab>
-                    <md-tab label="{{ 'TOPOLOGY' | translate }}">
-                        <md-content class="md-padding">
-                            <div class="row" ng-controller='topologyCtrl'>
-                                    <div class="mailbox-main" stype='margin: 10px 20px'>
-                                        <vis-network data="data" options="options"></vis-network>
-                                    </div>
-                            </div>
-                        </md-content>
-                    </md-tab>
                 </md-tabs>
-            </div>
+            </md-content>
         </div>
     </div>
 </div>

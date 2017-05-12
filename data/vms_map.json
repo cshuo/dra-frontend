@@ -1,0 +1,5 @@
+{
+  "kolla1": [["vm_id1","vm_name1"],["vm_id2","vm_name2"],["vm_id3","vm_name3"]],
+  "kolla2": [["vm_id4","vm_name4"],["vm_id5","vm_name5"]],
+  "kolla3": [["vm_id6","vm_name6"],["vm_id7","vm_name7"]]
+}
