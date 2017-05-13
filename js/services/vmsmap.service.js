@@ -32,7 +32,7 @@ angular.module('dra.vm')
                     $timeout(function () {
                         edges.remove({id: arrowId});
                         edges.update({id: vm_id, from: vm_id, to: host, dashes: false, width: 1});
-                    }, 2000);
+                    }, 3000);
                 },
 
                 updateStatus: function(host, status) {

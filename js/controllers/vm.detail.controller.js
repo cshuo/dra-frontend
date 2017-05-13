@@ -3,6 +3,7 @@
 var detail_url = "http://20.0.1.9:9000/api/vm/";
 var meters_url = "http://20.0.1.9:9000/api/meters/";
 var vnc_url = "http://20.0.1.9:9000/api/vnc/";
+var rel_url =  "http://20.0.1.9:9000/api/relatobj";
 var auth_d = {'tenant': 'admin', 'username':'admin', 'password': 'artemis'};
 var old_vnc = "20.0.1.110";
 var forward_vnc = "20.0.1.9";
@@ -153,6 +154,56 @@ detail.controller('vncCtrl', [
         }
         console.log($stateParams);
         get_vnc_url();
+    }
+]);
+
+detail.controller('relCtrl', [
+    '$scope',
+    '$stateParams',
+    '$state',
+    '$http',
+    function($scope, $stateParams, $state, $http) {
+        $scope.rels = [];
+        var get_rel = function() {
+            $http({
+                method: 'GET',
+                url: rel_url,
+                params:{
+                    type: 'app',
+                    object: $stateParams.vmName.split('_')[1]
+                }
+            }).then(function success(response) {
+                var rels = response.data;
+                for(var i=0; i<rels.length; i++){
+                    if(rels[i].name != $stateParams.vmName){
+                        $scope.rels.push(rels[i]);
+                    }
+                }
+            }, function error(response) {
+                //    error
+            });
+
+            $http({
+                method: 'GET',
+                url: rel_url,
+                params:{
+                    type: 'vm',
+                    object: $stateParams.vmName
+                }
+            }).then(function success(response) {
+                $scope.rel_host = response.data;
+            }, function error(response) {
+                //    error
+            });
+        }
+        get_rel();
+
+        $scope.rowClick = function(rel, sign){
+            if(sign)
+                $state.go('navbar.detail',{vmID: rel.id, vmName:rel.name});
+            else
+                $state.go('navbar.pm_detail',{pmID: rel.id, pmName: rel.name});
+        };
     }
 ]);
 

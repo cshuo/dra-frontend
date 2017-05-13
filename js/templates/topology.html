@@ -21,16 +21,19 @@
 							</div>
 						</md-content>
 					</md-tab>
+                    <md-tab label="{{ 'NETOPO' | translate }}">
+                        <vis-network data="data" options="options"></vis-network>
+                    </md-tab>
 				</md-tabs>
 			</div>
 		</div>
 	</div>
     <div class="wrapper wrapper-content animated fadeInRight" style="padding-top: 0;">
         <md-content class="md-padding">
-            <h2>scheduler</h2>
+            <h2>{{ 'CONSOLE' | translate }}</h2>
             <hr style="margin-top: 5px;"/>
             <div class="panel-body" >
-                <pre id="scheduler-panel"> This content is straight in the template. </pre>
+                <pre id="scheduler-panel"></pre>
             </div>
         </md-content>
     </div>

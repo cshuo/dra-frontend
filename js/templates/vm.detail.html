@@ -119,7 +119,7 @@
                 </div>
             </div>
             <div class="col-sm-4">
-                <div class="tableGroup" ng-controller="tableCtrl">
+                <div class="tableGroup" ng-controller="relCtrl">
                     <div id="tableBack">
                         <div class="table-responsive">
                             <h2>{{ 'RELATED' | translate }}</h2>
@@ -132,14 +132,11 @@
                                 </thead>
                                 <br/>
                                 <tbody>
-                                <tr>
-                                    <td>Hello</td>
+                                <tr class="read" ng-repeat="rel in rels" ng-click="rowClick(rel, 1)">
+                                    <td>{{ rel.name }}</td>
                                 </tr>
-                                <tr>
-                                    <td>Hello</td>
-                                </tr>
-                                <tr>
-                                    <td>Hello</td>
+                                <tr class="read" ng-repeat="rel in rel_host" ng-click="rowClick(rel, 0)">
+                                    <td>{{ rel.name }}</td>
                                 </tr>
                                 </tbody>
                             </table>

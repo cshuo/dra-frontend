@@ -139,6 +139,8 @@ angular.module('dra', [
         TOPOLOGY: 'Vms Topology',
         LOG: 'Log',
         RELATED: 'Related Res',
+        CONSOLE: 'Console',
+        NETOPO: 'Network Topology',
         DYNAMIC_SCHEDULE: 'Dynamic Schedule'
     });
     $translateProvider.translations('cn', {
@@ -221,6 +223,8 @@ angular.module('dra', [
         TOPOLOGY: 'VMs 拓扑图',
         LOG: '日志',
         RELATED: '关联资源',
+        CONSOLE: '日志控制台',
+        NETOPO: '网络拓扑',
         DYNAMIC_SCHEDULE: '动态调度'
     });
     $translateProvider.preferredLanguage('cn');
