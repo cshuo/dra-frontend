@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-var auth_url = "http://20.0.1.9:9000/api/login";
+var auth_url = "http://114.212.189.132:9000/api/login";
 angular.module('dra.auth',['ngCookies'])
 
 .factory('AuthenticationService',

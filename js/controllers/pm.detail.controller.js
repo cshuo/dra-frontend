@@ -1,7 +1,7 @@
 'use strict';
 
-var pm_detail_url = "http://20.0.1.9:9000/api/pm/";
-var meters_url = "http://20.0.1.9:9000/api/meters/";
+var pm_detail_url = "http://114.212.189.132:9000/api/pm/";
+var pmeters_url = "http://114.212.189.132:9000/api/pmeters";
 
 var detail = angular.module('dra.pm_detail',['ngMaterial', 'ngMessages', 'material.svgAssetsCache', 'chart.js', 'ui.router']);
 
@@ -27,18 +27,21 @@ detail.controller("pmCpuCtrl", ['$scope', '$interval', '$http', '$stateParams', 
     var reload_chart = function(){
         $http({
             method: 'GET',
-            url: meters_url + 'compute.node.cpu.percent',
+            url: pmeters_url,
             params: {
-                'tenant': 'admin',
-                'username': 'admin',
-                'password': 'artemis',
-                'resource': $stateParams.pmName+'_'+$stateParams.pmName,
-                'interval': '0.5'
+                'host': $stateParams.pmName,
+                'num': '15'
             }
         }).then(function success(response) {
-            $scope.series = ['cpu'];
-            $scope.labels = response.data.time;
-            $scope.data = [response.data.value];
+            $scope.cpu_series = ['cpu'];
+            $scope.cpu_labels = response.data.cpu.time;
+            $scope.cpu_data = [response.data.cpu.value];
+            $scope.mem_series = ['memory'];
+            $scope.mem_labels = response.data.mem.time;
+            $scope.mem_data = [response.data.mem.value];
+            $scope.disk_series = ['disk'];
+            $scope.disk_labels = response.data.disk.time;
+            $scope.disk_data = [response.data.disk.value];
         }, function error(response) {
         //    error
         });
@@ -94,9 +97,7 @@ detail.controller("pmLogCtrl", ['$scope','$http', '$interval', '$mdDialog', '$md
             'num': '6'
           }
       }).then(function success(response){
-        console.log('------------------------------');
         logs = response.data;
-        console.log(logs);
         for(var i=0; i<logs.length; i++){
           switch (logs[i].type) {
             case "warn":

@@ -1,12 +1,12 @@
 'use strict';
 
-var detail_url = "http://20.0.1.9:9000/api/vm/";
-var meters_url = "http://20.0.1.9:9000/api/meters/";
-var vnc_url = "http://20.0.1.9:9000/api/vnc/";
-var rel_url =  "http://20.0.1.9:9000/api/relatobj";
+var detail_url = "http://114.212.189.132:9000/api/vm/";
+var meters_url = "http://114.212.189.132:9000/api/meters/";
+var vnc_url = "http://114.212.189.132:9000/api/vnc/";
+var rel_url =  "http://114.212.189.132:9000/api/relatobj";
 var auth_d = {'tenant': 'admin', 'username':'admin', 'password': 'artemis'};
-var old_vnc = "20.0.1.110";
-var forward_vnc = "20.0.1.9";
+var old_vnc = "20.0.1.10";
+var forward_vnc = "114.212.189.132";
 
 var detail = angular.module('dra.detail',['ngMaterial', 'ngMessages', 'material.svgAssetsCache', 'chart.js', 'ui.router']);
 
@@ -26,7 +26,7 @@ detail.controller("detailCtrl", [
                 params: auth_d
             }).then(function success(response) {
                 $scope.data= response.data;
-		console.log(response.data.addresses);
+		// console.log(response.data.addresses);
             }, function error(response) {
             });
         }
@@ -65,7 +65,7 @@ detail.controller("detailCtrl", [
               .cancel($filter('translate')('CANCEL'));
             $mdDialog.show(cfir).then(function() {
                 VMs.deleteVm(vmId, vmName, function(){
-                    console.log('delete success');
+                    // console.log('delete success');
                     $state.go('navbar.vm');
                 });
             }, function() {
@@ -146,13 +146,14 @@ detail.controller('vncCtrl', [
                 url: vnc_url + $stateParams.vmID,
                 params: auth_d
             }).then(function success(response) {
-				        var temp = response.data.vnc;
-                $scope.vnc_url = $sce.trustAsResourceUrl(temp.replace(old_vnc, forward_vnc));
+				var temp = response.data.vnc;
+                // $scope.vnc_url = $sce.trustAsResourceUrl(temp.replace(old_vnc, forward_vnc));
+                $scope.vnc_url = $sce.trustAsResourceUrl(temp);
             }, function error(response) {
                 //    error
             });
         }
-        console.log($stateParams);
+        // console.log($stateParams);
         get_vnc_url();
     }
 ]);

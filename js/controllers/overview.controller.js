@@ -1,6 +1,6 @@
 'use strict';
 
-var base_url = "http://20.0.1.9:9000/api";
+var base_url = "http://114.212.189.132:9000/api";
 var flavor_url = base_url + "/flavors";
 var map_url = base_url + "/maps";
 var log_url = base_url + "/logs";

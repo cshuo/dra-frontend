@@ -120,6 +120,8 @@ angular.module('dra', [
         NETWORK: 'Network',
         OPTION: 'option',
         APP_TYPE: 'App Type',
+        DESCRIPTION: 'Description',
+        TIME: 'Time',
         CONTENT: 'Content',
         CREATE_RULE: 'Create Rule',
         ERROR_LOGIN_TIPS: 'Username or password is not correct',
@@ -141,7 +143,9 @@ angular.module('dra', [
         RELATED: 'Related Res',
         CONSOLE: 'Console',
         NETOPO: 'Network Topology',
-        DYNAMIC_SCHEDULE: 'Dynamic Schedule'
+        APP_DETAIL: '应用描述',
+        DYNAMIC_SCHEDULE: 'Dynamic Schedule',
+        MIGRATION: 'Migration'
     });
     $translateProvider.translations('cn', {
         LOGIN: '登录',
@@ -204,6 +208,8 @@ angular.module('dra', [
         NETWORK: '网络',
         OPTION: '选项',
         APP_TYPE: '应用类型',
+        DESCRIPTION: '描述',
+        TIME: '时间',
         CONTENT: '规则内容',
         CREATE_RULE: '添加规则',
         ERROR_LOGIN_TIPS: '用户名或密码错误',
@@ -222,10 +228,13 @@ angular.module('dra', [
         ALL_FIELDS_REQ: '所有字段都需填写!!!',
         TOPOLOGY: 'VMs 拓扑图',
         LOG: '日志',
+        OWNER: '位置',
         RELATED: '关联资源',
         CONSOLE: '日志控制台',
         NETOPO: '网络拓扑',
-        DYNAMIC_SCHEDULE: '动态调度'
+        APP_DETAIL: '应用描述',
+        DYNAMIC_SCHEDULE: '动态调度',
+        MIGRATION: '迁移操作'
     });
     $translateProvider.preferredLanguage('cn');
 }])
@@ -252,8 +261,6 @@ function ($rootScope, $state, $cookieStore, $http, $location, $translate) {
 
 	$rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
 		$rootScope.currentState = toState.name;
-		// console.log('preset: '+ toState.name);
-		// console.log('previous: '+fromState.name);
 	});
 
     $rootScope.switchLanguage = function(){

@@ -21,12 +21,12 @@ angular.module('dra.topology', ['ngVis', 'ngWebSocket', 'ui.bootstrap'])
 		// $scope.scheduler.open = true;
 		$scope.initData();
 		$scope.initWS();
-	}
+	};
 
 
 	$scope.initData = function () {
 		// init vms map to hosts
-		var map_url = "http://20.0.1.9:9000/api/maps";
+		var map_url = "http://114.212.189.132:9000/api/maps";
 		// var map_url = "data/vms_map.json";
 		VmsMap.clear();
 		VmsMap.get_mtd(map_url).then(function(response){
@@ -166,7 +166,7 @@ angular.module('dra.topology', ['ngVis', 'ngWebSocket', 'ui.bootstrap'])
     */
 
     $scope.initWS = function () {
-	    $scope.ws = $websocket('ws://20.0.1.9:8070/soc');
+	    $scope.ws = $websocket('ws://20.0.1.10:8070/soc');
 	    $scope.ws.onMessage(function(message){
 		    var updateData = JSON.parse(message.data);
 		    if(updateData.type === "update") {
@@ -220,8 +220,12 @@ angular.module('dra.topology', ['ngVis', 'ngWebSocket', 'ui.bootstrap'])
 
 	    $scope.ws.onClose(function(event){
 		    console.log('connection closed...');
-		    $interval.cancel(alive_interval);
 	    });
+
+        $scope.$on('$destroy', function(){
+            $interval.cancel(alive_interval);
+            $scope.ws.close();
+        });
     }
 
 

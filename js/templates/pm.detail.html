@@ -49,11 +49,25 @@
                         <md-tabs md-dynamic-height="" md-border-bottom="">
                             <md-tab label="{{ 'METERS' | translate }}">
                                 <md-content class="md-padding">
-                                    <div class="row tabContent">
-                                        <div ng-controller="pmCpuCtrl">
-                                            <h2>CPU</h2>
-                                            <canvas id="cpu" class="chart chart-line" chart-data="data"
-                                                    chart-labels="labels" chart-legend="true" chart-series="series"
+                                    <div class="row tabContent" ng-controller="pmCpuCtrl">
+                                        <div>
+                                            <h2>{{ 'CPU' | translate }} (%)</h2>
+                                            <canvas id="cpu" class="chart chart-line" chart-data="cpu_data"
+                                                    chart-labels="cpu_labels" chart-legend="true" chart-series="cpu_series"
+                                                    height="80">
+                                            </canvas>
+                                        </div>
+                                        <div>
+                                            <h2>{{ 'MEMORY' | translate }} (%)</h2>
+                                            <canvas id="mem" class="chart chart-line" chart-data="mem_data"
+                                                    chart-labels="mem_labels" chart-legend="true" chart-series="mem_series"
+                                                    height="80">
+                                            </canvas>
+                                        </div>
+                                        <div>
+                                            <h2>{{ 'DISK' | translate }} (%)</h2>
+                                            <canvas id="disk" class="chart chart-line" chart-data="disk_data"
+                                                    chart-labels="disk_labels" chart-legend="true" chart-series="disk_series"
                                                     height="80">
                                             </canvas>
                                         </div>
