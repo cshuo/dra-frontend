@@ -1,9 +1,9 @@
 'use strict';
 
-var detail_url = "http://114.212.189.132:9000/api/vm/";
-var meters_url = "http://114.212.189.132:9000/api/meters/";
-var vnc_url = "http://114.212.189.132:9000/api/vnc/";
-var rel_url =  "http://114.212.189.132:9000/api/relatobj";
+var detail_url = base_ip + "api/vm/";
+var meters_url = base_ip + "api/meters/";
+var vnc_url = base_ip + "api/vnc/";
+var rel_url =  base_ip + "api/relatobj";
 var auth_d = {'tenant': 'admin', 'username':'admin', 'password': 'artemis'};
 var old_vnc = "20.0.1.10";
 var forward_vnc = "114.212.189.132";
@@ -42,7 +42,7 @@ detail.controller("detailCtrl", [
             }, function() {
                 // do nothing when cancel clicked
             });
-        }
+        };
 
         $scope.start = function(vmId, e){
             var cfir = $mdDialog.confirm()

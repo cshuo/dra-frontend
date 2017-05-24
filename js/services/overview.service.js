@@ -1,4 +1,4 @@
-var base_url = 'http://114.212.189.132:9000/api/';
+var base_url = base_ip + 'api/';
 
 angular.module('dra.overview')
 
@@ -8,8 +8,8 @@ angular.module('dra.overview')
             query: {
                 method: 'get',
                 timeout: 20000
-            },
-        })
+            }
+        });
 
         var getTasks = function(callback) {
             return resource.query({

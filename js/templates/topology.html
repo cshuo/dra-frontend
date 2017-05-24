@@ -1,14 +1,15 @@
 <div class="animated fadeInRight" ng-init="init()">
-	<div class="wrapper wrapper-content">
-		<div ng-cloak="" class="tabsdemoDynamicHeight">
-			<md-content>
-				<md-tabs md-dynamic-height="" md-border-bottom="">
-					<md-tab label="{{ 'TOPOLOGY' | translate }}">
-						<md-content class="md-padding" id="topo-panel">
-							<div class="row">
-								<div class="col-sm-9 animated fadeInRight">
-                                    <vis-network data="data" options="options"></vis-network>
-								</div>
+    <div class="wrapper wrapper-content">
+        <div ng-cloak="" class="tabsdemoDynamicHeight">
+            <md-content>
+                <md-tabs md-dynamic-height="" md-border-bottom="">
+                    <md-tab label="{{ 'TOPOLOGY' | translate }}">
+                        <md-content class="md-padding" id="topo-panel">
+                            <div class="row">
+                                <!--<div class="col-sm-9 animated fadeInRight">-->
+                                <!--<vis-network id="network" data="data" options="options"></vis-network>-->
+                                <!--</div>-->
+                                <div class="col-sm-9" id="network"></div>
                                 <div class="col-sm-3" id="host-panel">
                                     <uib-accordion close-others="false">
                                         <div uib-accordion-group class="panel-default" ng-repeat="host in hosts" is-open="host.open">
@@ -18,23 +19,22 @@
                                         </div>
                                     </uib-accordion>
                                 </div>
-							</div>
-						</md-content>
-					</md-tab>
-                    <!--<md-tab label="{{ 'NETOPO' | translate }}">-->
-                        <!--<vis-network data="data" options="options"></vis-network>-->
-                    <!--</md-tab>-->
-				</md-tabs>
-			</div>
-		</div>
-	</div>
-    <div class="wrapper wrapper-content animated fadeInRight" style="padding-top: 0;">
-        <md-content class="md-padding">
-            <h2>{{ 'CONSOLE' | translate }}</h2>
-            <hr style="margin-top: 5px;"/>
-            <div class="panel-body" >
-                <pre id="scheduler-panel"></pre>
-            </div>
-        </md-content>
+                            </div>
+                        </md-content>
+                    </md-tab>
+                </md-tabs>
+        </div>
     </div>
 </div>
+<div class="wrapper wrapper-content animated fadeInRight" style="padding-top: 0;">
+    <md-content class="md-padding">
+        <h2>schedduler</h2>
+        <hr style="margin-top: 5px;"/>
+        <div class="panel-body" id="scheduler-panel">
+            This content is straight in the template.
+        </div>
+    </md-content>
+</div>
+</div>
+
+

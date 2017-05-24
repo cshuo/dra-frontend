@@ -1,5 +1,7 @@
 'use strict';
 
+var base_ip = "http://114.212.189.132:9000/";
+
 // Declare app level module which depends on views, and components
 angular.module('dra', [
     'ui.router',

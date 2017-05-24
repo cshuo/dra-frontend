@@ -10,13 +10,52 @@ angular.module('dra.vm')
                 init: function(vms_map){
                     var nodes = [];
                     var edges = [];
-                    var hosts = Object.keys(vms_map);
-                    for(var i=0; i<hosts.length; i++){
-	                    this.hostArry.push({label: hosts[i], content: "", contents: []});
-                        nodes.push({id: hosts[i], label: hosts[i], group: 'healthy'});
-                        for(var j=0; j<vms_map[hosts[i]].length; j++){
-                            nodes.push({id: vms_map[hosts[i]][j][0], label:vms_map[hosts[i]][j][1], group: 'vms' });
-                            edges.push({id: vms_map[hosts[i]][j][0], from: hosts[i], to: vms_map[hosts[i]][j][0]});
+                    for(var i=0; i<vms_map.length; i++){
+                        this.hostArry.push({label: vms_map[i].id, content: "", contents: []});
+                        var title = "<div class='popup-data'>";
+                        for(var prop in vms_map[i].data){
+                            if(prop === "net") {
+                                title += "<b>"+ prop + "</b>: <span>"+ vms_map[i].data[prop] + "KB/s</span><br/>";
+                            }else{
+                                title += "<b>"+ prop + "</b>: <span>"+ vms_map[i].data[prop] + "%</span><br/>";
+                            }
+                        }
+                        title += "</div>";
+                        nodes.push({id: vms_map[i].id, label: vms_map[i].id, level:0, group: 'healthy', title: title});
+
+                        var vms = vms_map[i].children;
+
+                        for(var j=0; j<vms.length; j++){
+                            var title ="<div class='popup-data'>";
+                            for(var prop in vms_map[i].data){
+                                if(prop === "net") {
+                                    title += "<b>"+ prop + "</b>: <span>"+ vms[j].data[prop] + "KB/s</span><br/>";
+                                }else{
+                                    title += "<b>"+ prop + "</b>: <span>"+ vms[j].data[prop] + "%</span><br/>";
+                                }
+                            }
+                            title += "</div>";
+                            nodes.push({id: vms[j].id, label:vms[j].name, level: 1, group: 'vms', title: title});
+                            edges.push({id: vms[j].id, from: vms_map[i].id, to: vms[j].id});
+
+                            var app = vms[j].children;
+
+                            for(var k=0; k<app.length; k++){
+                                nodes.push({id: app[k].id, label: app[k].name, level: 2, group: 'app'});
+                                edges.push({id: app[k].id, from: vms[j].id, to: app[k].id});
+
+                                var q=0;
+                                for(q=0; q<nodes.length; q++){
+                                    if(nodes[q].id === app[k].service){
+                                        break;
+                                    }
+                                }
+                                if(q === nodes.length){
+                                    nodes.push({id: app[k].service, label: app[k].service,level: 3, group: "service"});
+                                }
+                                var app_service = app[k].id + app[k].service;
+                                edges.push({id: app_service, from: app[k].id, to: app[k].service})
+                            }
                         }
                     }
                     this.data.nodes = new vis.DataSet(nodes);
@@ -26,17 +65,37 @@ angular.module('dra.vm')
                 updateEdge: function(vm_id, host){
                     var date = new Date();
                     var arrowId = "arrow" + vm_id + date.getTime();
+                    console.log(date, arrowId);
                     var edges = this.data.edges;
                     edges.add({id: arrowId, from: vm_id, to: host, arrows: "to", color: "red", width: 4});
                     edges.update({id: vm_id, dashes: true, width: 4});
                     $timeout(function () {
                         edges.remove({id: arrowId});
-                        edges.update({id: vm_id, from: vm_id, to: host, dashes: false, width: 1});
-                    }, 3000);
+                        edges.update({id: vm_id, from: host, to: vm_id, dashes: false, width: 1});
+                    }, 2000);
                 },
 
-                updateStatus: function(host, status) {
-                    this.data.nodes.update({id: host, group: status});
+                updateStatus: function(id, target, status) {
+                    if(status === "warning"){
+                        this.data.nodes.update({id: id, color: "red", group: "warning_"+target});
+                    }else if(status === "normal"){
+                        this.data.nodes.update({id: id, color: '#5087bf', group: target});
+                    }else {
+                        this.data.nodes.update({id: id, group: status});
+                    }
+                },
+
+                updateData: function (id, data) {
+                    var title = "<div class='popup-data'>";
+                    for(var prop in data){
+                        if(prop === "net") {
+                            title += "<b>"+ prop + "</b>: <span>"+ data[prop] + "KB/s</span><br/>";
+                        }else{
+                            title += "<b>"+ prop + "</b>: <span>"+ data[prop] + "%</span><br/>";
+                        }
+                    }
+                    title += "</div>";
+                    this.data.nodes.update({id: id, title: title});
                 },
 
                 remove: function(vm_id){
@@ -69,5 +128,6 @@ angular.module('dra.vm')
                     this.hostArry = [];
                 }
             }
-    }
-])
+        }
+    ])
+

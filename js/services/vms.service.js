@@ -1,4 +1,4 @@
-var base_url = 'http://114.212.189.132:9000/api/';
+var base_url = base_ip + 'api/';
 var auth_d = {'tenant': 'admin', 'username':'admin', 'password': 'artemis'};
 
 angular.module('dra.vm')

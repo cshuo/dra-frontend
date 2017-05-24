@@ -1,5 +1,109 @@
-{
-  "kolla1": [["vm_id1","vm_name1"],["vm_id2","vm_name2"],["vm_id3","vm_name3"]],
-  "kolla2": [["vm_id4","vm_name4"],["vm_id5","vm_name5"]],
-  "kolla3": [["vm_id6","vm_name6"],["vm_id7","vm_name7"]]
-}
+[
+  {
+    "id": "kolla1",
+    "children": [
+      {
+        "id": "vm_id1",
+        "name": "vm_name1",
+        "children": [
+          {
+            "id": "app_id1",
+            "name": "app_name1",
+            "service": "service1"
+          }
+        ],
+        "data": {
+          "cpu": "40",
+          "mem": "60",
+          "disk": "20",
+          "net": "250"
+        }
+      },
+      {
+        "id": "vm_id2",
+        "name": "vm_name2",
+        "children": [
+          {
+            "id": "app_id2",
+            "name": "app_name2",
+            "service": "service1"
+          }
+        ],
+        "data": {
+          "cpu": "40",
+          "mem": "60",
+          "disk": "20",
+          "net": "250"
+        }
+      }
+    ],
+    "data": {
+      "cpu": "40",
+      "mem": "60",
+      "disk": "20",
+      "net": "250"
+    }
+  },
+  {
+    "id": "kolla2",
+    "children": [
+      {
+        "id": "vm_id3",
+        "name": "vm_name3",
+        "children": [
+          {
+            "id": "app_id3",
+            "name": "app_name3",
+            "service": "service1"
+          }
+        ],
+        "data": {
+          "cpu": "40",
+          "mem": "60",
+          "disk": "20",
+          "net": "250"
+        }
+      },
+      {
+        "id": "vm_id4",
+        "name": "vm_name4",
+        "children": [
+          {
+            "id": "app_id4",
+            "name": "app_name4",
+            "service": "service2"
+          }
+        ],
+        "data": {
+          "cpu": "40",
+          "mem": "60",
+          "disk": "20",
+          "net": "250"
+        }
+      },
+      {
+        "id": "vm_id5",
+        "name": "vm_name5",
+        "children": [
+          {
+            "id": "app_id5",
+            "name": "app_name5",
+            "service": "service2"
+          }
+        ],
+        "data": {
+          "cpu": "40",
+          "mem": "60",
+          "disk": "20",
+          "net": "250"
+        }
+      }
+    ],
+    "data": {
+      "cpu": "40",
+      "mem": "60",
+      "disk": "20",
+      "net": "250"
+    }
+  }
+]

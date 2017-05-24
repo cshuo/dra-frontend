@@ -1,7 +1,7 @@
 'use strict';
 
-var pm_detail_url = "http://114.212.189.132:9000/api/pm/";
-var pmeters_url = "http://114.212.189.132:9000/api/pmeters";
+var pm_detail_url = base_ip + "api/pm/";
+var pmeters_url = base_ip + "api/pmeters";
 
 var detail = angular.module('dra.pm_detail',['ngMaterial', 'ngMessages', 'material.svgAssetsCache', 'chart.js', 'ui.router']);
 
