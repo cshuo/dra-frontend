@@ -349,7 +349,16 @@ angular.module('dra.topology', ['ngVis', 'ngWebSocket', 'ui.bootstrap'])
 						// console.log(updateArr);
 						var length = updateArr.length;
 						updateArr.forEach(function (updateData) {
-							if(updateData.type === "update") {
+							if(updateData.type === "reset"){
+								console.log("----------: reset the topology graph.");
+								for(var prop in $scope.warning_data){
+									if($scope.warning_data[prop].type !== "host"){
+										VmsMap.updateStatus(prop, $scope.warning_data[prop].type, "normal");
+										delete $scope.warning_data[prop];
+									}
+								}
+							}
+							else if(updateData.type === "update") {
 								VmsMap.updateEdge(updateData.vm_id, updateData.host);
 							}else if(updateData.type === "status"){
 								if(length > 1 && length === updateArr.length){
@@ -360,12 +369,6 @@ angular.module('dra.topology', ['ngVis', 'ngWebSocket', 'ui.bootstrap'])
 										}
 									}
 								}
-								/*
-								   if(updateData.warning !== undefined){
-								   updateData.warning.type = updateData.target;
-								   $scope.warning_data[updateData.id] = updateData.warning;
-								   }
-								   */
 								if(updateData.warning !== undefined){
 									updateData.warning.type = updateData.target;
 									$scope.warning_data[updateData.id] = updateData.warning;
