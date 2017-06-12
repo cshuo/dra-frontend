@@ -64,7 +64,6 @@
                             <md-tab label="{{ 'METERS' | translate }}">
                                 <md-content class="md-padding">
                                     <div class="row tabContent">
-                                        <h2> 关键资源 </h2>
                                         <div class="wrapper wrapper-content">
                                             <div ng-controller="vmCpuCtrl">
                                                 <h2>CPU</h2>
@@ -76,7 +75,6 @@
                                             </div>
                                         </div>
 
-                                        <h2> 其它资源 </h2>
                                         <div class="wrapper wrapper-content">
                                             <div ng-controller="vmCpuCtrl">
                                                 <h2>MEMORY</h2>
@@ -114,11 +112,11 @@
                                     <iframe ng-src="{{ vnc_url }}" style='width:100%; height:500px'></iframe>
                                 </md-content>
                             </md-tab>
-                            <md-tab label="{{ 'APP_DETAIL' | translate }}">
+                            <!--md-tab label="{{ 'APP_DETAIL' | translate }}">
                                 <md-content class="md-padding">
                                     应用描述
                                 </md-content>
-                            </md-tab>
+                            </md-tab-->
                         </md-tabs>
                     </md-content>
                 </div>

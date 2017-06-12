@@ -171,7 +171,7 @@ detail.controller('relCtrl', [
                 url: rel_url,
                 params:{
                     type: 'app',
-                    object: $stateParams.vmName.split('_')[1]
+                    object: $stateParams.vmName
                 }
             }).then(function success(response) {
                 var rels = response.data;
